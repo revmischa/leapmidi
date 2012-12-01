@@ -1,6 +1,6 @@
 /*
- *  leapmidi.cpp
- *  leapmidi
+ *  LeapMIDI.cpp
+ *  LeapMIDI
  *
  *  Created by Mischa Spiegelmock on 11/28/12.
  *  Copyright (c) 2012 int80. All rights reserved.
@@ -9,35 +9,35 @@
 
 #include <iostream>
 #include <math.h>
-#include "leapmidi.h"
+#include "LeapMIDI.h"
 
-LeapMidi::Listener::Listener() {
-    smoothing = kLeapMidiDefaultSmoothingFrames;
+LeapMIDI::Listener::Listener() {
+    smoothing = kLeapMIDIDefaultSmoothingFrames;
     frames = new std::deque<Leap::Frame *>;
-    std::cout << "leapmidi constructed, using frame window size " << smoothing << "\n";
+    std::cout << "LeapMIDI constructed, using frame window size " << smoothing << "\n";
 }
 
-LeapMidi::Listener::~Listener() {
+LeapMIDI::Listener::~Listener() {
     delete frames;
 }
 
-void LeapMidi::Listener::setSmoothing(unsigned int window) {
+void LeapMIDI::Listener::setSmoothing(unsigned int window) {
     smoothing = window;
 }
 
-void LeapMidi::Listener::onInit(const Leap::Controller& controller) {
+void LeapMIDI::Listener::onInit(const Leap::Controller& controller) {
     std::cout << "Initialized" << std::endl;
 }
 
-void LeapMidi::Listener::onConnect(const Leap::Controller& controller) {
+void LeapMIDI::Listener::onConnect(const Leap::Controller& controller) {
     std::cout << "Connected" << std::endl;
 }
 
-void LeapMidi::Listener::onDisconnect(const Leap::Controller& controller) {
+void LeapMIDI::Listener::onDisconnect(const Leap::Controller& controller) {
     std::cout << "Disconnected" << std::endl;
 }
 
-void LeapMidi::Listener::onFrame(const Leap::Controller& controller) {
+void LeapMIDI::Listener::onFrame(const Leap::Controller& controller) {
     // get most recent frame
     const Leap::Frame frame = controller.frame();
     

@@ -10,7 +10,7 @@
 #include <leapmidi.h>
 #include <Leap.h>
 
-leapmidi::listener listener;
+LeapMIDI::Listener listener;
 Leap::Controller controller(&listener);
 
 int main(int argc, const char * argv[]) {

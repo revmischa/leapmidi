@@ -11,29 +11,33 @@
 #include <math.h>
 #include "leapmidi.h"
 
-leapmidi::listener::listener() {
-    smoothing = lm_default_smoothing;
+LeapMidi::Listener::Listener() {
+    smoothing = kLeapMidiDefaultSmoothingFrames;
     frames = new std::deque<Leap::Frame *>;
     std::cout << "leapmidi constructed, using frame window size " << smoothing << "\n";
 }
 
-void leapmidi::listener::set_smoothing(unsigned int window) {
+LeapMidi::Listener::~Listener() {
+    delete frames;
+}
+
+void LeapMidi::Listener::setSmoothing(unsigned int window) {
     smoothing = window;
 }
 
-void leapmidi::listener::onInit(const Leap::Controller& controller) {
+void LeapMidi::Listener::onInit(const Leap::Controller& controller) {
     std::cout << "Initialized" << std::endl;
 }
 
-void leapmidi::listener::onConnect(const Leap::Controller& controller) {
+void LeapMidi::Listener::onConnect(const Leap::Controller& controller) {
     std::cout << "Connected" << std::endl;
 }
 
-void leapmidi::listener::onDisconnect(const Leap::Controller& controller) {
+void LeapMidi::Listener::onDisconnect(const Leap::Controller& controller) {
     std::cout << "Disconnected" << std::endl;
 }
 
-void leapmidi::listener::onFrame(const Leap::Controller& controller) {
+void LeapMidi::Listener::onFrame(const Leap::Controller& controller) {
     // get most recent frame
     const Leap::Frame frame = controller.frame();
     

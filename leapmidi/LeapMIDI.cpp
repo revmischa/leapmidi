@@ -9,7 +9,11 @@
 
 #include <iostream>
 #include <math.h>
+
+#include "MIDITool.h"
+
 #include "LeapMIDI.h"
+
 
 LeapMIDI::Listener::Listener() {
     smoothing = kLeapMIDIDefaultSmoothingFrames;
@@ -39,11 +43,11 @@ void LeapMIDI::Listener::onDisconnect(const Leap::Controller& controller) {
 
 void LeapMIDI::Listener::onFrame(const Leap::Controller& controller) {
     // get most recent frame
-    const Leap::Frame frame = controller.frame();
+    Leap::Frame frame = controller.frame();
     
     // add frame to frame history buffer
     
-    
+    MIDIToolController::instance().process_frame(frame);
     
     const std::vector<Leap::Hand>& hands = frame.hands();
     const size_t numHands = hands.size();

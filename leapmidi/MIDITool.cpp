@@ -44,8 +44,12 @@ MIDIToolController::MIDIToolController() {
 void MIDIToolController::init() {
     
 }
+
+
     
 void MIDIToolController::process_frame(const Leap::Frame &frame) {
+    deactivateTools();
+    
     if (frame.hands().empty())
         return; // no hands detected
     
@@ -58,6 +62,13 @@ void MIDIToolController::process_frame(const Leap::Frame &frame) {
         process_two_finger_tool(hand);
 }
 
+    void MIDIToolController::deactivateTools() {
+        for (std::map<MIDITool::ToolDescription, MIDIToolPtr>::iterator it = tool_map_.begin(); it != tool_map_.end(); ++it) {
+            it->second->setActive(false);
+        }
+    
+    }
+    
 void MIDIToolController::process_one_finger_tool(const Leap::Hand& hand) {
     MIDIToolPtr tool;
     
@@ -67,6 +78,8 @@ void MIDIToolController::process_one_finger_tool(const Leap::Hand& hand) {
     }
     
     tool = tool_map_[MIDITool::ONE_FINGER];
+    
+    tool->setActive(true);
     
     int value = hand.fingers()[0].tip().position.y;
     value = value > 127 ? 127 : value;

@@ -34,6 +34,9 @@ namespace LeapMIDI {
             TWO_FINGERS,
             THREE_FINGERS
         };
+        
+        bool active() { return active_; }
+        void setActive(bool a) { active_ = a; }
 
         ToolDescription tool_description() { return tool_description_; }
         
@@ -43,6 +46,7 @@ namespace LeapMIDI {
         int channel_;
         int value_;
         ToolDescription tool_description_;
+        bool active_;
         
         static int last_channel_;
         
@@ -60,14 +64,17 @@ namespace LeapMIDI {
         
         const std::map<MIDITool::ToolDescription, MIDIToolPtr>& tools() { return tool_map_; }
         
-        std::map<MIDITool::ToolDescription, MIDIToolPtr> tool_map_;
         
     private:
         MIDIToolController();
         void init();
         
+        void deactivateTools();
+        
         void process_one_finger_tool(const Leap::Hand&);
         void process_two_finger_tool(const Leap::Hand&);
+        
+        std::map<MIDITool::ToolDescription, MIDIToolPtr> tool_map_;
         
         static MIDIToolController* instance_;
         

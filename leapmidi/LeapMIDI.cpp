@@ -11,9 +11,7 @@
 #include <math.h>
 
 #include "MIDITool.h"
-
 #include "LeapMIDI.h"
-
 
 LeapMIDI::Listener::Listener() {
     smoothing = kLeapMIDIDefaultSmoothingFrames;

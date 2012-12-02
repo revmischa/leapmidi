@@ -29,6 +29,9 @@ namespace LeapMIDI {
         unsigned char value() { return value_; }
         void set_value(unsigned char v) { value_ = v; }
         
+        int leapValue() { return leapValue_; }
+        void setLeapValue(int v) { leapValue_ = v; }
+        
         enum ToolDescription {
             ONE_FINGER = 0,
             TWO_FINGERS,
@@ -43,6 +46,9 @@ namespace LeapMIDI {
     private:
         unsigned char control_;
         unsigned char value_;
+        
+        int leapValue_;
+        
         ToolDescription tool_description_;
         bool active_;
         

@@ -87,6 +87,8 @@ namespace LeapMIDI {
         if (value > 127) value = 127;
         //std::cout << "finger 0 Y: " << value << std::endl;
         tool->set_value(value);
+        
+        tool->setLeapValue(hand.fingers()[0].tip().position.y);
     }
 
     void MIDIToolController::process_two_finger_tool(const Leap::Hand& hand) {

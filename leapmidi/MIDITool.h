@@ -24,10 +24,10 @@ namespace LeapMIDI {
         MIDITool();
         void init();
         
-        int channel() { return channel_; }
+        unsigned char control() { return control_; }
         
-        int value() { return value_; }
-        void set_value(int v) { value_ = v; }
+        unsigned char value() { return value_; }
+        void set_value(unsigned char v) { value_ = v; }
         
         enum ToolDescription {
             ONE_FINGER = 0,
@@ -41,20 +41,27 @@ namespace LeapMIDI {
         ToolDescription tool_description() { return tool_description_; }
         
     private:
-        void setup_channel();
-        
-        int channel_;
-        int value_;
+        unsigned char control_;
+        unsigned char value_;
         ToolDescription tool_description_;
         bool active_;
         
-        static int last_channel_;
+        static unsigned char lastControl_;
         
-        static int get_next_available_channel();
+        static unsigned char getNextAvailableControl();
         
     };
         
     typedef std::shared_ptr<MIDITool> MIDIToolPtr;
+    
+    // TODO: figure out all the tools we need
+    class FingerTool : public MIDITool {
+        
+    };
+    
+    class RotateTool : public MIDITool {
+        
+    };
         
     class MIDIToolController {
     public:

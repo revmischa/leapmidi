@@ -7,6 +7,7 @@
 //
 
 #include "MIDITool.h"
+#include <iostream>
 
 namespace LeapMIDI {
 
@@ -45,6 +46,9 @@ void MIDIToolController::init() {
 }
     
 void MIDIToolController::process_frame(const Leap::Frame &frame) {
+    if (frame.hands().empty())
+        return; // no hands detected
+    
     // only support one hand at the moment
     Leap::Hand hand = frame.hands()[0];
     
@@ -66,6 +70,7 @@ void MIDIToolController::process_one_finger_tool(const Leap::Hand& hand) {
     
     int value = hand.fingers()[0].tip().position.y;
     value = value > 127 ? 127 : value;
+    std::cout << "finger 0 Y: " << value << std::endl;
     tool->set_value(value);
 }
 

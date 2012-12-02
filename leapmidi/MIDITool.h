@@ -14,7 +14,10 @@
 
 #include <Leap.h>
 
+typedef unsigned int LeapMIDIControl;
+
 namespace LeapMIDI {
+    
     class MIDIChannel {
         
     };
@@ -32,16 +35,16 @@ namespace LeapMIDI {
         int leapValue() { return leapValue_; }
         void setLeapValue(int v) { leapValue_ = v; }
         
-        enum ToolDescription {
-            ONE_FINGER = 0,
-            TWO_FINGERS,
-            THREE_FINGERS
-        };
+//        enum ToolDescription {
+//            ONE_FINGER = 0,
+//            TWO_FINGERS,
+//            THREE_FINGERS
+//        };
         
         bool active() { return active_; }
         void setActive(bool a) { active_ = a; }
 
-        ToolDescription tool_description() { return tool_description_; }
+        LeapMIDIControl tool_description() { return tool_description_; }
         
     private:
         unsigned char control_;
@@ -49,7 +52,7 @@ namespace LeapMIDI {
         
         int leapValue_;
         
-        ToolDescription tool_description_;
+        LeapMIDIControl tool_description_;
         bool active_;
         
         static unsigned char lastControl_;
@@ -75,7 +78,7 @@ namespace LeapMIDI {
         
         void process_frame(const Leap::Frame& frame);
         
-        const std::map<MIDITool::ToolDescription, MIDIToolPtr>& tools() { return tool_map_; }
+        const std::map<LeapMIDIControl, MIDIToolPtr>& tools() { return tool_map_; }
         
         
     private:
@@ -87,7 +90,7 @@ namespace LeapMIDI {
         void process_one_finger_tool(const Leap::Hand&);
         void process_two_finger_tool(const Leap::Hand&);
         
-        std::map<MIDITool::ToolDescription, MIDIToolPtr> tool_map_;
+        std::map<LeapMIDIControl, MIDIToolPtr> tool_map_;
         
         static MIDIToolController* instance_;
         

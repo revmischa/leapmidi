@@ -10,10 +10,15 @@
 #define leapmidi_MIDITool_h
 
 #include <map>
+#include <memory>
 
 #include <Leap.h>
 
 namespace LeapMIDI {
+    
+    class MIDIChannel {
+        
+    };
     
 class MIDITool {
 public:
@@ -54,6 +59,10 @@ public:
     
     void process_frame(const Leap::Frame& frame);
     
+    const std::map<MIDITool::ToolDescription, MIDIToolPtr>& tools() { return tool_map_; }
+    
+    std::map<MIDITool::ToolDescription, MIDIToolPtr> tool_map_;
+    
 private:
     MIDIToolController();
     void init();
@@ -63,7 +72,7 @@ private:
     
     static MIDIToolController* instance_;
     
-    std::map<MIDITool::ToolDescription, MIDIToolPtr> tool_map_;
+    
 };
     
 }

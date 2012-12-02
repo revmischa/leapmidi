@@ -16,6 +16,7 @@
 		C33EF32D16673D1D001D3D0E /* leapmidi.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C33EF2AF16672833001D3D0E /* leapmidi.dylib */; };
 		C33EF33116673E13001D3D0E /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C33EF318166738D3001D3D0E /* libLeap.dylib */; };
 		C3F81479166AACCE0039AB7E /* MIDITool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3F81478166AACCE0039AB7E /* MIDITool.cpp */; };
+		C3F81496166AC98D0039AB7E /* MIDITool.h in Headers */ = {isa = PBXBuildFile; fileRef = C3F81477166AAC430039AB7E /* MIDITool.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +147,7 @@
 			files = (
 				C33EF2CC16672FDE001D3D0E /* LeapMIDI.h in Headers */,
 				C33EF319166738D3001D3D0E /* Leap.h in Headers */,
+				C3F81496166AC98D0039AB7E /* MIDITool.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

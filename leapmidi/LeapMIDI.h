@@ -27,7 +27,7 @@ namespace LeapMIDI {
     class Listener : public Leap::Listener {
     public:
         Listener();
-        ~Listener();
+        virtual ~Listener();
         void setSmoothing(unsigned int);
         void getControlValue(control_value);
         virtual void onInit(const Leap::Controller&);

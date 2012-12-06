@@ -7,7 +7,7 @@
 //
 
 #include <iostream>
-//#include <leapmidi.h>
+#include <LeapMIDI.h>
 #include <Leap.h>
 
 LeapMIDI::Listener listener;

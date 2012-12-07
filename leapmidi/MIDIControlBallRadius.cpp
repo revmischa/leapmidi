@@ -10,7 +10,7 @@
 
 namespace LeapMIDI {
     namespace Control {
-        midi_control_index BallRadius::controlIndex() {
+        const midi_control_index BallRadius::controlIndex() {
             if (handIndex() == 0) return BALL_RADIUS_HAND_1;
             if (handIndex() == 1) return BALL_RADIUS_HAND_2;
             

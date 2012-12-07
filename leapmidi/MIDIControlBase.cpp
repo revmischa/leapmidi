@@ -17,7 +17,7 @@ namespace LeapMIDI {
             _rawValue = rawValue;
         }
         
-        midi_control_value Base::mappedValue() {
+        const midi_control_value Base::mappedValue() {
             midi_control_value_raw min = minRawValue();
             midi_control_value_raw max = maxRawValue();
             midi_control_value_raw raw = rawValue();

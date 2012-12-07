@@ -20,6 +20,18 @@ const short MIDI_DEBUG = 1;
 using namespace std;
 
 namespace LeapMIDI {
+    const char *controlDescription(midi_control_index idx) {
+        switch (idx) {
+            case BALL_RADIUS_HAND_1:
+                return "Hand 1 curvature";
+            case BALL_RADIUS_HAND_2:
+                return "Hand 2 curvature";
+                
+            default:
+                return "(Unknown control)";
+        }
+    }
+    
     Listener::Listener() {
         initGestures();
     }
@@ -38,7 +50,42 @@ namespace LeapMIDI {
     }
 
     void Listener::findControls(const Leap::Controller &controller) {
+        // feed frames to recognizers
+        for (vector<Gesture::Base *>::iterator it = gestureRecognizers.begin(); it != gestureRecognizers.end(); ++it) {
+            // get controls recognized from gestures
+            vector<LeapMIDI::Control::Base *> recognizedControls = (*it)->recognizedControls(controller);
+            
+            for (vector<LeapMIDI::Control::Base *>::iterator ctl = recognizedControls.begin(); ctl != recognizedControls.end(); ++ctl) {
+                midi_control_value val = (*ctl)->mappedValue();
+                midi_control_index idx = (*ctl)->controlIndex();
+                
+                if (MIDI_DEBUG) {
+                    cout << "recognized control index " << idx
+                    << " (" << controlDescription(idx) << ")"
+                    << ", raw value: "
+                    << (*ctl)->rawValue() << " mapped value: " << val << endl;
+                }
+                
+                // done with control, it can go away now
+                delete *ctl;
+            }
+        }
+    }
+    
+    void Listener::onGestureRecognized(const Leap::Controller &controller, Gesture::Base &gesture) {
+    }
+    
+    void Listener::onControlUpdated(const Leap::Controller &controller, Gesture::Base &gesture, Control::Base &control) {
+        midi_control_value val = control.mappedValue();
+        midi_control_index idx = control.controlIndex();
         
+        if (MIDI_DEBUG) {
+            cout << "recognized control index " << idx
+            << " (" << controlDescription(idx) << ")"
+            << ", raw value: "
+            << control.rawValue() << " mapped value: " << val << endl;
+        }
+
     }
 
     void Listener::onInit(const Leap::Controller &controller) {
@@ -54,23 +101,7 @@ namespace LeapMIDI {
     }
 
     void Listener::onFrame(const Leap::Controller &controller) {
-        // feed frames to recognizers
-        for (vector<Gesture::Base *>::iterator it = gestureRecognizers.begin(); it != gestureRecognizers.end(); ++it) {
-            // get controls recognized from gestures
-            vector<LeapMIDI::Control::Base *> recognizedControls = (*it)->recognizedControls(controller);
-            
-            for (vector<LeapMIDI::Control::Base *>::iterator ctl = recognizedControls.begin(); ctl != recognizedControls.end(); ++ctl) {
-                midi_control_value val = (*ctl)->mappedValue();
-
-                if (MIDI_DEBUG) {
-                    cout << "recognized control " << (*ctl)->controlIndex() << ", raw value: "
-                       << (*ctl)->rawValue() << " mapped value: " << val << endl;
-                }
-                
-                // done with control, it can go away now
-                delete *ctl;
-            }
-        }
+        findControls(controller);
 
         return;
         

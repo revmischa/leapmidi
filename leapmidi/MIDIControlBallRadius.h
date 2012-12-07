@@ -20,9 +20,9 @@ namespace LeapMIDI {
         public:
             BallRadius(midi_bodypart_index hi, midi_bodypart_index fi, double radius) : Base(hi, fi, radius) {};
             
-            virtual midi_control_value_raw minRawValue() { return 55; };
-            virtual midi_control_value_raw maxRawValue() { return 165; };
-            virtual midi_control_index controlIndex();
+            virtual const midi_control_value_raw minRawValue() { return 48; };
+            virtual const midi_control_value_raw maxRawValue() { return 145; };
+            virtual const midi_control_index controlIndex();
         };
     }
 }

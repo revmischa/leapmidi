@@ -24,17 +24,24 @@
 #include "MIDITypes.h"
 #include <Leap.h>
 
+const std::vector<LeapMIDI::Control::Base> MIDI_GESTURES_EMPTY;
+
 namespace LeapMIDI {
-    class Control;
     
-    class Gesture {
-    public:
-        Gesture() {};
-        virtual ~Gesture() {};
-        
-        // given a controller, return MIDI controls recognized from gestures
-        virtual std::vector<LeapMIDI::Control *> recognizedControls(const Leap::Controller&) = 0;
-    };
+class Control::Base;
+
+namespace Gesture {
+    
+class Base {
+public:
+    Base() {};
+    virtual ~Base() {};
+    
+    // given a controller, return MIDI controls recognized from gestures
+    virtual std::vector<LeapMIDI::Control::Base> recognizedControls(const Leap::Controller&) = 0;
+};
+}
+
 }
 
 #endif /* defined(__leapmidi__MIDIGesture__) */

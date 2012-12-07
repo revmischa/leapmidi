@@ -8,7 +8,10 @@
 
 #include "MIDIGestureBall.h"
 
-std::vector<LeapMIDI::Control *> recognizedControls(const Leap::Controller &controller) {
+namespace LeapMIDI {
+namespace Gesture {
+    
+std::vector<LeapMIDI::Control::Base> Ball::recognizedControls(const Leap::Controller &controller) {
     Leap::Frame frame = controller.frame();
     
     // hands detected?
@@ -26,4 +29,7 @@ std::vector<LeapMIDI::Control *> recognizedControls(const Leap::Controller &cont
         
         // now to return a MIDIControlBall instance...
     }
+}
+    
+}
 }

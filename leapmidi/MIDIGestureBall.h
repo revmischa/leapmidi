@@ -15,12 +15,14 @@
 #include "MIDIControl.h"
 #include <Leap.h>
 
-const std::vector<LeapMIDI::Control *> MIDI_GESTURES_EMPTY;
-
 namespace LeapMIDI {
-    class GestureBall : public Gesture {
-        std::vector<LeapMIDI::Control *> recognizedControls(const Leap::Controller &controller);
-    };
+namespace Gesture {
+    
+class Ball : public LeapMIDI::Gesture::Base {
+    std::vector<LeapMIDI::Control::Base> recognizedControls(const Leap::Controller &controller);
+};
+    
+}
 }
 
 #endif /* defined(__leapmidi__MIDIGestureBall__) */

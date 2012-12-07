@@ -13,33 +13,35 @@ typedef double midi_control_value_raw;
 typedef unsigned short midi_control_value;
 typedef unsigned short midi_bodypart_index;
 
-// MIDI control number offsets
-enum midi_control_index {
-    BALL_RADIUS_HAND_1 = 0,
-    BALL_RADIUS_HAND_2,
-    
-    PALM_HAND_1_X,
-    PALM_HAND_1_Y,
-    PALM_HAND_1_Z,
-    PALM_HAND_1_ROLL,
-    PALM_HAND_1_PITCH,
-    PALM_HAND_1_YAW,
-    
-    PALM_HAND_2_X,
-    PALM_HAND_2_Y,
-    PALM_HAND_2_Z,
-    PALM_HAND_2_ROLL,
-    PALM_HAND_2_PITCH,
-    PALM_HAND_2_YAW,
-    
-    FINGER_1_HAND_1_X,
-    FINGER_1_HAND_1_Y,
-    FINGER_1_HAND_1_Z,
-    FINGER_2_HAND_1_X,
-    FINGER_2_HAND_1_Y,
-    FINGER_2_HAND_1_Z
-    
-    // etc...
-};
+namespace LeapMIDI {
+    // MIDI control number offsets
+    enum midi_control_index {
+        BALL_RADIUS_HAND_1 = 0,
+        BALL_RADIUS_HAND_2,
+        
+        PALM_HAND_1_X,
+        PALM_HAND_1_Y,
+        PALM_HAND_1_Z,
+        PALM_HAND_1_ROLL,
+        PALM_HAND_1_PITCH,
+        PALM_HAND_1_YAW,
+        
+        PALM_HAND_2_X,
+        PALM_HAND_2_Y,
+        PALM_HAND_2_Z,
+        PALM_HAND_2_ROLL,
+        PALM_HAND_2_PITCH,
+        PALM_HAND_2_YAW,
+        
+        FINGER_1_HAND_1_X,
+        FINGER_1_HAND_1_Y,
+        FINGER_1_HAND_1_Z,
+        FINGER_2_HAND_1_X,
+        FINGER_2_HAND_1_Y,
+        FINGER_2_HAND_1_Z
+        
+        // etc...
+    };
+}
 
 #endif

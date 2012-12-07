@@ -16,23 +16,32 @@
 #include "MIDITypes.h"
 
 namespace LeapMIDI {
-namespace Control {
+    namespace Control {
+        class Base {
+        public:
+            // create a recognized control with raw input value from recognizer
+            Base(midi_bodypart_index handIndex, midi_bodypart_index fingerIndex, midi_control_value_raw rawValue);
+            
+            virtual midi_control_value_raw rawValue() { return _rawValue; };
+            
+            // map a raw value from [minRawValue,maxRawValue] into the range [0,127]
+            virtual midi_control_value mappedValue();
+            
+            // min/max raw value, for mapping to MIDI value
+            virtual midi_control_value_raw minRawValue() { throw "minRawValue() not implemented"; };
+            virtual midi_control_value_raw maxRawValue() { throw "maxRawValue() not implemented"; };
 
-class Base {
-public:
-    // create a recognized control with raw input value from recognizer
-    Base(midi_control_value_raw rawValue) {};
-    
-protected:
-    // map a raw value into the range of 0-127
-    virtual midi_control_value map(midi_control_value_raw rawValue);
-    
-    // min/max raw value, for mapping to MIDI value
-    virtual midi_control_value_raw minRawValue() { throw "minRawValue() not implemented"; };
-    virtual midi_control_value_raw maxRawValue() { throw "maxRawValue() not implemented"; };
-};
-
-}
+            // MIDI control code index
+            virtual midi_control_index controlIndex() { throw "controlIndex() not implemented"; };
+            
+            virtual midi_bodypart_index handIndex()   { return _handIndex; };
+            virtual midi_bodypart_index fingerIndex() { return _fingerIndex; };
+            
+        protected:
+            midi_bodypart_index _handIndex, _fingerIndex;
+            midi_control_value_raw _rawValue;
+        };
+    }
 }
 
 #endif /* defined(__leapmidi__MIDIControl__) */

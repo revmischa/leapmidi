@@ -6,4 +6,4 @@
 //  Copyright (c) 2012 int80. All rights reserved.
 //
 
-#include "MIDIGesture.h"
+#include "MIDIGestureBase.h"

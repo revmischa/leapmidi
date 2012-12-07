@@ -20,11 +20,11 @@
 
 #include <iostream>
 #include <vector>
-#include "MIDIControl.h"
+#include "MIDIControlBase.h"
 #include "MIDITypes.h"
 #include <Leap.h>
 
-const std::vector<LeapMIDI::Control::Base> MIDI_GESTURES_EMPTY;
+const std::vector<LeapMIDI::Control::Base *> MIDI_GESTURES_EMPTY;
 
 namespace LeapMIDI {
     
@@ -38,7 +38,7 @@ public:
     virtual ~Base() {};
     
     // given a controller, return MIDI controls recognized from gestures
-    virtual std::vector<LeapMIDI::Control::Base> recognizedControls(const Leap::Controller&) = 0;
+    virtual std::vector<LeapMIDI::Control::Base *> recognizedControls(const Leap::Controller&) = 0;
 };
 }
 

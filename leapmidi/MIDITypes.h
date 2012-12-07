@@ -10,6 +10,8 @@
 #define leapmidi_MIDITypes_h
 
 typedef double midi_control_value_raw;
+typedef unsigned short midi_control_index;
 typedef unsigned short midi_control_value;
+typedef unsigned short midi_bodypart_index;
 
 #endif

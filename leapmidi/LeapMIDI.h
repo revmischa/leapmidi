@@ -22,11 +22,33 @@ namespace LeapMIDI {
     
 class Gesture::Base;
 
-// base offsets from which to determine MIDI control number
+// MIDI control number offsets
 enum control_index {
-    BALL_RADIUS = 0,
-    HANDS = 1,
-    FINGERS = 10
+    BALL_RADIUS_HAND_1 = 0,
+    BALL_RADIUS_HAND_2,
+    
+    PALM_HAND_1_X,
+    PALM_HAND_1_Y,
+    PALM_HAND_1_Z,
+    PALM_HAND_1_ROLL,
+    PALM_HAND_1_PITCH,
+    PALM_HAND_1_YAW,
+    
+    PALM_HAND_2_X,
+    PALM_HAND_2_Y,
+    PALM_HAND_2_Z,
+    PALM_HAND_2_ROLL,
+    PALM_HAND_2_PITCH,
+    PALM_HAND_2_YAW,
+    
+    FINGER_1_HAND_1_X,
+    FINGER_1_HAND_1_Y,
+    FINGER_1_HAND_1_Z,
+    FINGER_2_HAND_1_X,
+    FINGER_2_HAND_1_Y,
+    FINGER_2_HAND_1_Z
+    
+    // etc...
 };
 
 class Listener : public Leap::Listener {

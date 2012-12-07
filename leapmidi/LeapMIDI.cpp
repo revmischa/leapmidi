@@ -13,8 +13,6 @@
 
 #include "MIDIGestureBase.h"
 #include "MIDIGestureBall.h"
-
-#include "MIDITool.h"
 #include "LeapMIDI.h"
 
 const short MIDI_DEBUG = 1;
@@ -44,15 +42,15 @@ namespace LeapMIDI {
     }
 
     void Listener::onInit(const Leap::Controller &controller) {
-        std::cout << "Initialized" << endl;
+        cout << "Initialized" << endl;
     }
 
     void Listener::onConnect(const Leap::Controller &controller) {
-        std::cout << "Connected" << endl;
+        cout << "Connected" << endl;
     }
 
     void Listener::onDisconnect(const Leap::Controller &controller) {
-        std::cout << "Disconnected" << endl;
+        cout << "Disconnected" << endl;
     }
 
     void Listener::onFrame(const Leap::Controller &controller) {

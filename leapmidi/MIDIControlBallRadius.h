@@ -12,6 +12,7 @@
 #include <iostream>
 #include "MIDIControlBase.h"
 #include "MIDITypes.h"
+#include "LeapMIDI.h"
 
 namespace LeapMIDI {
     namespace Control {
@@ -21,7 +22,7 @@ namespace LeapMIDI {
             
             virtual midi_control_value_raw minRawValue() { return 55; };
             virtual midi_control_value_raw maxRawValue() { return 165; };
-            virtual midi_control_index controlIndex() { return 0 + handIndex(); };
+            virtual midi_control_index controlIndex();
         };
     }
 }

@@ -122,14 +122,14 @@
 		C33EF2B116672833001D3D0E /* leapmidi */ = {
 			isa = PBXGroup;
 			children = (
+				C33EF2B416672833001D3D0E /* leapmidiProj.xcconfig */,
+				C33EF2B516672833001D3D0E /* leapmidiTarget.xcconfig */,
+				C35F6D9716705850000CEF49 /* MIDITypes.h */,
+				C35F6D8316704EAF000CEF49 /* LeapMIDI.cpp */,
+				C35F6D8416704EAF000CEF49 /* LeapMIDI.h */,
 				C35F6D9616705659000CEF49 /* controls */,
 				C35F6D951670564C000CEF49 /* gestures */,
 				C33EF316166738D3001D3D0E /* contrib */,
-				C33EF2B416672833001D3D0E /* leapmidiProj.xcconfig */,
-				C33EF2B516672833001D3D0E /* leapmidiTarget.xcconfig */,
-				C35F6D8316704EAF000CEF49 /* LeapMIDI.cpp */,
-				C35F6D8416704EAF000CEF49 /* LeapMIDI.h */,
-				C35F6D9716705850000CEF49 /* MIDITypes.h */,
 			);
 			path = leapmidi;
 			sourceTree = "<group>";

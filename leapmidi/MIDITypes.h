@@ -9,11 +9,11 @@
 #ifndef leapmidi_MIDITypes_h
 #define leapmidi_MIDITypes_h
 
-typedef double midi_control_value_raw;
-typedef unsigned short midi_control_value;
-typedef unsigned short midi_bodypart_index;
-
 namespace LeapMIDI {
+    typedef double midi_control_value_raw;
+    typedef unsigned short midi_control_value;
+    typedef unsigned short midi_bodypart_index;
+
     // MIDI control number offsets
     enum midi_control_index {
         BALL_RADIUS_HAND_1 = 0,

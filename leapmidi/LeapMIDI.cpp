@@ -53,18 +53,16 @@ namespace LeapMIDI {
         // feed frames to recognizers
         for (vector<Gesture::Base *>::iterator it = gestureRecognizers.begin(); it != gestureRecognizers.end(); ++it) {
             // get controls recognized from gestures
-            vector<LeapMIDI::Control::Base *> recognizedControls = (*it)->recognizedControls(controller);
+            Gesture::Base *gesture = *it;
+            vector<LeapMIDI::Control::Base *> recognizedControls = gesture->recognizedControls(controller);
+            
+            // call gesture recognized callback
+            this->onGestureRecognized(controller, *gesture);
             
             for (vector<LeapMIDI::Control::Base *>::iterator ctl = recognizedControls.begin(); ctl != recognizedControls.end(); ++ctl) {
-                midi_control_value val = (*ctl)->mappedValue();
-                midi_control_index idx = (*ctl)->controlIndex();
-                
-                if (MIDI_DEBUG) {
-                    cout << "recognized control index " << idx
-                    << " (" << controlDescription(idx) << ")"
-                    << ", raw value: "
-                    << (*ctl)->rawValue() << " mapped value: " << val << endl;
-                }
+                // call control updated callback
+                Control::Base *control = *ctl;
+                this->onControlUpdated(controller, *gesture, *control);
                 
                 // done with control, it can go away now
                 delete *ctl;

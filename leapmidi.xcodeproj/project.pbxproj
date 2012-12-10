@@ -13,16 +13,16 @@
 		C33EF32D16673D1D001D3D0E /* leapmidi.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C33EF2AF16672833001D3D0E /* leapmidi.dylib */; };
 		C35F6D8516704EAF000CEF49 /* LeapMIDI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35F6D8316704EAF000CEF49 /* LeapMIDI.cpp */; };
 		C35F6D8616704EAF000CEF49 /* LeapMIDI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35F6D8316704EAF000CEF49 /* LeapMIDI.cpp */; };
-		C35F6D8716704EAF000CEF49 /* LeapMIDI.h in Headers */ = {isa = PBXBuildFile; fileRef = C35F6D8416704EAF000CEF49 /* LeapMIDI.h */; };
+		C35F6D8716704EAF000CEF49 /* LeapMIDI.h in Headers */ = {isa = PBXBuildFile; fileRef = C35F6D8416704EAF000CEF49 /* LeapMIDI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C35F6D8916704EE5000CEF49 /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C38824A0166B1BAA007FE3B3 /* libLeap.dylib */; };
 		C35F6D8A16704F00000CEF49 /* libLeap.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = C38824A0166B1BAA007FE3B3 /* libLeap.dylib */; };
 		C35F6D8D16704FD4000CEF49 /* MIDIGestureBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35F6D8B16704FD4000CEF49 /* MIDIGestureBase.cpp */; };
 		C35F6D8E16704FD4000CEF49 /* MIDIGestureBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35F6D8B16704FD4000CEF49 /* MIDIGestureBase.cpp */; };
-		C35F6D8F16704FD4000CEF49 /* MIDIGestureBase.h in Headers */ = {isa = PBXBuildFile; fileRef = C35F6D8C16704FD4000CEF49 /* MIDIGestureBase.h */; };
+		C35F6D8F16704FD4000CEF49 /* MIDIGestureBase.h in Headers */ = {isa = PBXBuildFile; fileRef = C35F6D8C16704FD4000CEF49 /* MIDIGestureBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C35F6D92167052B4000CEF49 /* MIDIControlBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35F6D90167052B3000CEF49 /* MIDIControlBase.cpp */; };
 		C35F6D93167052B4000CEF49 /* MIDIControlBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35F6D90167052B3000CEF49 /* MIDIControlBase.cpp */; };
-		C35F6D94167052B4000CEF49 /* MIDIControlBase.h in Headers */ = {isa = PBXBuildFile; fileRef = C35F6D91167052B4000CEF49 /* MIDIControlBase.h */; };
-		C35F6D9816705850000CEF49 /* MIDITypes.h in Headers */ = {isa = PBXBuildFile; fileRef = C35F6D9716705850000CEF49 /* MIDITypes.h */; };
+		C35F6D94167052B4000CEF49 /* MIDIControlBase.h in Headers */ = {isa = PBXBuildFile; fileRef = C35F6D91167052B4000CEF49 /* MIDIControlBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C35F6D9816705850000CEF49 /* MIDITypes.h in Headers */ = {isa = PBXBuildFile; fileRef = C35F6D9716705850000CEF49 /* MIDITypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C35F6D9B16705DBB000CEF49 /* MIDIGestureBall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35F6D9916705DBB000CEF49 /* MIDIGestureBall.cpp */; };
 		C35F6D9C16705DBB000CEF49 /* MIDIGestureBall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35F6D9916705DBB000CEF49 /* MIDIGestureBall.cpp */; };
 		C35F6D9D16705DBB000CEF49 /* MIDIGestureBall.h in Headers */ = {isa = PBXBuildFile; fileRef = C35F6D9A16705DBB000CEF49 /* MIDIGestureBall.h */; };
@@ -99,6 +99,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C31B002E1675A39700383230 /* visualizers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = visualizers;
+			sourceTree = "<group>";
+		};
 		C33EF2A416672833001D3D0E = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +134,7 @@
 				C35F6D9716705850000CEF49 /* MIDITypes.h */,
 				C35F6D8316704EAF000CEF49 /* LeapMIDI.cpp */,
 				C35F6D8416704EAF000CEF49 /* LeapMIDI.h */,
+				C31B002E1675A39700383230 /* visualizers */,
 				C35F6D9616705659000CEF49 /* controls */,
 				C35F6D951670564C000CEF49 /* gestures */,
 				C33EF316166738D3001D3D0E /* contrib */,
@@ -180,10 +188,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C33EF319166738D3001D3D0E /* Leap.h in Headers */,
-				C35F6D8716704EAF000CEF49 /* LeapMIDI.h in Headers */,
 				C35F6D8F16704FD4000CEF49 /* MIDIGestureBase.h in Headers */,
 				C35F6D94167052B4000CEF49 /* MIDIControlBase.h in Headers */,
 				C35F6D9816705850000CEF49 /* MIDITypes.h in Headers */,
+				C35F6D8716704EAF000CEF49 /* LeapMIDI.h in Headers */,
 				C35F6D9D16705DBB000CEF49 /* MIDIGestureBall.h in Headers */,
 				C35F6DA21671B460000CEF49 /* MIDIControlBallRadius.h in Headers */,
 			);

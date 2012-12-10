@@ -13,6 +13,7 @@
 #include <Leap.h>
 #include <vector>
 #include "MIDIGestureBase.h"
+#include "MIDIControlBase.h"
 #include "MIDITypes.h"
 
 /* The classes below are exported */

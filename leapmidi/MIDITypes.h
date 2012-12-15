@@ -16,7 +16,7 @@ namespace LeapMIDI {
 
     // MIDI control number offsets
     enum midi_control_index {
-        BALL_RADIUS_HAND_1 = 0,
+        BALL_RADIUS_HAND_1 = 70,
         BALL_RADIUS_HAND_2,
         
         PALM_HAND_1_X,

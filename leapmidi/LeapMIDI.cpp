@@ -7,12 +7,6 @@
  *
  */
 
-#include <iostream>
-#include <math.h>
-#include <vector>
-
-#include "MIDIGestureBase.h"
-#include "MIDIGestureBall.h"
 #include "LeapMIDI.h"
 
 const short MIDI_DEBUG = 1;
@@ -26,6 +20,11 @@ namespace LeapMIDI {
                 return "Hand 1 curvature";
             case BALL_RADIUS_HAND_2:
                 return "Hand 2 curvature";
+                
+            case FINGER_1_HAND_1_Y:
+                return "Hand 1 finger 1 Y";
+            case FINGER_2_HAND_1_Y:
+                return "Hand 1 finger 2 Y";
                 
             default:
                 return "(Unknown control)";
@@ -47,6 +46,8 @@ namespace LeapMIDI {
         // instantiate gesture recognizer singletons
         Gesture::Ball *ballGesture = new Gesture::Ball();
         gestureRecognizers.push_back(ballGesture);
+        Gesture::Finger *fingerGesture = new Gesture::Finger();
+        gestureRecognizers.push_back(fingerGesture);
     }
 
     void Listener::findControls(const Leap::Controller &controller) {

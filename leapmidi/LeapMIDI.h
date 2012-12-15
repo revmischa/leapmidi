@@ -12,9 +12,14 @@
 
 #include <Leap.h>
 #include <vector>
+#include <iostream>
+#include <math.h>
+
 #include "MIDIGestureBase.h"
 #include "MIDIControlBase.h"
 #include "MIDITypes.h"
+#include "MIDIGestureBall.h"
+#include "MIDIGestureFinger.h"
 
 /* The classes below are exported */
 #pragma GCC visibility push(default)

@@ -18,10 +18,11 @@ namespace LeapMIDI {
     namespace Control {
         class FingerPosition : public Base {
         public:
-            FingerPosition(midi_bodypart_index hi, midi_bodypart_index fi, double radius) : Base(hi, fi, radius) {};
+            FingerPosition(midi_bodypart_index hi, midi_bodypart_index fi, double radius) : Base(hi, fi, radius) {}
+            virtual ~FingerPosition() {}
             
-            virtual const midi_control_value_raw minRawValue() { return 15; };
-            virtual const midi_control_value_raw maxRawValue() { return 200; };
+            virtual const midi_control_value_raw minRawValue() { return 30; };
+            virtual const midi_control_value_raw maxRawValue() { return 340; };
             virtual const midi_control_index controlIndex();
         };
     }

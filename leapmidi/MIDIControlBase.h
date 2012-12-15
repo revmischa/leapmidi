@@ -21,6 +21,7 @@ namespace LeapMIDI {
         public:
             // create a recognized control with raw input value from recognizer
             Base(midi_bodypart_index handIndex, midi_bodypart_index fingerIndex, midi_control_value_raw rawValue);
+            virtual ~Base() {}
             
             virtual const midi_control_value_raw rawValue() { return _rawValue; };
             
@@ -28,11 +29,11 @@ namespace LeapMIDI {
             virtual const midi_control_value mappedValue();
             
             // min/max raw value, for mapping to MIDI value
-            virtual const midi_control_value_raw minRawValue() { throw "minRawValue() not implemented"; };
-            virtual const midi_control_value_raw maxRawValue() { throw "maxRawValue() not implemented"; };
+            virtual const midi_control_value_raw minRawValue() = 0;
+            virtual const midi_control_value_raw maxRawValue() = 0;
 
             // MIDI control code index
-            virtual const midi_control_index controlIndex() { throw "controlIndex() not implemented"; };
+            virtual const midi_control_index controlIndex() = 0;
             
             virtual const midi_bodypart_index handIndex()   { return _handIndex; };
             virtual const midi_bodypart_index fingerIndex() { return _fingerIndex; };

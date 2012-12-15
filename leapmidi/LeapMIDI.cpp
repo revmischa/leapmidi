@@ -44,8 +44,8 @@ namespace LeapMIDI {
     
     void Listener::initGestures() {
         // instantiate gesture recognizer singletons
-        Gesture::Ball *ballGesture = new Gesture::Ball();
-        gestureRecognizers.push_back(ballGesture);
+//        Gesture::Ball *ballGesture = new Gesture::Ball();
+//        gestureRecognizers.push_back(ballGesture);
         Gesture::Finger *fingerGesture = new Gesture::Finger();
         gestureRecognizers.push_back(fingerGesture);
     }

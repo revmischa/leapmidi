@@ -20,6 +20,8 @@
 namespace LeapMIDI {
     namespace Gesture {
         class Finger : public LeapMIDI::Gesture::Base {
+            virtual ~Finger() {}
+            
             std::vector<LeapMIDI::Control::Base *> recognizedControls(const Leap::Controller &controller);
         };
     }

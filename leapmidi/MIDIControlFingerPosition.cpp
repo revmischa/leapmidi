@@ -15,7 +15,9 @@ namespace LeapMIDI {
             if (fingerIndex() == 1 && handIndex() == 0) return FINGER_2_HAND_1_Y;
             //....
             
-            throw "Too many hands detected for finger position control";
+            
+            std::cerr << "Too many hands detected for finger position control\n";
+            return NONE;
         }
     }
 }

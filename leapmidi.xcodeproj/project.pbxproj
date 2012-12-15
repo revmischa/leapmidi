@@ -10,7 +10,7 @@
 		C33EF31516673851001D3D0E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C33EF31416673851001D3D0E /* OpenGL.framework */; };
 		C33EF319166738D3001D3D0E /* Leap.h in Headers */ = {isa = PBXBuildFile; fileRef = C33EF317166738D3001D3D0E /* Leap.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C33EF32616673D10001D3D0E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C33EF32516673D10001D3D0E /* main.cpp */; };
-		C33EF32D16673D1D001D3D0E /* leapmidi.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C33EF2AF16672833001D3D0E /* leapmidi.dylib */; };
+		C33EF32D16673D1D001D3D0E /* leapmidi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C33EF2AF16672833001D3D0E /* leapmidi.a */; };
 		C35F6D8516704EAF000CEF49 /* LeapMIDI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35F6D8316704EAF000CEF49 /* LeapMIDI.cpp */; };
 		C35F6D8616704EAF000CEF49 /* LeapMIDI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35F6D8316704EAF000CEF49 /* LeapMIDI.cpp */; };
 		C35F6D8716704EAF000CEF49 /* LeapMIDI.h in Headers */ = {isa = PBXBuildFile; fileRef = C35F6D8416704EAF000CEF49 /* LeapMIDI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -62,7 +62,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		C33EF2AF16672833001D3D0E /* leapmidi.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = leapmidi.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		C33EF2AF16672833001D3D0E /* leapmidi.a */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = leapmidi.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33EF2B416672833001D3D0E /* leapmidiProj.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = leapmidiProj.xcconfig; sourceTree = "<group>"; };
 		C33EF2B516672833001D3D0E /* leapmidiTarget.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = leapmidiTarget.xcconfig; sourceTree = "<group>"; };
 		C33EF31416673851001D3D0E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -102,7 +102,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C35F6D8916704EE5000CEF49 /* libLeap.dylib in Frameworks */,
-				C33EF32D16673D1D001D3D0E /* leapmidi.dylib in Frameworks */,
+				C33EF32D16673D1D001D3D0E /* leapmidi.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,7 +130,7 @@
 		C33EF2B016672833001D3D0E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C33EF2AF16672833001D3D0E /* leapmidi.dylib */,
+				C33EF2AF16672833001D3D0E /* leapmidi.a */,
 				C33EF32216673D10001D3D0E /* leapmidi_test */,
 			);
 			name = Products;
@@ -230,7 +230,7 @@
 			);
 			name = leapmidi;
 			productName = leapmidi;
-			productReference = C33EF2AF16672833001D3D0E /* leapmidi.dylib */;
+			productReference = C33EF2AF16672833001D3D0E /* leapmidi.a */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 		C33EF32116673D10001D3D0E /* leapmidi_test */ = {
@@ -373,11 +373,13 @@
 		C33EF2BD16672833001D3D0E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				EXECUTABLE_EXTENSION = a;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/contrib\"",
 					"\"$(SRCROOT)/../Leap_SDK/lib\"",
 				);
+				MACH_O_TYPE = staticlib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -385,11 +387,13 @@
 		C33EF2BE16672833001D3D0E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				EXECUTABLE_EXTENSION = a;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/contrib\"",
 					"\"$(SRCROOT)/../Leap_SDK/lib\"",
 				);
+				MACH_O_TYPE = staticlib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

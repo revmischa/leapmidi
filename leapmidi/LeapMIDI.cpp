@@ -61,8 +61,13 @@ namespace LeapMIDI {
             this->onGestureRecognized(controller, *gesture);
             
             for (vector<LeapMIDI::Control::Base *>::iterator ctl = recognizedControls.begin(); ctl != recognizedControls.end(); ++ctl) {
-                // call control updated callback
                 Control::Base *control = *ctl;
+                
+                // skip control recognition failures
+                if (control->controlIndex() == MIDI_CONTROL_UNRECOGNIZED)
+                    continue;
+                
+                // call control updated callback
                 this->onControlUpdated(controller, *gesture, *control);
                 
                 // done with control, it can go away now

@@ -22,7 +22,7 @@ namespace LeapMIDI {
             virtual ~FingerPosition() {}
             
             virtual const midi_control_value_raw minRawValue() { return 30; };
-            virtual const midi_control_value_raw maxRawValue() { return 340; };
+            virtual const midi_control_value_raw maxRawValue() { return 460; };
             virtual const midi_control_index controlIndex();
         };
     }

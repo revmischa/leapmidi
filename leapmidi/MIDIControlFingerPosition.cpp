@@ -17,7 +17,7 @@ namespace LeapMIDI {
             
             
             std::cerr << "Too many hands detected for finger position control\n";
-            return NONE;
+            return MIDI_CONTROL_UNRECOGNIZED;
         }
     }
 }

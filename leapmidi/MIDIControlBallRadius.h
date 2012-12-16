@@ -21,6 +21,8 @@ namespace LeapMIDI {
             BallRadius(midi_bodypart_index hi, midi_bodypart_index fi, double radius) : Base(hi, fi, radius) {}
             virtual ~BallRadius() {}
             
+            virtual const char *description() { return "Hand curvature "; }
+            
             virtual const midi_control_value_raw minRawValue() { return 48; }
             virtual const midi_control_value_raw maxRawValue() { return 145; }
             virtual const midi_control_index controlIndex();

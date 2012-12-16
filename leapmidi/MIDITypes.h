@@ -40,7 +40,11 @@ namespace LeapMIDI {
         FINGER_1_HAND_1_Z,
         FINGER_2_HAND_1_X,
         FINGER_2_HAND_1_Y,
-        FINGER_2_HAND_1_Z
+        FINGER_2_HAND_1_Z,
+        
+        FINGER_1_HAND_2_X,
+        FINGER_1_HAND_2_Y,
+        FINGER_1_HAND_2_Z,
         
         // etc...
     };

@@ -16,6 +16,9 @@
 #include "MIDIGestureBase.h"
 #include "MIDIControlBase.h"
 #include "MIDIControlFingerPosition.h"
+#include "MIDIControlFingerPositionX.h"
+#include "MIDIControlFingerPositionY.h"
+#include "MIDIControlFingerPositionZ.h"
 
 namespace LeapMIDI {
     namespace Gesture {

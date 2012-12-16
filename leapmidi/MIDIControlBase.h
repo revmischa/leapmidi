@@ -23,7 +23,7 @@ namespace LeapMIDI {
             Base(midi_bodypart_index handIndex, midi_bodypart_index fingerIndex, midi_control_value_raw rawValue);
             virtual ~Base() {}
             
-            virtual const midi_control_value_raw rawValue() { return _rawValue; };
+            virtual const midi_control_value_raw rawValue() { return _rawValue; }
             
             // map a raw value from [minRawValue,maxRawValue] into the range [0,127]
             virtual const midi_control_value mappedValue();
@@ -35,8 +35,10 @@ namespace LeapMIDI {
             // MIDI control code index
             virtual const midi_control_index controlIndex() = 0;
             
-            virtual const midi_bodypart_index handIndex()   { return _handIndex; };
-            virtual const midi_bodypart_index fingerIndex() { return _fingerIndex; };
+            virtual const char *description() = 0;
+            
+            virtual const midi_bodypart_index handIndex()   { return _handIndex; }
+            virtual const midi_bodypart_index fingerIndex() { return _fingerIndex; }
             
         protected:
             midi_bodypart_index _handIndex, _fingerIndex;

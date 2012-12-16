@@ -23,11 +23,11 @@ namespace LeapMIDI {
             midi_control_value_raw raw = rawValue();
             
             if (raw < min) {
-                std::cerr << "Warning, got raw value " << raw
+                std::cerr << "Warning, " << description() << " got raw value " << raw
                     << " which is below the min of " << min << std::endl;
                 raw = min;
             } else if (raw > max) {
-                std::cerr << "Warning, got raw value " << raw
+                std::cerr << "Warning, " << description() << " got raw value " << raw
                     << " which is above the max of " << max << std::endl;
                 raw = max;
             }

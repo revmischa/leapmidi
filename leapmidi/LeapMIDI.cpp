@@ -14,23 +14,6 @@ const short MIDI_DEBUG = 1;
 using namespace std;
 
 namespace LeapMIDI {
-    const char *controlDescription(midi_control_index idx) {
-        switch (idx) {
-            case BALL_RADIUS_HAND_1:
-                return "Hand 1 curvature";
-            case BALL_RADIUS_HAND_2:
-                return "Hand 2 curvature";
-                
-            case FINGER_1_HAND_1_Y:
-                return "Hand 1 finger 1 Y";
-            case FINGER_2_HAND_1_Y:
-                return "Hand 1 finger 2 Y";
-                
-            default:
-                return "(Unknown control)";
-        }
-    }
-    
     Listener::Listener() {
         initGestures();
     }
@@ -85,7 +68,7 @@ namespace LeapMIDI {
         
         if (MIDI_DEBUG) {
             cout << "recognized control index " << idx
-            << " (" << controlDescription(idx) << ")"
+            << " (" << control.description() << ")"
             << ", raw value: "
             << control.rawValue() << " mapped value: " << val << endl;
         }

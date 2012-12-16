@@ -12,17 +12,17 @@
 #include <iostream>
 #include "MIDIControlBase.h"
 #include "MIDITypes.h"
-#include "LeapMIDI.h"
 
 namespace LeapMIDI {
     namespace Control {
         class FingerPosition : public Base {
         public:
-            FingerPosition(midi_bodypart_index hi, midi_bodypart_index fi, double radius) : Base(hi, fi, radius) {}
+            FingerPosition(midi_bodypart_index hi, midi_bodypart_index fi, double pos) : Base(hi, fi, pos) {}
             virtual ~FingerPosition() {}
+
+            // override this in subclass to define the control index of hand 1/finger 1
+            virtual const midi_control_index controlIndexBase() = 0;
             
-            virtual const midi_control_value_raw minRawValue() { return 30; };
-            virtual const midi_control_value_raw maxRawValue() { return 460; };
             virtual const midi_control_index controlIndex();
         };
     }

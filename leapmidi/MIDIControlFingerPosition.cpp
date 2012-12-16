@@ -11,13 +11,12 @@
 namespace LeapMIDI {
     namespace Control {
         const midi_control_index FingerPosition::controlIndex() {
-            if (fingerIndex() == 0 && handIndex() == 0) return FINGER_1_HAND_1_Y;
-            if (fingerIndex() == 1 && handIndex() == 0) return FINGER_2_HAND_1_Y;
-            //....
+            // how many controls do we have per hand?
+            unsigned long handControlCount = FINGER_1_HAND_2_X - FINGER_1_HAND_1_X;
+            unsigned long _controlIndex = controlIndexBase() + fingerIndex() * 3; // gives us finger control index
+            _controlIndex += (handIndex() - 1) * handControlCount; // offset by hand count
             
-            
-            std::cerr << "Too many hands detected for finger position control\n";
-            return MIDI_CONTROL_UNRECOGNIZED;
+            return (midi_control_index)_controlIndex;
         }
     }
 }

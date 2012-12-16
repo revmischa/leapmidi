@@ -25,8 +25,8 @@ namespace LeapMIDI {
             
             virtual const char *description() { return "Finger X position"; }
                         
-            virtual const midi_control_value_raw minRawValue() { return -240; }
-            virtual const midi_control_value_raw maxRawValue() { return 240; }
+            virtual const midi_control_value_raw minRawValue() { return -150; }
+            virtual const midi_control_value_raw maxRawValue() { return 150; }
         };
     }
 }

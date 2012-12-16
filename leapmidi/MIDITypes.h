@@ -18,7 +18,7 @@ namespace LeapMIDI {
     enum midi_control_index {
         MIDI_CONTROL_UNRECOGNIZED = 0,
         
-        BALL_RADIUS_HAND_1 = 70,
+        BALL_RADIUS_HAND_1 = 1,
         BALL_RADIUS_HAND_2,
         
         PALM_HAND_1_X,

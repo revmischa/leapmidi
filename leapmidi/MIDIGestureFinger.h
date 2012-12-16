@@ -12,6 +12,7 @@
 #include <iostream>
 #include <vector>
 #include <Leap.h>
+#include <math.h>
 
 #include "MIDIGestureBase.h"
 #include "MIDIControlBase.h"

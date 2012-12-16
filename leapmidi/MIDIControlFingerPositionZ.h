@@ -18,7 +18,7 @@ namespace LeapMIDI {
         
         class FingerPositionZ : public FingerPosition {
         public:
-            FingerPositionZ(midi_bodypart_index hi, midi_bodypart_index fi, double pos) : FingerPosition(hi, fi, pos) {}
+            FingerPositionZ(midi_bodypart_index hi, midi_bodypart_index fi, double pos) : FingerPosition(hi, fi, -pos) {}
             virtual ~FingerPositionZ() {}
             
             virtual const midi_control_index controlIndexBase() { return FINGER_1_HAND_1_Z; }

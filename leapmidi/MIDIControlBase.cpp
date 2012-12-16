@@ -11,6 +11,8 @@
 
 namespace LeapMIDI {
     namespace Control {
+        bool rangeWarning = 0;
+        
         Base::Base(midi_bodypart_index handIndex, midi_bodypart_index fingerIndex, midi_control_value_raw rawValue) {
             _handIndex = handIndex;
             _fingerIndex = fingerIndex;
@@ -23,12 +25,14 @@ namespace LeapMIDI {
             midi_control_value_raw raw = rawValue();
             
             if (raw < min) {
-                std::cerr << "Warning, " << description() << " got raw value " << raw
-                    << " which is below the min of " << min << std::endl;
+                if (rangeWarning)
+                    std::cerr << "Warning, " << description() << " got raw value " << raw
+                        << " which is below the min of " << min << std::endl;
                 raw = min;
             } else if (raw > max) {
-                std::cerr << "Warning, " << description() << " got raw value " << raw
-                    << " which is above the max of " << max << std::endl;
+                if (rangeWarning)
+                    std::cerr << "Warning, " << description() << " got raw value " << raw
+                        << " which is above the max of " << max << std::endl;
                 raw = max;
             }
             

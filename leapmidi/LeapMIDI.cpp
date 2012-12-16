@@ -9,7 +9,7 @@
 
 #include "LeapMIDI.h"
 
-const short MIDI_DEBUG = 1;
+const short MIDI_DEBUG = 0;
 
 using namespace std;
 

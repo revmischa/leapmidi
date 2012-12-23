@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C313AAE91687B78400A0AD2A /* LeapMath.h in Headers */ = {isa = PBXBuildFile; fileRef = C313AAE81687B78400A0AD2A /* LeapMath.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C33EF31516673851001D3D0E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C33EF31416673851001D3D0E /* OpenGL.framework */; };
 		C33EF319166738D3001D3D0E /* Leap.h in Headers */ = {isa = PBXBuildFile; fileRef = C33EF317166738D3001D3D0E /* Leap.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C33EF32616673D10001D3D0E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C33EF32516673D10001D3D0E /* main.cpp */; };
@@ -65,6 +66,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C313AAE81687B78400A0AD2A /* LeapMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeapMath.h; sourceTree = "<group>"; };
 		C33EF2AF16672833001D3D0E /* leapmidi.a */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = leapmidi.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33EF2B416672833001D3D0E /* leapmidiProj.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = leapmidiProj.xcconfig; sourceTree = "<group>"; };
 		C33EF2B516672833001D3D0E /* leapmidiTarget.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = leapmidiTarget.xcconfig; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 		C33EF316166738D3001D3D0E /* contrib */ = {
 			isa = PBXGroup;
 			children = (
+				C313AAE81687B78400A0AD2A /* LeapMath.h */,
 				C33EF317166738D3001D3D0E /* Leap.h */,
 			);
 			path = contrib;
@@ -211,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C33EF319166738D3001D3D0E /* Leap.h in Headers */,
+				C313AAE91687B78400A0AD2A /* LeapMath.h in Headers */,
 				C35F6D8F16704FD4000CEF49 /* MIDIGestureBase.h in Headers */,
 				C35F6D94167052B4000CEF49 /* MIDIControlBase.h in Headers */,
 				C35F6D9816705850000CEF49 /* MIDITypes.h in Headers */,

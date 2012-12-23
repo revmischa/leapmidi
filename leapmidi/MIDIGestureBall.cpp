@@ -15,24 +15,21 @@ namespace LeapMIDI {
             Leap::Frame frame = controller.frame();
             
             // hands detected?
-            if (! frame.hands().size())
+            if (frame.hands().empty())
                 return MIDI_GESTURES_EMPTY;
             
             std::vector<LeapMIDI::Control::Base *> controls;
             
-            for (int i = 0; i < frame.hands().size(); i++) {
+            for (int i = 0; i < frame.hands().count(); i++) {
                 // gonna assume the user only has two hands. sometimes leap thinks otherwise.
                 if (i > 1) break;
                 
                 Leap::Hand hand = frame.hands()[i];
-                const Leap::Ball *ball = hand.ball();
-                if (ball == NULL)
+                double radius = hand.sphereRadius(); // in mm
+
+                if (! radius)
                     continue;
                 
-                // found hand curvature
-                double radius = ball->radius; // in mm
-                
-                // I'm not sure if this is the right way to return stuff in a vector
                 LeapMIDI::Control::BallRadius *ballControl = new LeapMIDI::Control::BallRadius(i, 0, radius);
                 controls.push_back(ballControl);
             }

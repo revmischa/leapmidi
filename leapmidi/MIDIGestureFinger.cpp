@@ -1,11 +1,12 @@
 //
-//  MIDIGestureFinger.cpp
+//  MIDIGesturepointable.cpp
 //  leapmidi
 //
 //  Created by Mischa Spiegelmock on 12/13/12.
 //  Copyright (c) 2012 int80. All rights reserved.
 //
 
+#include "LeapMIDI.h"
 #include "MIDIGestureFinger.h"
 
 namespace LeapMIDI {
@@ -14,66 +15,67 @@ namespace LeapMIDI {
             Leap::Frame frame = controller.frame();
             
             // hands detected?
-            if (! frame.hands().size())
+            if (frame.hands().empty())
                 return MIDI_GESTURES_EMPTY;
             
             std::vector<LeapMIDI::Control::Base *> controls;
             
-            size_t handCount = frame.hands().size();
+            size_t handCount = frame.hands().count();
             for (int i = 0; i < handCount; i++) {
                 // gonna assume the user only has two hands. sometimes leap thinks otherwise.
                 if (i > 1) break;
 
                 Leap::Hand hand = frame.hands()[i];
                 
-                // we need at least one finger to make this work
-                size_t fingerCount = hand.fingers().size();
-                if (! fingerCount)
+                // we need at least one pointable to make this work
+                size_t pointableCount = hand.pointables().count();
+                if (! pointableCount)
                     continue;
                 
                 // calculate average X/Y/Z coords
                 double x=0, y=0, z=0;
                 double velX=0, velY=0, velZ=0;
-                for (int fingerIndex = 0; fingerIndex < fingerCount; fingerIndex++) {
-                    Leap::Finger finger = hand.fingers()[fingerIndex];
+                for (int pointableIndex = 0; pointableIndex < pointableCount; pointableIndex++) {
+                    Leap::Pointable pointable = hand.pointables()[pointableIndex];
                     
+                    std::cout << "vel X: " << pointable.tipVelocity().x << std::endl;
                     // we want to know the velocity yo
-                    if (! finger.velocity())
-                        continue;
+//                    if (! pointable.tipVelocity())
+//                        continue;
                     
-                    x += finger.tip().position.x;
-                    y += finger.tip().position.y;
-                    z += finger.tip().position.z;
+                    x += pointable.tipPosition().x;
+                    y += pointable.tipPosition().y;
+                    z += pointable.tipPosition().z;
                     
-                    velX += finger.velocity()->x;
-                    velY += finger.velocity()->y;
-                    velZ += finger.velocity()->z;
+                    velX += pointable.tipVelocity().x;
+                    velY += pointable.tipVelocity().y;
+                    velZ += pointable.tipVelocity().z;
                 }
-                x /= fingerCount;
-                y /= fingerCount;
-                z /= fingerCount;
-                velX /= fingerCount;
-                velY /= fingerCount;
-                velZ /= fingerCount;
+                x /= pointableCount;
+                y /= pointableCount;
+                z /= pointableCount;
+                velX /= pointableCount;
+                velY /= pointableCount;
+                velZ /= pointableCount;
                 
                 // only register if velocity is greater than this threshold
                 double velocityThreshold = 5.0;
 //                std::cout << "velX: " << velX << " velY: " << velY << " velZ: " << velZ << std::endl;
                 
-                // generate one finger position control per hand coordinate, determined by number of fingers
+                // generate one pointable position control per hand coordinate, determined by number of pointables
                 if (abs(velX) > velocityThreshold) {
-                    LeapMIDI::Control::FingerPosition *fingerPosControlX = new LeapMIDI::Control::FingerPositionX(handCount, fingerCount, x);
-                        controls.push_back(fingerPosControlX);
+                    LeapMIDI::Control::FingerPosition *pointablePosControlX = new LeapMIDI::Control::FingerPositionX(handCount, pointableCount, x);
+                        controls.push_back(pointablePosControlX);
                 }
                 
                 if (abs(velY) > velocityThreshold) {
-                    LeapMIDI::Control::FingerPosition *fingerPosControlY = new LeapMIDI::Control::FingerPositionY(handCount, fingerCount, y);
-                    controls.push_back(fingerPosControlY);
+                    LeapMIDI::Control::FingerPosition *pointablePosControlY = new LeapMIDI::Control::FingerPositionY(handCount, pointableCount, y);
+                    controls.push_back(pointablePosControlY);
                 }
                 
                 if (abs(velZ) > velocityThreshold) {
-                    LeapMIDI::Control::FingerPosition *fingerPosControlZ = new LeapMIDI::Control::FingerPositionZ(handCount, fingerCount, z);
-                    controls.push_back(fingerPosControlZ);
+                    LeapMIDI::Control::FingerPosition *pointablePosControlZ = new LeapMIDI::Control::FingerPositionZ(handCount, pointableCount, z);
+                    controls.push_back(pointablePosControlZ);
                 }
             }
             

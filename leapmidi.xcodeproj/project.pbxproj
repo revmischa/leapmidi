@@ -30,6 +30,9 @@
 		C35F6DA01671B460000CEF49 /* MIDIControlBallRadius.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35F6D9E1671B460000CEF49 /* MIDIControlBallRadius.cpp */; };
 		C35F6DA11671B460000CEF49 /* MIDIControlBallRadius.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35F6D9E1671B460000CEF49 /* MIDIControlBallRadius.cpp */; };
 		C35F6DA21671B460000CEF49 /* MIDIControlBallRadius.h in Headers */ = {isa = PBXBuildFile; fileRef = C35F6D9F1671B460000CEF49 /* MIDIControlBallRadius.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C37D33441698F68F00D695C0 /* MIDIProgramControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C37D33431698F68F00D695C0 /* MIDIProgramControl.cpp */; };
+		C37D33471698F6C000D695C0 /* MIDIProgramBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C37D33451698F6C000D695C0 /* MIDIProgramBase.cpp */; };
+		C37D33481698F6C000D695C0 /* MIDIProgramBase.h in Headers */ = {isa = PBXBuildFile; fileRef = C37D33461698F6C000D695C0 /* MIDIProgramBase.h */; };
 		C38824A1166B1BAA007FE3B3 /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C38824A0166B1BAA007FE3B3 /* libLeap.dylib */; };
 		C3C2E7B5167D45650031B430 /* MIDIControlFingerPositionX.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C2E7B2167D45650031B430 /* MIDIControlFingerPositionX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C3C2E7B8167D49460031B430 /* MIDIControlFingerPositionY.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C2E7B7167D49460031B430 /* MIDIControlFingerPositionY.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -85,6 +88,10 @@
 		C35F6D9A16705DBB000CEF49 /* MIDIGestureBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIDIGestureBall.h; sourceTree = "<group>"; };
 		C35F6D9E1671B460000CEF49 /* MIDIControlBallRadius.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MIDIControlBallRadius.cpp; sourceTree = "<group>"; };
 		C35F6D9F1671B460000CEF49 /* MIDIControlBallRadius.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIDIControlBallRadius.h; sourceTree = "<group>"; };
+		C37D33431698F68F00D695C0 /* MIDIProgramControl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MIDIProgramControl.cpp; sourceTree = "<group>"; };
+		C37D33451698F6C000D695C0 /* MIDIProgramBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MIDIProgramBase.cpp; sourceTree = "<group>"; };
+		C37D33461698F6C000D695C0 /* MIDIProgramBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIDIProgramBase.h; sourceTree = "<group>"; };
+		C37D33491698F79100D695C0 /* MIDIProgramControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MIDIProgramControl.h; sourceTree = "<group>"; };
 		C38824A0166B1BAA007FE3B3 /* libLeap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libLeap.dylib; path = ../Leap_SDK/lib/libLeap.dylib; sourceTree = "<group>"; };
 		C3C2E7B2167D45650031B430 /* MIDIControlFingerPositionX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIDIControlFingerPositionX.h; sourceTree = "<group>"; };
 		C3C2E7B7167D49460031B430 /* MIDIControlFingerPositionY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIDIControlFingerPositionY.h; sourceTree = "<group>"; };
@@ -152,6 +159,7 @@
 				C35F6D9716705850000CEF49 /* MIDITypes.h */,
 				C35F6D8316704EAF000CEF49 /* LeapMIDI.cpp */,
 				C35F6D8416704EAF000CEF49 /* LeapMIDI.h */,
+				C37D33411698F66B00D695C0 /* program */,
 				C31B002E1675A39700383230 /* visualizers */,
 				C35F6D9616705659000CEF49 /* controls */,
 				C35F6D951670564C000CEF49 /* gestures */,
@@ -206,6 +214,17 @@
 			name = controls;
 			sourceTree = "<group>";
 		};
+		C37D33411698F66B00D695C0 /* program */ = {
+			isa = PBXGroup;
+			children = (
+				C37D33431698F68F00D695C0 /* MIDIProgramControl.cpp */,
+				C37D33491698F79100D695C0 /* MIDIProgramControl.h */,
+				C37D33451698F6C000D695C0 /* MIDIProgramBase.cpp */,
+				C37D33461698F6C000D695C0 /* MIDIProgramBase.h */,
+			);
+			name = program;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -226,6 +245,7 @@
 				C3C2E7B8167D49460031B430 /* MIDIControlFingerPositionY.h in Headers */,
 				C3C2E7BA167D496D0031B430 /* MIDIControlFingerPositionZ.h in Headers */,
 				C35F6DA21671B460000CEF49 /* MIDIControlBallRadius.h in Headers */,
+				C37D33481698F6C000D695C0 /* MIDIProgramBase.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,6 +326,8 @@
 				C35F6DA01671B460000CEF49 /* MIDIControlBallRadius.cpp in Sources */,
 				C3EAA989167AD5FE00497E33 /* MIDIGestureFinger.cpp in Sources */,
 				C3EAA98F167AD69300497E33 /* MIDIControlFingerPosition.cpp in Sources */,
+				C37D33441698F68F00D695C0 /* MIDIProgramControl.cpp in Sources */,
+				C37D33471698F6C000D695C0 /* MIDIProgramBase.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

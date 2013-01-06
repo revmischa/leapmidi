@@ -25,8 +25,6 @@
 #pragma GCC visibility push(default)
 
 namespace LeapMIDI {
-    const char *controlDescription(midi_control_index idx);
-
     class Gesture::Base;
 
     class Listener : public Leap::Listener {

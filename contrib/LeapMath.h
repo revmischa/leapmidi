@@ -1,9 +1,9 @@
 /******************************************************************************\
-* Copyright (C) 2012 Leap Motion, Inc. All rights reserved.                    *
-* NOTICE: This developer release of Leap Motion, Inc. software is confidential *
-* and intended for very limited distribution. Parties using this software must *
-* accept the SDK Agreement prior to obtaining this software and related tools. *
-* This software is subject to copyright.                                       *
+* Copyright (C) 2012-2013 Leap Motion, Inc. All rights reserved.               *
+* Leap Motion proprietary and confidential. Not for distribution.              *
+* Use subject to the terms of the Leap Motion SDK Agreement available at       *
+* https://developer.leapmotion.com/sdk_agreement, or another agreement         *
+* between Leap Motion and you, your company or other organization.             *
 \******************************************************************************/
 
 #if !defined(__LeapMath_h__)
@@ -12,6 +12,7 @@
 #include <cmath>
 #include <iostream>
 #include <sstream>
+#include <float.h>
 
 namespace Leap {
 
@@ -166,7 +167,7 @@ struct Vector {
   /// The yaw angle in radians.
   ///
   /// Yaw is the angle between the negative z-axis and the projection of
-  /// the vector onto the x-z plane. In other words, pitch represents rotation
+  /// the vector onto the x-z plane. In other words, yaw represents rotation
   /// around the y-axis. If the vector points to the right of the negative z-axis,
   /// then the returned angle is between 0 and pi radians (180 degrees);
   /// if it points to the left, the angle is between 0 and -pi radians.
@@ -238,7 +239,7 @@ struct Vector {
   Vector normalized() const {
     float denom = this->magnitudeSquared();
     if (denom <= 0.0f) {
-      return Vector();
+      return Vector::zero();
     }
     denom = 1.0f / std::sqrt(denom);
     return Vector(x * denom, y * denom, z * denom);
@@ -330,6 +331,14 @@ struct Vector {
     return x != other.x || y != other.y || z != other.z;
   }
 
+  /// Returns true if all of the vector's components are finite.  If any
+  /// component is NaN or infinite, then this returns false.
+  bool isValid() const {
+    return (x <= FLT_MAX && x >= -FLT_MAX) &&
+           (y <= FLT_MAX && y >= -FLT_MAX) &&
+           (z <= FLT_MAX && z >= -FLT_MAX);
+  }
+
   /// Index vector components numerically.
   /// Index 0 is x, index 1 is y, and index 2 is z.
   /// @returns The x, y, or z component of this Vector, if the specified index
@@ -355,7 +364,7 @@ struct Vector {
   /// Convert a Leap::Vector to another 4-component Vector type.
   ///
   /// The specified type must define a constructor that takes the x, y, z, and w
-  /// components as separate parameters. (The homogenous coordinate, w, is set
+  /// components as separate parameters. (The homogeneous coordinate, w, is set
   /// to zero by default, but you should typically set it to one for vectors
   /// representing a position.)
   template<typename Vector4Type>
@@ -383,6 +392,11 @@ struct FloatArray {
 
   /// Use the Float Array anywhere a float pointer can be used
   operator float* () {
+    return m_array;
+  }
+
+  /// Use the Float Array anywhere a const float pointer can be used
+  operator const float* () const {
     return m_array;
   }
 
@@ -505,6 +519,21 @@ struct Matrix
   /// @returns A new Vector representing the transformed original.
   Vector transformDirection(const Vector& in) const {
     return xBasis*in.x + yBasis*in.y + zBasis*in.z;
+  }
+
+  /// Performs a matrix inverse if the matrix consists entirely of rigid
+  /// transformations (translations and rotations).  If the matrix is not rigid,
+  /// this operation will not represent an inverse.
+  ///
+  /// Note that all matricies that are directly returned by the API are rigid.
+  ///
+  /// @returns The rigid inverse of the matrix.
+  Matrix rigidInverse() const {
+    Matrix rotInverse = Matrix(Vector(xBasis[0], yBasis[0], zBasis[0]),
+                               Vector(xBasis[1], yBasis[1], zBasis[1]),
+                               Vector(xBasis[2], yBasis[2], zBasis[2]));
+    rotInverse.origin = rotInverse.transformDirection( -origin );
+    return rotInverse;
   }
 
   /// Multiply transform matrices.

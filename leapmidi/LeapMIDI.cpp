@@ -8,86 +8,39 @@
  */
 
 #include "LeapMIDI.h"
-
-const short MIDI_DEBUG = 0;
+#include "MIDIProgramControl.h"
 
 using namespace std;
 
 namespace LeapMIDI {
     Listener::Listener() {
-        initGestures();
+        currentProgram = new LeapMIDI::Program::Control();
     }
     
-    Listener::~Listener() {
-        // destroy each singleton
-        for (vector<Gesture::Base *>::iterator it = gestureRecognizers.begin(); it != gestureRecognizers.end(); ++it) {
-            delete *it;
-        }
+    void Listener::onInit(const Leap::Controller& controller) {
+        std::cout << "Leap device initialized\n";
     }
     
-    void Listener::initGestures() {
-        // instantiate gesture recognizer singletons
-//        Gesture::Ball *ballGesture = new Gesture::Ball();
-//        gestureRecognizers.push_back(ballGesture);
-        Gesture::Finger *fingerGesture = new Gesture::Finger();
-        gestureRecognizers.push_back(fingerGesture);
-    }
-
-    void Listener::findControls(const Leap::Controller &controller) {
-        // feed frames to recognizers
-        for (vector<Gesture::Base *>::iterator it = gestureRecognizers.begin(); it != gestureRecognizers.end(); ++it) {
-            // get controls recognized from gestures
-            Gesture::Base *gesture = *it;
-            vector<LeapMIDI::Control::Base *> recognizedControls = gesture->recognizedControls(controller);
-            
-            // call gesture recognized callback
-            this->onGestureRecognized(controller, *gesture);
-            
-            for (vector<LeapMIDI::Control::Base *>::iterator ctl = recognizedControls.begin(); ctl != recognizedControls.end(); ++ctl) {
-                Control::Base *control = *ctl;
-                
-                // skip control recognition failures
-                if (control->controlIndex() == MIDI_CONTROL_UNRECOGNIZED)
-                    continue;
-                
-                // call control updated callback
-                this->onControlUpdated(controller, *gesture, *control);
-                
-                // done with control, it can go away now
-                delete *ctl;
-            }
-        }
+    void LeapMIDI::Listener::onConnect(const Leap::Controller& controller) {
+        std::cout << "Leap device connected\n";
     }
     
-    void Listener::onGestureRecognized(const Leap::Controller &controller, Gesture::Base &gesture) {
+    void LeapMIDI::Listener::onDisconnect(const Leap::Controller& controller) {
+        std::cout << "Leap device disconnected\n";
     }
     
-    void Listener::onControlUpdated(const Leap::Controller &controller, Gesture::Base &gesture, Control::Base &control) {
-        midi_control_value val = control.mappedValue();
-        midi_control_index idx = control.controlIndex();
-        
-        if (MIDI_DEBUG) {
-            cout << "recognized control index " << idx
-            << " (" << control.description() << ")"
-            << ", raw value: "
-            << control.rawValue() << " mapped value: " << val << endl;
-        }
-
+    void LeapMIDI::Listener::onFrame(const Leap::Controller &controller) {
+        currentProgram->findControls(controller);
     }
-
-    void Listener::onInit(const Leap::Controller &controller) {
-        cout << "Initialized" << endl;
+    
+    void Listener::onGestureRecognized(const Leap::Controller &controller, LeapMIDI::Gesture::Base &gesture) {
+        cout << "gesture recognized\n";
+        currentProgram->onGestureRecognized(controller, gesture);
     }
-
-    void Listener::onConnect(const Leap::Controller &controller) {
-        cout << "Connected" << endl;
-    }
-
-    void Listener::onDisconnect(const Leap::Controller &controller) {
-        cout << "Disconnected" << endl;
-    }
-
-    void Listener::onFrame(const Leap::Controller &controller) {
-        findControls(controller);
+    
+    void Listener::onControlUpdated(const Leap::Controller &controller, LeapMIDI::Gesture::Base &gesture, LeapMIDI::Control::Base &control) {
+        // call superclass method
+        cout << "control updated\n";
+        currentProgram->onControlUpdated(controller, gesture, control);
     }
 }

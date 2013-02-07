@@ -38,7 +38,7 @@ namespace LeapMIDI {
                 for (int pointableIndex = 0; pointableIndex < pointableCount; pointableIndex++) {
                     Leap::Pointable pointable = hand.pointables()[pointableIndex];
                     
-                    std::cout << "vel X: " << pointable.tipVelocity().x << std::endl;
+//                    std::cout << "vel X: " << pointable.tipVelocity().x << std::endl;
                     // we want to know the velocity yo
 //                    if (! pointable.tipVelocity())
 //                        continue;

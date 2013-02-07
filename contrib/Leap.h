@@ -1,9 +1,9 @@
 /******************************************************************************\
-* Copyright (C) 2012 Leap Motion, Inc. All rights reserved.                    *
-* NOTICE: This developer release of Leap Motion, Inc. software is confidential *
-* and intended for very limited distribution. Parties using this software must *
-* accept the SDK Agreement prior to obtaining this software and related tools. *
-* This software is subject to copyright.                                       *
+* Copyright (C) 2012-2013 Leap Motion, Inc. All rights reserved.               *
+* Leap Motion proprietary and confidential. Not for distribution.              *
+* Use subject to the terms of the Leap Motion SDK Agreement available at       *
+* https://developer.leapmotion.com/sdk_agreement, or another agreement         *
+* between Leap Motion and you, your company or other organization.             *
 \******************************************************************************/
 
 #if !defined(__Leap_h__)
@@ -14,7 +14,7 @@
 #include <string>
 #include <vector>
 
-// Define integer types for Visual Studio 2005
+// Define integer types for Visual Studio 2008 and earlier
 #if defined(_MSC_VER) && (_MSC_VER < 1600)
 typedef __int32 int32_t;
 typedef __int64 int64_t;
@@ -70,6 +70,7 @@ class PointableImplementation;
 class FingerImplementation;
 class ToolImplementation;
 class HandImplementation;
+class ScreenImplementation;
 class FrameImplementation;
 class ControllerImplementation;
 template<typename T> class ListBaseImplementation;
@@ -80,6 +81,7 @@ class FingerList;
 class ToolList;
 class Hand;
 class Frame;
+class Screen;
 class Listener;
 
 /// The Pointable class reports the physical characteristics of a detected finger or tool.
@@ -246,7 +248,7 @@ class Finger : public Pointable {
 
     /// If the specified Pointable object represents a finger, creates a copy
     /// of it as a Finger object; otherwise, creates an invalid Finger object.
-    LEAP_EXPORT Finger(const Pointable&);
+    LEAP_EXPORT explicit Finger(const Pointable&);
 
     /// Returns an invalid Finger object.
     ///
@@ -292,7 +294,7 @@ class Tool : public Pointable {
 
     /// If the specified Pointable object represents a tool, creates a copy
     /// of it as a Tool object; otherwise, creates an invalid Tool object.
-    LEAP_EXPORT Tool(const Pointable&);
+    LEAP_EXPORT explicit Tool(const Pointable&);
 
     /// Returns an invalid Tool object.
     ///
@@ -475,6 +477,110 @@ class Hand : public Interface {
     /// @returns The radius of the sphere in millimeters.
     LEAP_EXPORT float sphereRadius() const;
 
+    /// The change of position of this hand between the current frame and
+    /// the specified frame.
+    ///
+    /// The returned translation vector provides the magnitude and direction of
+    /// the movement in millimeters.
+    ///
+    /// If a corresponding Hand object is not found in sinceFrame, or if either
+    /// this frame or sinceFrame are invalid Frame objects, then this method
+    /// returns a zero vector.
+    ///
+    /// @param sinceFrame The starting frame for computing the translation.
+    /// @returns A Vector representing the heuristically determined change in
+    /// hand position between the current frame and that specified in the
+    /// sinceFrame parameter.
+    LEAP_EXPORT Vector translation(const Frame& sinceFrame) const;
+
+    /// The axis of rotation derived from the change in orientation of this
+    /// hand, and any associated fingers and tools, between the current frame
+    /// and the specified frame.
+    ///
+    /// The returned direction vector is normalized.
+    ///
+    /// If a corresponding Hand object is not found in sinceFrame, or if either
+    /// this frame or sinceFrame are invalid Frame objects, then this method
+    /// returns a zero vector.
+    ///
+    /// @param sinceFrame The starting frame for computing the relative rotation.
+    /// @returns A normalized direction Vector representing the heuristically
+    /// determined axis of rotational change of the hand between the current
+    /// frame and that specified in the sinceFrame parameter.
+    LEAP_EXPORT Vector rotationAxis(const Frame& sinceFrame) const;
+
+    /// The angle of rotation around the rotation axis derived from the change
+    /// in orientation of this hand, and any associated fingers and tools,
+    /// between the current frame and the specified frame.
+    ///
+    /// The returned angle is expressed in radians measured clockwise around the
+    /// rotation axis (using the right-hand rule) between the start and end frames.
+    /// The value is always between 0 and pi radians (0 and 180 degrees).
+    ///
+    /// If a corresponding Hand object is not found in sinceFrame, or if either
+    /// this frame or sinceFrame are invalid Frame objects, then the angle of
+    /// rotation is zero.
+    ///
+    /// @param sinceFrame The starting frame for computing the relative rotation.
+    /// @returns A positive value representing the heuristically determined
+    /// rotational change of the hand between the current frame and that
+    /// specified in the sinceFrame parameter.
+    LEAP_EXPORT float rotationAngle(const Frame& sinceFrame) const;
+
+    /// The angle of rotation around the specified axis derived from the change
+    /// in orientation of this hand, and any associated fingers and tools,
+    /// between the current frame and the specified frame.
+    ///
+    /// The returned angle is expressed in radians measured clockwise around the
+    /// rotation axis (using the right-hand rule) between the start and end frames.
+    /// The value is always between -pi and pi radians (-180 and 180 degrees).
+    ///
+    /// If a corresponding Hand object is not found in sinceFrame, or if either
+    /// this frame or sinceFrame are invalid Frame objects, then the angle of
+    /// rotation is zero.
+    ///
+    /// @param sinceFrame The starting frame for computing the relative rotation.
+    /// @param axis The axis to measure rotation around.
+    /// @returns A value representing the heuristically determined rotational
+    /// change of the hand between the current frame and that specified in the
+    /// sinceFrame parameter around the specified axis.
+    LEAP_EXPORT float rotationAngle(const Frame& sinceFrame, const Vector& axis) const;
+
+    /// The transform matrix expressing the rotation derived from the change
+    /// in orientation of this hand, and any associated fingers and tools,
+    /// between the current frame and the specified frame.
+    ///
+    /// If a corresponding Hand object is not found in sinceFrame, or if either
+    /// this frame or sinceFrame are invalid Frame objects, then this method
+    /// returns an identity matrix.
+    ///
+    /// @param sinceFrame The starting frame for computing the relative rotation.
+    /// @returns A transformation Matrix representing the heuristically determined
+    /// rotational change of the hand between the current frame and that specified
+    /// in the sinceFrame parameter.
+    LEAP_EXPORT Matrix rotationMatrix(const Frame& sinceFrame) const;
+
+    /// The scale factor derived from this hand's motion between the current frame
+    /// and the specified frame.
+    ///
+    /// The scale factor is always positive. A value of 1.0 indicates no
+    /// scaling took place. Values between 0.0 and 1.0 indicate contraction
+    /// and values greater than 1.0 indicate expansion.
+    ///
+    /// The Leap derives scaling from the relative inward or outward motion of
+    /// a hand and its associated fingers and tools (independent of translation
+    /// and rotation).
+    ///
+    /// If a corresponding Hand object is not found in sinceFrame, or if either
+    /// this frame or sinceFrame are invalid Frame objects, then this method
+    /// returns 1.0.
+    ///
+    /// @param sinceFrame The starting frame for computing the relative scaling.
+    /// @returns A positive value representing the heuristically determined
+    /// scaling change ratio of the hand between the current frame and that
+    /// specified in the sinceFrame parameter.
+    LEAP_EXPORT float scaleFactor(const Frame& sinceFrame) const;
+
     /// Reports whether this is a valid Hand object.
     ///
     /// @returns True, if this Hand object contains valid tracking data.
@@ -611,8 +717,6 @@ class FingerList : public Interface {
 
     /// The C++ iterator set to the end of this FingerList.
     LEAP_EXPORT const_iterator end() const;
-
-    friend class PointableList;
 };
 
 /// The ToolList class represents a list of Tool objects.
@@ -652,8 +756,6 @@ class ToolList : public Interface {
 
     /// The C++ iterator set to the end of this ToolList.
     LEAP_EXPORT const_iterator end() const;
-
-    friend class PointableList;
 };
 
 /// The HandList class represents a list of Hand objects.
@@ -695,11 +797,261 @@ class HandList : public Interface {
     LEAP_EXPORT const_iterator end() const;
 };
 
+/// The ScreenList class represents a list of Screen objects.
+///
+/// Get a ScreenList object by calling Controller::calibratedScreens().
+class ScreenList : public Interface {
+  public:
+    // For internal use only.
+    ScreenList(const ListBaseImplementation<Screen>&);
+
+    /// Constructs an empty list of screens.
+    LEAP_EXPORT ScreenList();
+
+    /// Returns the number of screens in this list.
+    /// @returns The number of screens in this list.
+    LEAP_EXPORT int count() const;
+
+    /// Reports whether the list is empty.
+    /// @returns True, if the list has no members.
+    LEAP_EXPORT bool empty() const;
+
+    /// Access a list member by its position in the list.
+    /// @param index The zero-based list position index.
+    /// @returns The Screen object at the specified index.
+    LEAP_EXPORT Screen operator[](int index) const;
+
+    /// A C++ iterator type for this ScreenList objects.
+    typedef ConstListIterator<ScreenList, Screen> const_iterator;
+
+    /// The C++ iterator set to the beginning of this ScreenList.
+    LEAP_EXPORT const_iterator begin() const;
+
+    /// The C++ iterator set to the end of this ScreenList.
+    LEAP_EXPORT const_iterator end() const;
+
+    /// Gets the closest Screen intercepting a ray projecting from the specified
+    /// Pointable object.
+    ///
+    /// The projected ray emanates from the Pointable tipPosition along the
+    /// Pointable's direction vector. If the projected ray does not intersect
+    /// any screen surface directly, then the Leap checks for intersection with
+    /// the planes extending from the surfaces of the known screens
+    /// and returns the Screen with the closest intersection.
+    ///
+    /// If no intersections are found (i.e. the ray is directed parallel to or
+    /// away from all known screens), then an invalid Screen object is
+    /// returned.
+    ///
+    /// @param pointable The Pointable object to check for screen intersection.
+    /// @returns The closest Screen the specified Pointable object is pointing
+    /// toward.
+    LEAP_EXPORT Screen closestScreenHit(const Pointable& pointable) const;
+};
+
+/// The Screen class represents a computer monitor screen.
+///
+/// The Screen class reports characteristics describing the position and
+/// orientation of the monitor screen within the Leap coordinate system. These
+/// characteristics include the bottom-left corner position of the screen,
+/// direction vectors for the horizontal and vertical axes of the screen, and
+/// the screen's normal vector. The screen must be properly registered with the 
+/// Screen Locator for the Leap to report these characteristics accurately. 
+/// The Screen class also reports the size of the screen in pixels, using 
+/// information obtained from the operating system. (Run the Screen Locator 
+/// from the Leap Application Settings dialog, on the Screen page.)
+///
+/// You can get the point of intersection between the screen and a ray
+/// projected from a Pointable object using the Screen::intersect() function.
+/// Likewise, you can get the closest point on the screen to a point in space
+/// using the Screen::distanceToPoint() function. Again, the screen location 
+/// must be registered with the Screen Locator for these functions to 
+/// return accurate values.
+///
+/// Note that Screen objects can be invalid, which means that they do not contain
+/// valid screen coordinate data and do not correspond to a physical entity.
+/// Test for validity with the Screen::isValid() function.
+class Screen : public Interface {
+  public:
+#if !defined(SWIG)
+    // For internal use only.
+    Screen(ScreenImplementation*);
+#endif
+    /// Constructs a Screen object.
+    ///
+    /// An uninitialized screen is considered invalid.
+    /// Get valid Screen objects from a ScreenList object obtained using the
+    /// Controller::calibratedScreens() method.
+    LEAP_EXPORT Screen();
+
+    /// A unique identifier for this screen based on the screen 
+    /// information in the configuration. A default screen with ID, *0*,
+    /// always exists and contains default characteristics, even if no screens
+    /// have been located.
+    LEAP_EXPORT int32_t id() const;
+
+    /// Returns the intersection between this screen and a ray projecting from a
+    /// Pointable object.
+    ///
+    /// The projected ray emanates from the Pointable tipPosition along the
+    /// Pointable's direction vector.
+    ///
+    /// Set the normalize parameter to true to request the intersection point in
+    /// normalized screen coordinates. Normalized screen coordinates are usually
+    /// values between 0 and 1, where 0 represents the screen's origin at the
+    /// bottom-left corner and 1 represents the opposite edge (either top or
+    /// right). When you request normalized coordinates, the z-component of the
+    /// returned vector is zero. Multiply a normalized coordinate by the values
+    /// returned by Screen::widthPixels() or Screen::heightPixels() to calculate
+    /// the screen position in pixels (remembering that many other computer
+    /// graphics coordinate systems place the origin in the top-left corner).
+    ///
+    /// Set the normalize parameter to false to request the intersection point
+    /// in Leap coordinates (millimeters from the Leap origin).
+    ///
+    /// If the Pointable object points outside the screen's border (but still
+    /// intersects the plane in which the screen lies), the returned intersection
+    /// point is clamped to the nearest point on the edge of the screen.
+    ///
+    /// You can use the clampRatio parameter to contract or expand the area in
+    /// which you can point. For example, if you set the clampRatio parameter to
+    /// 0.5, then the positions reported for intersection points outside the
+    /// central 50% of the screen are moved to the border of this smaller area.
+    /// If, on the other hand, you expanded the area by setting clampRatio to
+    /// a value such as 3.0, then you could point well outside screen's physical
+    /// boundary before the intersection points would be clamped. The positions
+    /// for any points clamped would also be placed on this larger outer border.
+    /// The positions reported for any intersection points inside the clamping
+    /// border are unaffected by clamping.
+    ///
+    /// If the Pointable object does not point toward the plane of the screen
+    /// (i.e. it is pointing parallel to or away from the screen), then the
+    /// components of the returned vector are all set to NaN (not-a-number).
+    ///
+    /// @param normalize If true, return normalized coordinates representing
+    /// the intersection point as a percentage of the screen's width and height.
+    /// If false, return Leap coordinates (millimeters from the Leap origin,
+    /// which is located at the center of the top surface of the Leap device).
+    /// If true and the clampRatio parameter is set to 1.0, coordinates will be
+    /// of the form (0..1, 0..1, 0). Setting the clampRatio to a different value
+    /// changes the range for normalized coordinates. For example, a clampRatio
+    /// of 5.0 changes the range of values to be of the form (-2..3, -2..3, 0).
+    ///
+    /// @param clampRatio Adjusts the clamping border around this screen.
+    /// By default this ratio is 1.0, and the border corresponds to the actual
+    /// boundaries of the screen. Setting clampRatio to 0.5 would reduce the
+    /// interaction area. Likewise, setting the ratio to 2.0 would increase the
+    /// interaction area, adding 50% around each edge of the physical monitor.
+    /// Intersection points outside the interaction area are repositioned to
+    /// the closest point on the clamping border before the vector is returned.
+    ///
+    /// @returns A Vector containing the coordinates of the intersection between
+    /// this Screen and a ray projecting from the specified Pointable object.
+    LEAP_EXPORT Vector intersect(const Pointable& pointable, bool normalize, float clampRatio = 1.0f) const;
+
+    /// A Vector representing the horizontal axis of this Screen within the
+    /// Leap coordinate system.
+    ///
+    /// The magnitude of this vector estimates the physical width of this Screen
+    /// in millimeters. The direction of this vector is parallel to the bottom
+    /// edge of the screen and points toward the right edge of the screen.
+    ///
+    /// Together, horizontalAxis(), verticalAxis(), and bottomLeftCorner()
+    /// describe the physical position, size and orientation of this Screen.
+    ///
+    /// @returns A Vector representing the bottom, horizontal edge of this Screen.
+    LEAP_EXPORT Vector horizontalAxis() const;
+
+    /// A Vector representing the vertical axis of this Screen within the
+    /// Leap coordinate system.
+    ///
+    /// The magnitude of this vector estimates the physical height of this Screen
+    /// in millimeters. The direction of this vector is parallel to the left
+    /// edge of the screen and points toward the top edge of the screen.
+    ///
+    /// Together, horizontalAxis(), verticalAxis(), and bottomLeftCorner()
+    /// describe the physical position, size and orientation of this screen.
+    ///
+    /// @returns A Vector representing the left, vertical edge of this Screen.
+    LEAP_EXPORT Vector verticalAxis() const;
+
+    /// A Vector representing the bottom left corner of this Screen within the
+    /// Leap coordinate system.
+    ///
+    /// The point represented by this vector defines the origin of the screen
+    /// in the Leap coordinate system.
+    ///
+    /// Together, horizontalAxis(), verticalAxis(), and bottomLeftCorner()
+    /// describe the physical position, size and orientation of this Screen.
+    ///
+    /// @returns A Vector containing the coordinates of the bottom-left corner
+    /// of this Screen.
+    LEAP_EXPORT Vector bottomLeftCorner() const;
+
+    /// A Vector normal to the plane in which this Screen lies.
+    ///
+    /// The normal vector is a unit direction vector orthogonal to the screen's
+    /// surface plane. It points toward a viewer positioned for typical use of
+    /// the monitor.
+    ///
+    /// @returns A Vector representing this Screen's normal vector.
+    LEAP_EXPORT Vector normal() const;
+
+    /// The horizontal resolution of this screen, in pixels.
+    ///
+    /// @returns The width of this Screen in pixels.
+    LEAP_EXPORT int widthPixels() const;
+
+    /// The vertical resolution of this screen, in pixels.
+    ///
+    /// @returns The height of this Screen in pixels.
+    LEAP_EXPORT int heightPixels() const;
+
+    /// The shortest distance from the specified point to the plane in which this
+    /// Screen lies.
+    ///
+    /// @returns The length of the perpendicular line segment extending from
+    /// the plane this Screen lies in to the specified point.
+    LEAP_EXPORT float distanceToPoint(const Vector& point) const;
+
+    /// Reports whether this is a valid Screen object.
+    ///
+    /// @returns True, if this Screen object contains valid data.
+    LEAP_EXPORT bool isValid() const;
+
+    /// Returns an invalid Screen object.
+    ///
+    /// You can use the instance returned by this function in comparisons testing
+    /// whether a given Hand instance is valid or invalid. (You can also use the
+    /// Screen::isValid() function.)
+    ///
+    /// @returns The invalid Screen instance.
+    LEAP_EXPORT static const Screen& invalid();
+
+    /// Compare Screen object equality.
+    /// Two Screen objects are equal if and only if both Screen objects represent the
+    /// exact same Screens and both Screens are valid.
+    LEAP_EXPORT bool operator==(const Screen&) const;
+
+    /// Compare Screen object inequality.
+    /// Two Screen objects are equal if and only if both Screen objects represent the
+    /// exact same Screens and both Screens are valid.
+    LEAP_EXPORT bool operator!=(const Screen&) const;
+
+    /// Writes a brief, human readable description of the Screen object.
+    LEAP_EXPORT friend std::ostream& operator<<(std::ostream&, const Screen&);
+
+    /// A string containing a brief, human readable description of the Screen object.
+    ///
+    /// @returns A description of the Screen as a string.
+    LEAP_EXPORT std::string toString() const;
+};
+
 /// The Frame class represents a set of hand and finger tracking data detected
 /// in a single frame.
 ///
 /// The Leap detects hands, fingers and tools within the tracking area, reporting
-/// their positions and orientations in frames generated at the Leap frame rate.
+/// their positions, orientations and motions in frames at the Leap frame rate.
 ///
 /// Access Frame objects through an instance of a Leap Controller. Implement a
 /// Listener subclass to receive a callback event when a new Frame is available.
@@ -819,6 +1171,115 @@ class Frame : public Interface {
     /// otherwise, an invalid Tool object is returned.
     LEAP_EXPORT Tool tool(int32_t id) const;
 
+    /// The change of position derived from the overall linear motion between
+    /// the current frame and the specified frame.
+    ///
+    /// The returned translation vector provides the magnitude and direction of
+    /// the movement in millimeters.
+    ///
+    /// The Leap derives frame translation from the linear motion of
+    /// all objects detected in the field of view.
+    ///
+    /// If either this frame or sinceFrame is an invalid Frame object, then this
+    /// method returns a zero vector.
+    ///
+    /// @param sinceFrame The starting frame for computing the relative translation.
+    /// @returns A Vector representing the heuristically determined change in
+    /// position of all objects between the current frame and that specified
+    /// in the sinceFrame parameter.
+    LEAP_EXPORT Vector translation(const Frame& sinceFrame) const;
+
+    /// The axis of rotation derived from the overall rotational motion between
+    /// the current frame and the specified frame.
+    ///
+    /// The returned direction vector is normalized.
+    ///
+    /// The Leap derives frame rotation from the relative change in position and
+    /// orientation of all objects detected in the field of view.
+    ///
+    /// If either this frame or sinceFrame is an invalid Frame object, or if no
+    /// rotation is detected between the two frames, a zero vector is returned.
+    ///
+    /// @param sinceFrame The starting frame for computing the relative rotation.
+    /// @returns A normalized direction Vector representing the axis of the
+    /// heuristically determined rotational change between the current frame
+    /// and that specified in the sinceFrame parameter.
+    LEAP_EXPORT Vector rotationAxis(const Frame& sinceFrame) const;
+
+    /// The angle of rotation around the rotation axis derived from the overall
+    /// rotational motion between the current frame and the specified frame.
+    ///
+    /// The returned angle is expressed in radians measured clockwise around the
+    /// rotation axis (using the right-hand rule) between the start and end frames.
+    /// The value is always between 0 and pi radians (0 and 180 degrees).
+    ///
+    /// The Leap derives frame rotation from the relative change in position and
+    /// orientation of all objects detected in the field of view.
+    ///
+    /// If either this frame or sinceFrame is an invalid Frame object, then the
+    /// angle of rotation is zero.
+    ///
+    /// @param sinceFrame The starting frame for computing the relative rotation.
+    /// @returns A positive value containing the heuristically determined
+    /// rotational change between the current frame and that specified in the
+    /// sinceFrame parameter.
+    LEAP_EXPORT float rotationAngle(const Frame& sinceFrame) const;
+
+    /// The angle of rotation around the specified axis derived from the overall
+    /// rotational motion between the current frame and the specified frame.
+    ///
+    /// The returned angle is expressed in radians measured clockwise around the
+    /// rotation axis (using the right-hand rule) between the start and end frames.
+    /// The value is always between -pi and pi radians (-180 and 180 degrees).
+    ///
+    /// The Leap derives frame rotation from the relative change in position and
+    /// orientation of all objects detected in the field of view.
+    ///
+    /// If either this frame or sinceFrame is an invalid Frame object, then the
+    /// angle of rotation is zero.
+    ///
+    /// @param sinceFrame The starting frame for computing the relative rotation.
+    /// @param axis The axis to measure rotation around.
+    /// @returns A value containing the heuristically determined rotational
+    /// change between the current frame and that specified in the sinceFrame
+    /// parameter around the given axis.
+    LEAP_EXPORT float rotationAngle(const Frame& sinceFrame, const Vector& axis) const;
+
+    /// The transform matrix expressing the rotation derived from the overall
+    /// rotational motion between the current frame and the specified frame.
+    ///
+    /// The Leap derives frame rotation from the relative change in position and
+    /// orientation of all objects detected in the field of view.
+    ///
+    /// If either this frame or sinceFrame is an invalid Frame object, then this
+    /// method returns an identity matrix.
+    ///
+    /// @param sinceFrame The starting frame for computing the relative rotation.
+    /// @returns A transformation Matrix containing the heuristically determined
+    /// rotational change between the current frame and that specified in the
+    /// sinceFrame parameter.
+    LEAP_EXPORT Matrix rotationMatrix(const Frame& sinceFrame) const;
+
+    /// The scale factor derived from the overall motion between the current frame
+    /// and the specified frame.
+    ///
+    /// The scale factor is always positive. A value of 1.0 indicates no
+    /// scaling took place. Values between 0.0 and 1.0 indicate contraction
+    /// and values greater than 1.0 indicate expansion.
+    ///
+    /// The Leap derives scaling from the relative inward or outward motion of
+    /// all objects detected in the field of view (independent of translation
+    /// and rotation).
+    ///
+    /// If either this frame or sinceFrame is an invalid Frame object, then this
+    /// method returns 1.0.
+    ///
+    /// @param sinceFrame The starting frame for computing the relative scaling.
+    /// @returns A positive value representing the heuristically determined
+    /// scaling change ratio between the current frame and that specified in the
+    /// sinceFrame parameter.
+    LEAP_EXPORT float scaleFactor(const Frame& sinceFrame) const;
+
     /// Reports whether this Frame instance is valid.
     ///
     /// A valid Frame is one generated by the Leap::Controller object that contains
@@ -829,7 +1290,7 @@ class Frame : public Interface {
     /// you can invoke:
     ///
     /// \code{.cpp}
-    /// Finger finger = Controller::frame(n).finger(fingerID);
+    /// Finger finger = controller.frame(n).finger(fingerID);
     /// \endcode
     ///
     /// for an arbitrary Frame history value, "n", without first checking whether
@@ -968,11 +1429,11 @@ class Config : public Interface {
 /// callback function defined in your subclass of Listener.
 ///
 /// To access frames of tracking data as they become available:
-/// 1. Implement a subclass of the Listener class and override the
+/// #. Implement a subclass of the Listener class and override the
 ///    Listener::onFrame() function.
-/// 2. In your Listener::onFrame() function, call the Controller::frame()
+/// #. In your Listener::onFrame() function, call the Controller::frame()
 ///    function to access the newest frame of tracking data.
-/// 3. To start receiving frames, create a Controller object and add an instance
+/// #. To start receiving frames, create a Controller object and add an instance
 ///    of the Listener subclass to the Controller::addListener() function.
 ///
 /// When an instance of a Listener subclass is added to a Controller object,
@@ -986,6 +1447,9 @@ class Config : public Interface {
 /// removed from the controller or the controller is destroyed, it calls the
 /// Listener::onExit() function. At that point, unless the listener is added to
 /// another controller again, it will no longer receive frames of tracking data.
+///
+/// The Controller object is multithreaded and calls the Listener functions on
+/// its own thread, not on an application thread.
 class Controller : public Interface {
   public:
 #if !defined(SWIG)
@@ -1004,6 +1468,20 @@ class Controller : public Interface {
     LEAP_EXPORT Controller();
     LEAP_EXPORT virtual ~Controller();
     LEAP_EXPORT Controller(Listener& listener);
+
+    /// Reports whether this Controller is connected to the Leap device.
+    ///
+    /// When you first create a Controller object, isConnected() returns false.
+    /// After the controller finishes initializing and connects to the Leap,
+    /// isConnected() will return true.
+    ///
+    /// You can either handle the onConnect event using a Listener instance or
+    /// poll the isConnected() function if you need to wait for your
+    /// application to be connected to the Leap before performing some other
+    /// action.
+    ///
+    /// @returns True, if connected; false otherwise.
+    LEAP_EXPORT bool isConnected() const;
 
     /// Adds a listener to this Controller.
     ///
@@ -1044,6 +1522,37 @@ class Controller : public Interface {
     /// Returns a Config object, which you can use to query the Leap system for
     /// configuration information. Reserved for future use.
     LEAP_EXPORT Config config() const;
+
+    /// The list of screens whose positions have been identified by using the
+    /// Leap application Screen Locator.
+    ///
+    /// The list always contains at least one entry representing the default
+    /// screen. If the user has not registered the location of this default 
+    /// screen, then the coordinates, directions, and other values reported by 
+    /// the functions in its Screen object will not be accurate. Other monitor 
+    /// screens only appear in the list if their positions have been registered
+    /// using the Leap Screen Locator.
+    ///
+    /// A Screen object represents the position and orientation of a display
+    /// monitor screen within the Leap coordinate system.
+    /// For example, if the screen location is known, you can get Leap coordinates
+    /// for the bottom-left corner of the screen. Registering the screen 
+    /// location also allows the Leap to calculate the point on the screen at 
+    /// which a finger or tool is pointing.
+    ///
+    /// A user can run the Screen Locator tool from the Leap application 
+    /// Settings window. Avoid assuming that a screen location is known or that 
+    /// an existing position is still correct. The registered position is only 
+    /// valid as long as the relative position of the Leap device and the 
+    /// monitor screen remain constant.
+    ///
+    /// @returns ScreenList A list containing the screens whose positions have 
+    /// been registered by the user using the Screen Locator tool.
+    /// The list always contains at least one entry representing the default
+    /// monitor. If the user has not run the Screen Locator or has moved the Leap
+    /// device or screen since running it, the Screen object for this entry
+    /// only contains default values.
+    LEAP_EXPORT ScreenList calibratedScreens() const;
 };
 
 /// The Listener class defines a set of callback functions that you can
@@ -1053,6 +1562,9 @@ class Controller : public Interface {
 /// it to the Controller instance. The Controller calls the relevant Listener
 /// callback function when an event occurs, passing in a reference to itself.
 /// You do not have to implement callbacks for events you do not want to handle.
+///
+/// The Controller object calls these Listener functions from a thread created
+/// by the Leap library, not the thread used to create or set the Listener instance.
 class Listener {
   public:
     /// Constructs a Listener object.
@@ -1080,8 +1592,8 @@ class Listener {
     /// @param controller The Controller object invoking this callback function.
     LEAP_EXPORT virtual void onDisconnect(const Controller&) {}
 
-    /// Called when this Listener object is removed from the Controller object
-    /// or the controller is destroyed.
+    /// Called when this Listener object is removed from the Controller
+    /// or the Controller instance is destroyed.
     ///
     /// @param controller The Controller object invoking this callback function.
     LEAP_EXPORT virtual void onExit(const Controller&) {}

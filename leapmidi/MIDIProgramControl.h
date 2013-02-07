@@ -1,8 +1,7 @@
 //
-//  MIDIProgramControl.h
 //  leapmidi
 //
-//  Created by Snooz on 1/5/13.
+//  Created by Mischa Spiegelmock on 1/5/13.
 //  Copyright (c) 2013 int80. All rights reserved.
 //
 
@@ -11,9 +10,19 @@
 
 #include "MIDIProgramBase.h"
 
-namespace LeapMIDI {        
-    class Program : public Listener {
-    };
+namespace LeapMIDI {
+    namespace Program {
+        class Control : public Base {
+        public:
+            Control();
+            virtual ~Control();
+            
+            virtual void initGestures();
+                        
+            virtual void onGestureRecognized(const Leap::Controller &controller, Gesture::Base &gesture);
+            virtual void onControlUpdated(const Leap::Controller &controller, Gesture::Base &gesture, LeapMIDI::Control::Base &control);
+        };
+    }
 }
 
 #endif

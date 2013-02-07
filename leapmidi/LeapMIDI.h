@@ -21,35 +21,30 @@
 #include "MIDIGestureBall.h"
 #include "MIDIGestureFinger.h"
 
+using namespace std;
+
 /* The classes below are exported */
 #pragma GCC visibility push(default)
 
 namespace LeapMIDI {
     class Gesture::Base;
+    
+    namespace Program {
+        class Base;
+    }
 
     class Listener : public Leap::Listener {
     public:
         Listener();
-        virtual ~Listener();
-        
-        virtual void initGestures();
-        
         virtual void onInit(const Leap::Controller&);
         virtual void onConnect(const Leap::Controller&);
         virtual void onDisconnect(const Leap::Controller&);
-        virtual void onFrame(const Leap::Controller&);
-        
-        virtual void onGestureRecognized(const Leap::Controller &controller, Gesture::Base &gesture);
-        virtual void onControlUpdated(const Leap::Controller &controller, Gesture::Base &gesture, Control::Base &control);
+        virtual void onFrame(const Leap::Controller &controller);
+        virtual void onGestureRecognized(const Leap::Controller &controller, Gesture::Base &gesture) = 0;
+        virtual void onControlUpdated(const Leap::Controller &controller, Gesture::Base &gesture, LeapMIDI::Control::Base &control) = 0;
         
     protected:
-        // gesture recognizer singletons
-        std::vector<Gesture::Base *>gestureRecognizers;
-
-        // find all recognized MIDI controls from frames
-        virtual void findControls(const Leap::Controller&);
-        
-        
+        Program::Base *currentProgram;
     };
 }
 

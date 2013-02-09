@@ -37,8 +37,8 @@ namespace LeapMIDI {
         virtual void onConnect(const Leap::Controller&);
         virtual void onDisconnect(const Leap::Controller&);
         virtual void onFrame(const Leap::Controller &controller);
-        virtual void onGestureRecognized(const Leap::Controller &controller, Gesture::Base &gesture) = 0;
-        virtual void onControlUpdated(const Leap::Controller &controller, Gesture::Base &gesture, LeapMIDI::Control::Base &control) = 0;
+        virtual void onGestureRecognized(const Leap::Controller &controller, GestureBasePtr gesture) = 0;
+        virtual void onControlUpdated(const Leap::Controller &controller, GestureBasePtr gesture, ControlBasePtr control) = 0;
         
     protected:
         Program::Base *currentProgram;

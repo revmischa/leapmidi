@@ -11,7 +11,7 @@
 
 namespace LeapMIDI {
     namespace Gesture {
-        void recognizedControls(const Leap::Controller &controller, std::vector<LeapMIDI::Control::Base *> &controls) {
+        void recognizedControls(const Leap::Controller &controller, std::vector<BallRadiusPtr> &controls) {
             Leap::Frame frame = controller.frame();
             
             // hands detected?
@@ -29,7 +29,10 @@ namespace LeapMIDI {
                     continue;
                 
                 LeapMIDI::Control::BallRadius *ballControl = new LeapMIDI::Control::BallRadius(i, 0, radius);
-                controls.push_back(ballControl);
+                
+                BallRadiusPtr bc(new LeapMIDI::Control::BallRadius(i, 0, radius));
+                
+                controls.push_back(bc);
             }
         }
     }

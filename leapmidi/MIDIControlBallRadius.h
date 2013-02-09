@@ -30,4 +30,7 @@ namespace LeapMIDI {
     }
 }
 
+
+typedef std::shared_ptr<LeapMIDI::Control::BallRadius> BallRadiusPtr;
+
 #endif /* defined(__leapmidi__MIDIControlBallRadius__) */

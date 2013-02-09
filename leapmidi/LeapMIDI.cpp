@@ -31,17 +31,19 @@ namespace LeapMIDI {
     void LeapMIDI::Listener::onFrame(const Leap::Controller &controller) {
         if (! currentProgram) return;
         
-        currentProgram->findControls(controller);
+        vector<ControlBasePtr> controls;
+        currentProgram->findControls(controller, controls);
+        cout << " found " << controls.size() << " controls\n";
     }
     
-    void Listener::onGestureRecognized(const Leap::Controller &controller, LeapMIDI::Gesture::Base &gesture) {
+    void Listener::onGestureRecognized(const Leap::Controller &controller, GestureBasePtr gesture) {
         cout << "gesture recognized\n";
         
         if (currentProgram)
             currentProgram->onGestureRecognized(controller, gesture);
     }
     
-    void Listener::onControlUpdated(const Leap::Controller &controller, LeapMIDI::Gesture::Base &gesture, LeapMIDI::Control::Base &control) {
+    void Listener::onControlUpdated(const Leap::Controller &controller, GestureBasePtr gesture, ControlBasePtr control) {
         // call superclass method
         cout << "control updated\n";
         

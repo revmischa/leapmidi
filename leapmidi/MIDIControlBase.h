@@ -47,4 +47,6 @@ namespace LeapMIDI {
     }
 }
 
+typedef std::shared_ptr<LeapMIDI::Control::Base *> ControlBasePtr;
+
 #endif /* defined(__leapmidi__MIDIControl__) */

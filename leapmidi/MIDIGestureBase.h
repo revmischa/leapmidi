@@ -36,7 +36,7 @@ namespace LeapMIDI {
             virtual ~Base() {}
             
             // given a controller, return MIDI controls recognized from gestures
-            virtual std::vector<LeapMIDI::Control::Base *> recognizedControls(const Leap::Controller&) = 0;
+            virtual void recognizedControls(const Leap::Controller&, std::vector<LeapMIDI::Control::Base *>&) = 0;
         };
     }
 }

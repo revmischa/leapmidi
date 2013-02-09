@@ -11,15 +11,13 @@
 
 namespace LeapMIDI {
     namespace Gesture {
-        std::vector<LeapMIDI::Control::Base *> Finger::recognizedControls(const Leap::Controller &controller) {
+        void recognizedControls(const Leap::Controller &controller, std::vector<LeapMIDI::Control::Base *> &controls) {
             Leap::Frame frame = controller.frame();
             
             // hands detected?
             if (frame.hands().empty())
-                return MIDI_GESTURES_EMPTY;
-            
-            std::vector<LeapMIDI::Control::Base *> controls;
-            
+                return;
+                        
             size_t handCount = frame.hands().count();
             for (int i = 0; i < handCount; i++) {
                 // gonna assume the user only has two hands. sometimes leap thinks otherwise.
@@ -79,7 +77,7 @@ namespace LeapMIDI {
                 }
             }
             
-            return controls;
+            return;
         }
     }
 }

@@ -6,17 +6,20 @@
 //  Copyright (c) 2013 int80. All rights reserved.
 //
 
-#include "MIDIProgramControl.h"
+#include "MIDIProgramBase.h"
+
+using namespace std;
 
 namespace LeapMIDI {
     namespace Program {
-        // not sure where this belongs
         void Base::findControls(const Leap::Controller &controller) {
             // feed frames to recognizers
+            std::vector<LeapMIDI::Control::Base *> recognizedControls;
+
             for (vector<Gesture::Base *>::iterator it = gestureRecognizers.begin(); it != gestureRecognizers.end(); ++it) {
                 // get controls recognized from gestures
                 Gesture::Base *gesture = *it;
-                vector<LeapMIDI::Control::Base *> recognizedControls = gesture->recognizedControls(controller);
+                gesture->recognizedControls(controller, recognizedControls);
                 
                 // call gesture recognized callback
                 this->onGestureRecognized(controller, *gesture);

@@ -10,7 +10,7 @@
 #define __leapmidi__MIDIProgram__
 
 #include <iostream>
-#include "LeapMIDI.h"
+#include "MIDIGestureBase.h"
 
 namespace LeapMIDI {
     namespace Program {
@@ -20,7 +20,7 @@ namespace LeapMIDI {
             virtual void onControlUpdated(const Leap::Controller &controller, Gesture::Base &gesture, LeapMIDI::Control::Base &control) = 0;
             
             // find all recognized MIDI controls from frames
-            virtual void findControls(const Leap::Controller&);
+            virtual void findControls(const Leap::Controller&) = 0;
             
         protected:
             // gesture recognizer singletons

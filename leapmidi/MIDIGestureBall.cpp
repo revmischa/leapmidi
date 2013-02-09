@@ -11,15 +11,13 @@
 
 namespace LeapMIDI {
     namespace Gesture {
-        std::vector<LeapMIDI::Control::Base *> Ball::recognizedControls(const Leap::Controller &controller) {
+        void recognizedControls(const Leap::Controller &controller, std::vector<LeapMIDI::Control::Base *> &controls) {
             Leap::Frame frame = controller.frame();
             
             // hands detected?
             if (frame.hands().empty())
-                return MIDI_GESTURES_EMPTY;
-            
-            std::vector<LeapMIDI::Control::Base *> controls;
-            
+                return;
+                        
             for (int i = 0; i < frame.hands().count(); i++) {
                 // gonna assume the user only has two hands. sometimes leap thinks otherwise.
                 if (i > 1) break;
@@ -33,8 +31,6 @@ namespace LeapMIDI {
                 LeapMIDI::Control::BallRadius *ballControl = new LeapMIDI::Control::BallRadius(i, 0, radius);
                 controls.push_back(ballControl);
             }
-            
-            return controls;
         }
     }
 }

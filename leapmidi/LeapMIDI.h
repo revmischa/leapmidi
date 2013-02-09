@@ -15,6 +15,7 @@
 #include <iostream>
 #include <math.h>
 
+#include "MIDIProgramBase.h"
 #include "MIDIGestureBase.h"
 #include "MIDIControlBase.h"
 #include "MIDITypes.h"
@@ -28,10 +29,6 @@ using namespace std;
 
 namespace LeapMIDI {
     class Gesture::Base;
-    
-    namespace Program {
-        class Base;
-    }
 
     class Listener : public Leap::Listener {
     public:

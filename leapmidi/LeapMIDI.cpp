@@ -8,13 +8,12 @@
  */
 
 #include "LeapMIDI.h"
-#include "MIDIProgramControl.h"
 
 using namespace std;
 
 namespace LeapMIDI {
     Listener::Listener() {
-        currentProgram = new LeapMIDI::Program::Control();
+        currentProgram = NULL;
     }
     
     void Listener::onInit(const Leap::Controller& controller) {
@@ -30,17 +29,23 @@ namespace LeapMIDI {
     }
     
     void LeapMIDI::Listener::onFrame(const Leap::Controller &controller) {
+        if (! currentProgram) return;
+        
         currentProgram->findControls(controller);
     }
     
     void Listener::onGestureRecognized(const Leap::Controller &controller, LeapMIDI::Gesture::Base &gesture) {
         cout << "gesture recognized\n";
-        currentProgram->onGestureRecognized(controller, gesture);
+        
+        if (currentProgram)
+            currentProgram->onGestureRecognized(controller, gesture);
     }
     
     void Listener::onControlUpdated(const Leap::Controller &controller, LeapMIDI::Gesture::Base &gesture, LeapMIDI::Control::Base &control) {
         // call superclass method
         cout << "control updated\n";
-        currentProgram->onControlUpdated(controller, gesture, control);
+        
+        if (currentProgram)
+            currentProgram->onControlUpdated(controller, gesture, control);
     }
 }

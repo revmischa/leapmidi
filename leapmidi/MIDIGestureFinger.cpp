@@ -35,12 +35,7 @@ namespace LeapMIDI {
                 double velX=0, velY=0, velZ=0;
                 for (int pointableIndex = 0; pointableIndex < pointableCount; pointableIndex++) {
                     Leap::Pointable pointable = hand.pointables()[pointableIndex];
-                    
-//                    std::cout << "vel X: " << pointable.tipVelocity().x << std::endl;
-                    // we want to know the velocity yo
-//                    if (! pointable.tipVelocity())
-//                        continue;
-                    
+                                        
                     x += pointable.tipPosition().x;
                     y += pointable.tipPosition().y;
                     z += pointable.tipPosition().z;
@@ -57,7 +52,7 @@ namespace LeapMIDI {
                 velZ /= pointableCount;
                 
                 // only register if velocity is greater than this threshold
-                double velocityThreshold = 5.0;
+                double velocityThreshold = 8.0; // mm/s
 //                std::cout << "velX: " << velX << " velY: " << velY << " velZ: " << velZ << std::endl;
                 
                 // generate one pointable position control per hand coordinate, determined by number of pointables

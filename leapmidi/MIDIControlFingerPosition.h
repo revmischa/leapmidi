@@ -28,4 +28,6 @@ namespace LeapMIDI {
     }
 }
 
+typedef typedef std::shared_ptr<LeapMIDI::Control::FingerPosition> FingerPositionPtr;
+
 #endif /* defined(__leapmidi__MIDIControlFingerPosition__) */

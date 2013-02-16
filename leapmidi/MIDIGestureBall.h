@@ -19,8 +19,6 @@
 namespace LeapMIDI {
     namespace Gesture {
         class Ball : public LeapMIDI::Gesture::Base {
-            virtual ~Ball() {}
-            
             void recognizedControls(const Leap::Controller &controller, std::vector<ControlBasePtr> &controls);
         };
     }

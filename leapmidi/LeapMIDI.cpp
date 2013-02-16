@@ -30,10 +30,6 @@ namespace LeapMIDI {
     
     void LeapMIDI::Listener::onFrame(const Leap::Controller &controller) {
         if (! currentProgram) return;
-        
-        vector<ControlBasePtr> controls;
-        currentProgram->findControls(controller, controls);
-        cout << " found " << controls.size() << " controls\n";
     }
     
     void Listener::onGestureRecognized(const Leap::Controller &controller, GestureBasePtr gesture) {

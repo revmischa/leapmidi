@@ -11,7 +11,7 @@
 
 namespace LeapMIDI {
     namespace Gesture {
-        void recognizedControls(const Leap::Controller &controller, std::vector<LeapMIDI::Control::Base *> &controls) {
+        void Finger::recognizedControls(const Leap::Controller &controller, std::vector<ControlBasePtr> &controls) {
             Leap::Frame frame = controller.frame();
             
             // hands detected?
@@ -57,11 +57,12 @@ namespace LeapMIDI {
                 
                 // generate one pointable position control per hand coordinate, determined by number of pointables
                 if (abs(velX) > velocityThreshold) {
-                    LeapMIDI::Control::FingerPosition *pointablePosControlX = new LeapMIDI::Control::FingerPositionX(handCount, pointableCount, x);
-                        controls.push_back(pointablePosControlX);
+                    shared_ptr<LeapMIDI::Control::FingerPositionX> posX = make_shared<LeapMIDI::Control::FingerPositionX>(handCount, pointableCount, x);
+                    FingerPositionPtr pointablePosControlX = dynamic_pointer_cast<LeapMIDI::Control::FingerPosition>(posX);
+                    controls.push_back(pointablePosControlX);
                 }
                 
-                if (abs(velY) > velocityThreshold) {
+                /*if (abs(velY) > velocityThreshold) {
                     LeapMIDI::Control::FingerPosition *pointablePosControlY = new LeapMIDI::Control::FingerPositionY(handCount, pointableCount, y);
                     controls.push_back(pointablePosControlY);
                 }
@@ -69,7 +70,7 @@ namespace LeapMIDI {
                 if (abs(velZ) > velocityThreshold) {
                     LeapMIDI::Control::FingerPosition *pointablePosControlZ = new LeapMIDI::Control::FingerPositionZ(handCount, pointableCount, z);
                     controls.push_back(pointablePosControlZ);
-                }
+                }*/
             }
             
             return;

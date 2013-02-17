@@ -1,49 +1,16 @@
-/*
- *  LeapMIDI.h
- *  LeapMIDI
- *
- *  Created by Mischa Spiegelmock on 11/28/12.
- *  Copyright (c) 2012 int80. All rights reserved.
- *
- */
+//
+//  leapmidi.h
+//
+//  Created by Mischa Spiegelmock on 2/16/13.
+//  Copyright (c) 2013 int80. All rights reserved.
+//
 
-#ifndef LeapMIDI_
-#define LeapMIDI_
+#ifndef leapmidi_leapmidi_h
+#define leapmidi_leapmidi_h
 
-#include <Leap.h>
-#include <vector>
-#include <iostream>
-#include <math.h>
-
-#include "MIDIProgramBase.h"
-#include "MIDIGestureBase.h"
-#include "MIDIControlBase.h"
 #include "MIDITypes.h"
-#include "MIDIGestureBall.h"
-#include "MIDIGestureFinger.h"
+#include <iostream>
 
 using namespace std;
 
-/* The classes below are exported */
-#pragma GCC visibility push(default)
-
-namespace LeapMIDI {
-    class Gesture::Base;
-
-    class Listener : public Leap::Listener {
-    public:
-        Listener();
-        virtual void onInit(const Leap::Controller&);
-        virtual void onConnect(const Leap::Controller&);
-        virtual void onDisconnect(const Leap::Controller&);
-        virtual void onFrame(const Leap::Controller &controller);
-        virtual void onGestureRecognized(const Leap::Controller &controller, GestureBasePtr gesture) = 0;
-        virtual void onControlUpdated(const Leap::Controller &controller, GestureBasePtr gesture, ControlBasePtr control) = 0;
-        
-    protected:
-        Program::Base *currentProgram;
-    };
-}
-
-#pragma GCC visibility pop
 #endif

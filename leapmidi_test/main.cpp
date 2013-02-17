@@ -2,7 +2,7 @@
 //  main.cpp
 //  leapmidi_test
 //
-//  Created by Snooz on 11/28/12.
+//  Created by Mischa Spiegelmock on 11/28/12.
 //  Copyright (c) 2012 int80. All rights reserved.
 //
 

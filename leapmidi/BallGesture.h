@@ -1,5 +1,5 @@
 //
-//  MIDIGestureBall.h
+//  BallGesture.h
 //  leapmidi
 //
 //  Created by Mischa Spiegelmock on 12/5/12.
@@ -13,15 +13,15 @@
 #include <vector>
 #include <Leap.h>
 
-#include "MIDIGestureBase.h"
-#include "MIDIControlBase.h"
+#include "MIDIGesture.h"
+#include "MIDIControl.h"
 
-namespace LeapMIDI {
-    namespace Gesture {
-        class Ball : public LeapMIDI::Gesture::Base {
-            void recognizedControls(const Leap::Controller &controller, std::vector<ControlBasePtr> &controls);
-        };
-    }
+namespace leapmidi {
+
+class BallGesture : public Gesture {
+    void recognizedControls(const Leap::Controller &controller, std::vector<ControlPtr> &controls);
+};
+
 }
 
 #endif /* defined(__leapmidi__MIDIGestureBall__) */

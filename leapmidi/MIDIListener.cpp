@@ -13,8 +13,12 @@ namespace leapmidi {
     
 Listener::Listener() {
     currentProgram = NULL;
+    cout << "listener base init\n";
 }
 
+void Listener::setProgram(ProgramPtr prog) {
+    currentProgram = prog;
+}
 
 void Listener::onFrame(const Leap::Controller &controller) {
     if (! currentProgram) return;
@@ -22,7 +26,7 @@ void Listener::onFrame(const Leap::Controller &controller) {
     // use current active gesture recognizers to locate gestures
     // and controls in this frame.
     // will call onGestureRecognized and onControlUpdated if appropriate
-    currentProgram->findControls(controller, *this);
+    currentProgram->findControls(controller, this);
 }
 
 // do something productive with these in your application's Listener subclass

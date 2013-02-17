@@ -32,6 +32,7 @@ class Program;
 class Listener : public Leap::Listener {
 public:
     Listener();
+    virtual void setProgram(ProgramPtr prog);
     virtual void onInit(const Leap::Controller&);
     virtual void onConnect(const Leap::Controller&);
     virtual void onDisconnect(const Leap::Controller&);
@@ -40,7 +41,7 @@ public:
     virtual void onControlUpdated(const Leap::Controller &controller, GesturePtr gesture, ControlPtr control);
     
 protected:
-    Program *currentProgram;
+    ProgramPtr currentProgram;
 };
 
 } // namespace leapmidi

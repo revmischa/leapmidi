@@ -10,7 +10,6 @@
 #define __leapmidi__MIDIProgram__
 
 #include <iostream>
-#include "MIDIListener.h"
 #include "MIDIProgram.h"
 #include "MIDIGesture.h"
 #include "MIDIControl.h"
@@ -20,15 +19,20 @@ namespace leapmidi {
 class Listener;
     
 class Program {
-public:    
+public:
+    virtual ~Program() {};
+    virtual void initGestures() = 0;
+
     // find all recognized MIDI controls from frames
     // calls onGestureRecognized and onControlUpdated
-    void findControls(const Leap::Controller &controller,  Listener &listener);
+    void findControls(const Leap::Controller &controller,  Listener *listener);
     
 protected:
     // gesture recognizer singletons
     std::vector<GesturePtr>gestureRecognizers;
 };
+
+typedef shared_ptr<Program> ProgramPtr;
 
 }
 

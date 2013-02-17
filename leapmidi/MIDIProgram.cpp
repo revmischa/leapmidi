@@ -3,11 +3,12 @@
 //  Copyright (c) 2013 int80. All rights reserved.
 //
 
+#include "MIDIListener.h"
 #include "MIDIProgram.h"
 
 namespace leapmidi {
     
-void Program::findControls(const Leap::Controller &controller, Listener &listener) {
+void Program::findControls(const Leap::Controller &controller, Listener *listener) {
     // feed frames to recognizers
     for (vector<GesturePtr>::iterator it = gestureRecognizers.begin(); it != gestureRecognizers.end(); ++it) {
         // get controls recognized from gestures
@@ -19,12 +20,12 @@ void Program::findControls(const Leap::Controller &controller, Listener &listene
             continue;
         
         // call gesture recognized callback
-        listener.onGestureRecognized(controller, gesture);
+        listener->onGestureRecognized(controller, gesture);
         
         for (vector<ControlPtr>::iterator ctl = gestureControls.begin(); ctl != gestureControls.end(); ++ctl) {
             ControlPtr control = *ctl;
             
-            listener.onControlUpdated(controller, gesture, control);
+            listener->onControlUpdated(controller, gesture, control);
         }
     }
 }

@@ -11,6 +11,7 @@
 #include <iostream>
 #include "MIDIListener.h"
 #include "MIDITypes.h"
+#include "FingerGesture.h"
 
 using namespace std;
 

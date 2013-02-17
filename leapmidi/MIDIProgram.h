@@ -12,7 +12,6 @@
 #include <iostream>
 #include "MIDIProgram.h"
 #include "MIDIGesture.h"
-#include "MIDIControl.h"
 
 namespace leapmidi {
 
@@ -22,10 +21,9 @@ class Program {
 public:
     virtual ~Program() {};
     virtual void initGestures() = 0;
-
-    // find all recognized MIDI controls from frames
-    // calls onGestureRecognized and onControlUpdated
-    void findControls(const Leap::Controller &controller,  Listener *listener);
+    
+    // find all gestures from frames
+    virtual void locateGestures(const Leap::Controller &controller,  Listener *listener);
     
 protected:
     // gesture recognizer singletons

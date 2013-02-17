@@ -8,8 +8,9 @@
 #ifndef leapmidi_leapmidi_h
 #define leapmidi_leapmidi_h
 
-#include "MIDITypes.h"
 #include <iostream>
+#include "MIDIListener.h"
+#include "MIDITypes.h"
 
 using namespace std;
 

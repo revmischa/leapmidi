@@ -12,6 +12,8 @@
 #include <iostream>
 #include "MIDIControl.h"
 
+using namespace std;
+
 namespace leapmidi {
     
 class BallRadius : public Control {

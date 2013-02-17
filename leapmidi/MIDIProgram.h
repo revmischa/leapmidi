@@ -20,12 +20,10 @@ namespace leapmidi {
 class Listener;
     
 class Program {
-public:
-    virtual void onGestureRecognized(const Leap::Controller &controller, GesturePtr gesture) = 0;
-    virtual void onControlUpdated(const Leap::Controller &controller, GesturePtr gesture, ControlPtr control) = 0;
-    
+public:    
     // find all recognized MIDI controls from frames
-    void findControls(const Leap::Controller &controller,  Listener &listener, std::vector<ControlPtr> &inOutRecognizedControls);
+    // calls onGestureRecognized and onControlUpdated
+    void findControls(const Leap::Controller &controller,  Listener &listener);
     
 protected:
     // gesture recognizer singletons

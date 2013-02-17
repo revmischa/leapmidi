@@ -24,6 +24,8 @@
 #include "MIDITypes.h"
 #include <Leap.h>
 
+using namespace std;
+
 namespace leapmidi {
 
 class Gesture {
@@ -34,7 +36,7 @@ public:
     virtual void recognizedControls(const Leap::Controller&, std::vector<ControlPtr>&) = 0;
 };
 
-typedef std::shared_ptr<Gesture> GesturePtr;
+typedef shared_ptr<Gesture> GesturePtr;
 
 } // namespace leapmidi
 

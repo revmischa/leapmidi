@@ -7,42 +7,42 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C313AAE91687B78400A0AD2A /* LeapMath.h in Headers */ = {isa = PBXBuildFile; fileRef = C313AAE81687B78400A0AD2A /* LeapMath.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C313AAE91687B78400A0AD2A /* LeapMath.h in Headers */ = {isa = PBXBuildFile; fileRef = C313AAE81687B78400A0AD2A /* LeapMath.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C33EF31516673851001D3D0E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C33EF31416673851001D3D0E /* OpenGL.framework */; };
-		C33EF319166738D3001D3D0E /* Leap.h in Headers */ = {isa = PBXBuildFile; fileRef = C33EF317166738D3001D3D0E /* Leap.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C33EF319166738D3001D3D0E /* Leap.h in Headers */ = {isa = PBXBuildFile; fileRef = C33EF317166738D3001D3D0E /* Leap.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C33EF32616673D10001D3D0E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C33EF32516673D10001D3D0E /* main.cpp */; };
 		C33EF32D16673D1D001D3D0E /* leapmidi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C33EF2AF16672833001D3D0E /* leapmidi.a */; };
 		C35F6D8516704EAF000CEF49 /* MIDIListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35F6D8316704EAF000CEF49 /* MIDIListener.cpp */; };
 		C35F6D8616704EAF000CEF49 /* MIDIListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35F6D8316704EAF000CEF49 /* MIDIListener.cpp */; };
-		C35F6D8716704EAF000CEF49 /* MIDIListener.h in Headers */ = {isa = PBXBuildFile; fileRef = C35F6D8416704EAF000CEF49 /* MIDIListener.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C35F6D8716704EAF000CEF49 /* MIDIListener.h in Headers */ = {isa = PBXBuildFile; fileRef = C35F6D8416704EAF000CEF49 /* MIDIListener.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C35F6D8916704EE5000CEF49 /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C38824A0166B1BAA007FE3B3 /* libLeap.dylib */; };
 		C35F6D8A16704F00000CEF49 /* libLeap.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = C38824A0166B1BAA007FE3B3 /* libLeap.dylib */; };
 		C35F6D8D16704FD4000CEF49 /* MIDIGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35F6D8B16704FD4000CEF49 /* MIDIGesture.cpp */; };
 		C35F6D8E16704FD4000CEF49 /* MIDIGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35F6D8B16704FD4000CEF49 /* MIDIGesture.cpp */; };
-		C35F6D8F16704FD4000CEF49 /* MIDIGesture.h in Headers */ = {isa = PBXBuildFile; fileRef = C35F6D8C16704FD4000CEF49 /* MIDIGesture.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C35F6D8F16704FD4000CEF49 /* MIDIGesture.h in Headers */ = {isa = PBXBuildFile; fileRef = C35F6D8C16704FD4000CEF49 /* MIDIGesture.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C35F6D92167052B4000CEF49 /* MIDIControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35F6D90167052B3000CEF49 /* MIDIControl.cpp */; };
 		C35F6D93167052B4000CEF49 /* MIDIControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35F6D90167052B3000CEF49 /* MIDIControl.cpp */; };
-		C35F6D94167052B4000CEF49 /* MIDIControl.h in Headers */ = {isa = PBXBuildFile; fileRef = C35F6D91167052B4000CEF49 /* MIDIControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C35F6D94167052B4000CEF49 /* MIDIControl.h in Headers */ = {isa = PBXBuildFile; fileRef = C35F6D91167052B4000CEF49 /* MIDIControl.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C35F6D9B16705DBB000CEF49 /* BallGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35F6D9916705DBB000CEF49 /* BallGesture.cpp */; };
 		C35F6D9C16705DBB000CEF49 /* BallGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35F6D9916705DBB000CEF49 /* BallGesture.cpp */; };
-		C35F6D9D16705DBB000CEF49 /* BallGesture.h in Headers */ = {isa = PBXBuildFile; fileRef = C35F6D9A16705DBB000CEF49 /* BallGesture.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C35F6D9D16705DBB000CEF49 /* BallGesture.h in Headers */ = {isa = PBXBuildFile; fileRef = C35F6D9A16705DBB000CEF49 /* BallGesture.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C35F6DA01671B460000CEF49 /* BallRadius.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35F6D9E1671B460000CEF49 /* BallRadius.cpp */; };
 		C35F6DA11671B460000CEF49 /* BallRadius.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35F6D9E1671B460000CEF49 /* BallRadius.cpp */; };
-		C35F6DA21671B460000CEF49 /* BallRadius.h in Headers */ = {isa = PBXBuildFile; fileRef = C35F6D9F1671B460000CEF49 /* BallRadius.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C35F6DA21671B460000CEF49 /* BallRadius.h in Headers */ = {isa = PBXBuildFile; fileRef = C35F6D9F1671B460000CEF49 /* BallRadius.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C37D33471698F6C000D695C0 /* MIDIProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C37D33451698F6C000D695C0 /* MIDIProgram.cpp */; };
-		C37D33481698F6C000D695C0 /* MIDIProgram.h in Headers */ = {isa = PBXBuildFile; fileRef = C37D33461698F6C000D695C0 /* MIDIProgram.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C37D33481698F6C000D695C0 /* MIDIProgram.h in Headers */ = {isa = PBXBuildFile; fileRef = C37D33461698F6C000D695C0 /* MIDIProgram.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C38824A1166B1BAA007FE3B3 /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C38824A0166B1BAA007FE3B3 /* libLeap.dylib */; };
-		C3BF4B7516D053C40091DE62 /* LeapMIDI.h in Headers */ = {isa = PBXBuildFile; fileRef = C3BF4B7416D053C40091DE62 /* LeapMIDI.h */; };
-		C3BF4B7816D053D90091DE62 /* MIDITypes.h in Headers */ = {isa = PBXBuildFile; fileRef = C3BF4B7716D053D90091DE62 /* MIDITypes.h */; };
-		C3C2E7B5167D45650031B430 /* FingerPositionX.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C2E7B2167D45650031B430 /* FingerPositionX.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C3C2E7B8167D49460031B430 /* FingerPositionY.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C2E7B7167D49460031B430 /* FingerPositionY.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C3C2E7BA167D496D0031B430 /* FingerPositionZ.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C2E7B9167D496D0031B430 /* FingerPositionZ.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C3BF4B7516D053C40091DE62 /* LeapMIDI.h in Headers */ = {isa = PBXBuildFile; fileRef = C3BF4B7416D053C40091DE62 /* LeapMIDI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C3BF4B7816D053D90091DE62 /* MIDITypes.h in Headers */ = {isa = PBXBuildFile; fileRef = C3BF4B7716D053D90091DE62 /* MIDITypes.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3C2E7B5167D45650031B430 /* FingerPositionX.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C2E7B2167D45650031B430 /* FingerPositionX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3C2E7B8167D49460031B430 /* FingerPositionY.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C2E7B7167D49460031B430 /* FingerPositionY.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3C2E7BA167D496D0031B430 /* FingerPositionZ.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C2E7B9167D496D0031B430 /* FingerPositionZ.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C3EAA989167AD5FE00497E33 /* FingerGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3EAA987167AD5FE00497E33 /* FingerGesture.cpp */; };
 		C3EAA98A167AD5FE00497E33 /* FingerGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3EAA987167AD5FE00497E33 /* FingerGesture.cpp */; };
-		C3EAA98B167AD5FE00497E33 /* FingerGesture.h in Headers */ = {isa = PBXBuildFile; fileRef = C3EAA988167AD5FE00497E33 /* FingerGesture.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C3EAA98B167AD5FE00497E33 /* FingerGesture.h in Headers */ = {isa = PBXBuildFile; fileRef = C3EAA988167AD5FE00497E33 /* FingerGesture.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C3EAA98F167AD69300497E33 /* FingerPosition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3EAA98D167AD69300497E33 /* FingerPosition.cpp */; };
 		C3EAA990167AD69300497E33 /* FingerPosition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3EAA98D167AD69300497E33 /* FingerPosition.cpp */; };
-		C3EAA991167AD69300497E33 /* FingerPosition.h in Headers */ = {isa = PBXBuildFile; fileRef = C3EAA98E167AD69300497E33 /* FingerPosition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C3EAA991167AD69300497E33 /* FingerPosition.h in Headers */ = {isa = PBXBuildFile; fileRef = C3EAA98E167AD69300497E33 /* FingerPosition.h */; settings = {ATTRIBUTES = (Private, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -222,6 +222,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3BF4B7516D053C40091DE62 /* LeapMIDI.h in Headers */,
+				C3BF4B7816D053D90091DE62 /* MIDITypes.h in Headers */,
 				C33EF319166738D3001D3D0E /* Leap.h in Headers */,
 				C313AAE91687B78400A0AD2A /* LeapMath.h in Headers */,
 				C35F6D8F16704FD4000CEF49 /* MIDIGesture.h in Headers */,
@@ -235,8 +237,6 @@
 				C3C2E7B8167D49460031B430 /* FingerPositionY.h in Headers */,
 				C3C2E7BA167D496D0031B430 /* FingerPositionZ.h in Headers */,
 				C35F6DA21671B460000CEF49 /* BallRadius.h in Headers */,
-				C3BF4B7516D053C40091DE62 /* LeapMIDI.h in Headers */,
-				C3BF4B7816D053D90091DE62 /* MIDITypes.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

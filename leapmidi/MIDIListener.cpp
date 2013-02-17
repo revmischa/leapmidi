@@ -9,43 +9,27 @@
 
 #include "MIDIListener.h"
 
-using namespace std;
-
 namespace leapmidi {
     
 Listener::Listener() {
     currentProgram = NULL;
 }
 
-void Listener::onInit(const Leap::Controller& controller) {
-    std::cout << "Leap device initialized\n";
-}
-
-void Listener::onConnect(const Leap::Controller& controller) {
-    std::cout << "Leap device connected\n";
-}
-
-void Listener::onDisconnect(const Leap::Controller& controller) {
-    std::cout << "Leap device disconnected\n";
-}
 
 void Listener::onFrame(const Leap::Controller &controller) {
     if (! currentProgram) return;
+    
+    // use current active gesture recognizers to locate gestures
+    // and controls in this frame.
+    // will call onGestureRecognized and onControlUpdated if appropriate
+    currentProgram->findControls(controller, *this);
 }
 
-void Listener::onGestureRecognized(const Leap::Controller &controller, GesturePtr gesture) {
-    cout << "gesture recognized\n";
-    
-    if (currentProgram)
-        currentProgram->onGestureRecognized(controller, gesture);
-}
-
-void Listener::onControlUpdated(const Leap::Controller &controller, GesturePtr gesture, ControlPtr control) {
-    // call superclass method
-    cout << "control updated\n";
-    
-    if (currentProgram)
-        currentProgram->onControlUpdated(controller, gesture, control);
-}
+// do something productive with these in your application's Listener subclass
+void Listener::onInit(const Leap::Controller& controller) {}
+void Listener::onConnect(const Leap::Controller& controller) {}
+void Listener::onDisconnect(const Leap::Controller& controller) {}
+void Listener::onGestureRecognized(const Leap::Controller &controller, GesturePtr gesture) {}
+void Listener::onControlUpdated(const Leap::Controller &controller, GesturePtr gesture, ControlPtr control) {}
     
 }

@@ -7,7 +7,7 @@
 
 namespace leapmidi {
     
-void Program::findControls(const Leap::Controller &controller, Listener &listener, std::vector<ControlPtr> &recognizedControls) {
+void Program::findControls(const Leap::Controller &controller, Listener &listener) {
     // feed frames to recognizers
     for (vector<GesturePtr>::iterator it = gestureRecognizers.begin(); it != gestureRecognizers.end(); ++it) {
         // get controls recognized from gestures
@@ -24,7 +24,6 @@ void Program::findControls(const Leap::Controller &controller, Listener &listene
         for (vector<ControlPtr>::iterator ctl = gestureControls.begin(); ctl != gestureControls.end(); ++ctl) {
             ControlPtr control = *ctl;
             
-            recognizedControls.push_back(control);
             listener.onControlUpdated(controller, gesture, control);
         }
     }

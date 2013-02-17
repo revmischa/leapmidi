@@ -13,7 +13,7 @@
 #define __leapmidi__MIDIControl__
 
 #include <iostream>
-#include <LeapMIDI.h>
+#include "MIDITypes.h"
 
 namespace leapmidi {
     
@@ -45,7 +45,7 @@ class Control {
         midi_control_value_raw _rawValue;
 };
 
-typedef shared_ptr<Control> ControlPtr;
+    typedef std::shared_ptr<Control> ControlPtr;
 
 } // namespace leapmidi
 

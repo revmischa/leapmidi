@@ -36,8 +36,8 @@ public:
     virtual void onConnect(const Leap::Controller&);
     virtual void onDisconnect(const Leap::Controller&);
     virtual void onFrame(const Leap::Controller &controller);
-    virtual void onGestureRecognized(const Leap::Controller &controller, GesturePtr gesture) = 0;
-    virtual void onControlUpdated(const Leap::Controller &controller, GesturePtr gesture, ControlPtr control) = 0;
+    virtual void onGestureRecognized(const Leap::Controller &controller, GesturePtr gesture);
+    virtual void onControlUpdated(const Leap::Controller &controller, GesturePtr gesture, ControlPtr control);
     
 protected:
     Program *currentProgram;

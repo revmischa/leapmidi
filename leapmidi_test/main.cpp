@@ -10,13 +10,26 @@
 #include <LeapMIDI.h>
 #include <Leap.h>
 
-LeapMIDI::Listener listener;
-Leap::Controller controller(&listener);
+using namespace std;
+
+class TestListener : public leapmidi::Listener {
+public:
+    virtual void onFrame(const Leap::Controller &controller);
+};
+
+void TestListener::onFrame(const Leap::Controller &controller) {
+}
 
 int main(int argc, const char * argv[]) {
-    std::cout << "Press Enter to quit..." << std::endl;
-    std::cin.get();
+    TestListener listener;
+    Leap::Controller controller;
+    controller.addListener(listener);
+
+    cout << "Press Enter to quit..." << std::endl;
+    cin.get();
     
+    controller.removeListener(listener);
+
     return 0;
 }
 

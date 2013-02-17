@@ -21,6 +21,7 @@
 #include <iostream>
 #include <vector>
 #include "MIDIControl.h"
+#include "MIDINote.h"
 #include "MIDITypes.h"
 #include <Leap.h>
 
@@ -34,6 +35,9 @@ public:
     
     // given a controller, return MIDI controls recognized from gestures
     virtual void recognizedControls(const Leap::Controller&, std::vector<ControlPtr>&) = 0;
+    
+    // given a controller, return MIDI notes recognized from gestures
+    virtual void recognizedNotes(const Leap::Controller&, std::vector<NotePtr>&) = 0;
 };
 
 typedef shared_ptr<Gesture> GesturePtr;

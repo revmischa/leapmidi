@@ -17,8 +17,11 @@
 
 #include "MIDITypes.h"
 #include "MIDIProgram.h"
+#include "MIDIControlProgram.h"
+#include "MIDINoteProgram.h"
 #include "MIDIGesture.h"
 #include "MIDIControl.h"
+#include "MIDINote.h"
 
 using namespace std;
 
@@ -39,6 +42,7 @@ public:
     virtual void onFrame(const Leap::Controller &controller);
     virtual void onGestureRecognized(const Leap::Controller &controller, GesturePtr gesture);
     virtual void onControlUpdated(const Leap::Controller &controller, GesturePtr gesture, ControlPtr control);
+    virtual void onNoteUpdated(const Leap::Controller &controller, GesturePtr gesture, NotePtr note);
     
 protected:
     ProgramPtr currentProgram;

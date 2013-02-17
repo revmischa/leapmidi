@@ -24,9 +24,8 @@ void Listener::onFrame(const Leap::Controller &controller) {
     if (! currentProgram) return;
     
     // use current active gesture recognizers to locate gestures
-    // and controls in this frame.
-    // will call onGestureRecognized and onControlUpdated if appropriate
-    currentProgram->findControls(controller, this);
+    // and then trigger appropriate note/controls
+    currentProgram->locateGestures(controller, this);
 }
 
 // do something productive with these in your application's Listener subclass
@@ -35,5 +34,6 @@ void Listener::onConnect(const Leap::Controller& controller) {}
 void Listener::onDisconnect(const Leap::Controller& controller) {}
 void Listener::onGestureRecognized(const Leap::Controller &controller, GesturePtr gesture) {}
 void Listener::onControlUpdated(const Leap::Controller &controller, GesturePtr gesture, ControlPtr control) {}
+void Listener::onNoteUpdated(const Leap::Controller &controller, GesturePtr gesture, NotePtr note) {}
     
 }

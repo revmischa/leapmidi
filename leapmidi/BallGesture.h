@@ -18,10 +18,13 @@
 
 namespace leapmidi {
 
-class BallGesture : public Gesture {
-    void recognizedControls(const Leap::Controller &controller, std::vector<ControlPtr> &controls);
-};
+    class BallGesture : public Gesture {
+        void recognizedControls(const Leap::Controller &controller, std::vector<ControlPtr> &controls);
+    };
+
+    typedef shared_ptr<BallGesture> GestureBallPtr;
 
 }
+
 
 #endif /* defined(__leapmidi__MIDIGestureBall__) */

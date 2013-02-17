@@ -52,7 +52,7 @@ void FingerGesture::recognizedControls(const Leap::Controller &controller, std::
         velZ /= pointableCount;
         
         // only register if velocity is greater than this threshold
-        double velocityThreshold = 8.0; // mm/s
+        double velocityThreshold = 13.0; // mm/s
 //                std::cout << "velX: " << velX << " velY: " << velY << " velZ: " << velZ << std::endl;
         
         // generate one pointable position control per hand coordinate, determined by number of pointables
@@ -62,15 +62,17 @@ void FingerGesture::recognizedControls(const Leap::Controller &controller, std::
             controls.push_back(pointablePosControlX);
         }
         
-        /*if (abs(velY) > velocityThreshold) {
-            LeapMIDI::Control::FingerPosition *pointablePosControlY = new LeapMIDI::Control::FingerPositionY(handCount, pointableCount, y);
+        if (abs(velY) > velocityThreshold) {
+            shared_ptr<FingerPositionY> posY = make_shared<FingerPositionY>(handCount, pointableCount, y);
+            FingerPositionPtr pointablePosControlY = dynamic_pointer_cast<FingerPosition>(posY);
             controls.push_back(pointablePosControlY);
         }
         
         if (abs(velZ) > velocityThreshold) {
-            LeapMIDI::Control::FingerPosition *pointablePosControlZ = new LeapMIDI::Control::FingerPositionZ(handCount, pointableCount, z);
+            shared_ptr<FingerPositionZ> posZ = make_shared<FingerPositionZ>(handCount, pointableCount, z);
+            FingerPositionPtr pointablePosControlZ = dynamic_pointer_cast<FingerPosition>(posZ);
             controls.push_back(pointablePosControlZ);
-        }*/
+        }
     }
     
     return;

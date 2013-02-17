@@ -19,7 +19,8 @@ public:
     virtual ~FingerPositionY() {}
     
     virtual const midi_control_index controlIndexBase() { return FINGER_1_HAND_1_Y; }
-    
+    virtual const midi_note_index noteIndexBase() { return FINGER_1_HAND_1_Y_ON; }
+
     virtual const char *description() { return "Finger Y position"; }
     
     virtual const midi_control_value_raw minRawValue() { return 30; }

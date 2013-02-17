@@ -104,9 +104,13 @@ enum midi_note_index {
         
         FINGER_1_HAND_1_X_ON,
         FINGER_1_HAND_1_X_OFF,
+    
+        FINGER_1_HAND_1_Y_ON,
+        FINGER_1_HAND_1_Y_OFF,
+    
+        FINGER_1_HAND_1_Z_ON,
+        FINGER_1_HAND_1_Z_OFF,
     /*
-        FINGER_1_HAND_1_Y,
-        FINGER_1_HAND_1_Z,
         FINGER_2_HAND_1_X,
         FINGER_2_HAND_1_Y,
         FINGER_2_HAND_1_Z,

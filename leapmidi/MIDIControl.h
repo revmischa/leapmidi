@@ -14,10 +14,11 @@
 
 #include <iostream>
 #include "MIDITypes.h"
+#include "MIDIBase.h"
 
 namespace leapmidi {
     
-class Control {
+    class Control : public virtual MIDIBase {
     public:
         // create a recognized control with raw input value from recognizer
         Control(midi_bodypart_index handIndex, midi_bodypart_index fingerIndex, midi_control_value_raw rawValue);
@@ -35,13 +36,7 @@ class Control {
         // MIDI control code index
         virtual const midi_control_index controlIndex() = 0;
         
-        virtual const char *description() = 0;
-        
-        virtual const midi_bodypart_index handIndex()   { return _handIndex; }
-        virtual const midi_bodypart_index fingerIndex() { return _fingerIndex; }
-        
     protected:
-        midi_bodypart_index _handIndex, _fingerIndex;
         midi_control_value_raw _rawValue;
 };
 

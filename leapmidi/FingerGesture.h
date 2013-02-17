@@ -26,6 +26,7 @@ namespace leapmidi {
 
 class FingerGesture : public Gesture {
     void recognizedControls(const Leap::Controller &controller, std::vector<ControlPtr> &controls);
+    void recognizedNotes(const Leap::Controller &controller, std::vector<NotePtr> &notes);
 };
 
 typedef shared_ptr<FingerGesture> FingerGesturePtr;

@@ -19,9 +19,11 @@ public:
     virtual ~FingerPositionX() {}
     
     virtual const midi_control_index controlIndexBase() { return FINGER_1_HAND_1_X; }
-    virtual const midi_note_index noteIndexBase() { return FINGER_1_HAND_1_X_ON; }
     
-    virtual const char *description() { return "Finger X position"; }
+    virtual const string description() {
+        static const string desc = "Finger X position";
+        return desc;
+    }
                 
     virtual const midi_control_value_raw minRawValue() { return -150; }
     virtual const midi_control_value_raw maxRawValue() { return 150; }

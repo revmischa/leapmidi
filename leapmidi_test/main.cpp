@@ -9,19 +9,12 @@
 #include <iostream>
 #include <LeapMIDI.h>
 #include <Leap.h>
+#include "MIDIListener.h"
 
 using namespace std;
 
-class TestListener : public leapmidi::Listener {
-public:
-    virtual void onFrame(const Leap::Controller &controller);
-};
-
-void TestListener::onFrame(const Leap::Controller &controller) {
-}
-
 int main(int argc, const char * argv[]) {
-    TestListener listener;
+    leapmidi::Listener listener;
     Leap::Controller controller;
     controller.addListener(listener);
 

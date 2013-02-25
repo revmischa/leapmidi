@@ -20,7 +20,7 @@ public:
     
     virtual const midi_control_index controlIndexBase() { return FINGER_1_HAND_1_Z; }
 
-    virtual const string description() {
+    virtual const string &description() {
         static const string desc = "Finger Z position";
         return desc;
     }

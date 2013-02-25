@@ -14,22 +14,33 @@
 #include <vector>
 #include <iostream>
 #include "MIDIGesture.h"
+#include "BallGesture.h"
 
 using namespace std;
-
-/* The classes below are exported */
-#pragma GCC visibility push(default)
 
 namespace leapmidi {
     
 class Listener : public Leap::Listener {
 public:
-    virtual void onFrame(const Leap::Controller &controller);
-    virtual void onControlUpdated(const Leap::Controller &controller, GesturePtr gesture, ControlPtr control);
+    Listener();
+
+    // vector of Gesture instances to detect gesture input
+    // and emit control messages
+    virtual const vector<GesturePtr> &gestureRecognizers();
+
+    // called when we have identified a gesture in the current frame
     virtual void onGestureRecognized(const Leap::Controller &controller, GesturePtr gesture);
+    
+    // called for each control message emitted by a gesture recognizer
+    virtual void onControlUpdated(const Leap::Controller &controller, GesturePtr gesture, ControlPtr control);
+
+    // from Leap::Listener
+    virtual void onFrame(const Leap::Controller &controller);
+    
+protected:
+    vector<GesturePtr> _gestureRecognizers;
 };
 
 } // namespace leapmidi
 
-#pragma GCC visibility pop
 #endif

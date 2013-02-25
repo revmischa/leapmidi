@@ -14,17 +14,17 @@
 #include <Leap.h>
 
 #include "MIDIGesture.h"
-#include "MIDIControl.h"
+#include "LeapMIDI.h"
 
 namespace leapmidi {
 
-    class BallGesture : public Gesture {
-        void recognizedControls(const Leap::Controller &controller, std::vector<ControlPtr> &controls);
-    };
+class BallGesture : public Gesture {
+public:
+    void recognizedControls(const Leap::Controller &controller, std::vector<ControlPtr> &controls);
+};
 
-    typedef shared_ptr<BallGesture> GestureBallPtr;
+typedef shared_ptr<BallGesture> GestureBallPtr;
 
 }
-
 
 #endif /* defined(__leapmidi__MIDIGestureBall__) */

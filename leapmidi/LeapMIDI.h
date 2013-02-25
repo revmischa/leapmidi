@@ -17,9 +17,6 @@ namespace leapmidi {
 typedef double midi_control_value_raw;
 typedef unsigned short midi_control_value;
 
-typedef double midi_note_value_raw;
-typedef unsigned short midi_note_value;
-
 typedef unsigned short midi_bodypart_index;
 
 // MIDI control number offsets

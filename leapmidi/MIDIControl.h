@@ -31,7 +31,7 @@ public:
     // map a raw value from [minRawValue,maxRawValue] into the range [0,127]
     virtual const midi_control_value mappedValue();
     
-    virtual const string description() = 0;
+    virtual const string &description() = 0;
     
     // min/max raw value, for mapping to MIDI value
     virtual const midi_control_value_raw minRawValue() = 0;

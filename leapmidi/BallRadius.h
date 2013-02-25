@@ -20,9 +20,8 @@ namespace leapmidi {
 class BallRadius : public Control {
 public:
     BallRadius(midi_bodypart_index hi, midi_bodypart_index fi, double radius) : Control(hi, fi, radius) {}
-    virtual ~BallRadius() {}
     
-    virtual const string description() {
+    virtual const string &description() {
         static const string desc = "Hand curvature";
         return desc;
     }

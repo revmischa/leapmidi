@@ -18,11 +18,10 @@ int main(int argc, const char * argv[]) {
     Leap::Controller controller;
     controller.addListener(listener);
 
-    cout << "Press Enter to quit..." << std::endl;
+    cout << "Press enter to quit..." << std::endl;
     cin.get();
     
     controller.removeListener(listener);
 
     return 0;
 }
-

@@ -29,9 +29,9 @@ void BallGesture::recognizedControls(const Leap::Controller &controller, std::ve
             continue;
                 
         BallRadiusPtr bc = make_shared<BallRadius>(i, 0, radius);
-//        ControlPtr cptr = dynamic_pointer_cast<ControlPtr>(bc);
+        ControlPtr cptr = dynamic_pointer_cast<Control>(bc);
         
-//        controls.push_back(cptr);
+        controls.push_back(cptr);
     }
 }
 

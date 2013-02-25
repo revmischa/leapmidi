@@ -20,8 +20,6 @@ namespace leapmidi {
 
 class Gesture {
 public:
-    Gesture() {}
-    
     // given a controller, return MIDI controls recognized from gestures
     virtual void recognizedControls(const Leap::Controller&, std::vector<ControlPtr>&) = 0;
 };

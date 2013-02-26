@@ -16,8 +16,6 @@
 #include "MIDIGesture.h"
 #include "BallGesture.h"
 
-using namespace std;
-
 namespace leapmidi {
     
 class Listener : public Leap::Listener {
@@ -26,7 +24,7 @@ public:
 
     // vector of Gesture instances to detect gesture input
     // and emit control messages
-    virtual const vector<GesturePtr> &gestureRecognizers();
+    std::vector<GesturePtr>& gestureRecognizers() { return _gestureRecognizers; }
 
     // called when we have identified a gesture in the current frame
     virtual void onGestureRecognized(const Leap::Controller &controller, GesturePtr gesture);
@@ -38,7 +36,7 @@ public:
     virtual void onFrame(const Leap::Controller &controller);
     
 protected:
-    vector<GesturePtr> _gestureRecognizers;
+    std::vector<GesturePtr> _gestureRecognizers;
 };
 
 } // namespace leapmidi

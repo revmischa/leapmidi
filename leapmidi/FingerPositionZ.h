@@ -15,18 +15,17 @@ namespace leapmidi {
     
 class FingerPositionZ : public FingerPosition {
 public:
-    FingerPositionZ(midi_bodypart_index hi, midi_bodypart_index fi, double pos) : FingerPosition(hi, fi, -pos) {}
-    virtual ~FingerPositionZ() {}
+    FingerPositionZ(int hi, int fi, double pos) : FingerPosition(hi, fi, -pos) {}
     
-    virtual const midi_control_index controlIndexBase() { return FINGER_1_HAND_1_Z; }
+    virtual midi_control_index controlIndexBase() { return FINGER_1_HAND_1_Z; }
 
-    virtual const string &description() {
-        static const string desc = "Finger Z position";
+    virtual const std::string &description() {
+        static const std::string desc = "Finger Z position";
         return desc;
     }
     
-    virtual const midi_control_value_raw minRawValue() { return -160; }
-    virtual const midi_control_value_raw maxRawValue() { return 160; }
+    virtual midi_control_value_raw minRawValue() { return -160; }
+    virtual midi_control_value_raw maxRawValue() { return 160; }
 };
 
 }

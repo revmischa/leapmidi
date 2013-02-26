@@ -20,28 +20,29 @@ namespace leapmidi {
 class Control {
 public:
     // create a recognized control with raw input value from recognizer
-    Control(midi_bodypart_index handIndex, midi_bodypart_index fingerIndex, midi_control_value_raw rawValue);
-    virtual ~Control() {}
-    
-    virtual const midi_bodypart_index handIndex()   { return _handIndex; }
-    virtual const midi_bodypart_index fingerIndex() { return _fingerIndex; }
-    
-    virtual const midi_control_value_raw rawValue() { return _rawValue; }
+    Control(midi_control_value_raw rawValue, int hand) :
+        _rawValue(rawValue), _handIndex(hand) {}
     
     // map a raw value from [minRawValue,maxRawValue] into the range [0,127]
-    virtual const midi_control_value mappedValue();
+    virtual midi_control_value mappedValue();
     
-    virtual const string &description() = 0;
+    // overloaded by subclasses with a human-readable description
+    virtual const std::string &description() = 0;
     
     // min/max raw value, for mapping to MIDI value
-    virtual const midi_control_value_raw minRawValue() = 0;
-    virtual const midi_control_value_raw maxRawValue() = 0;
+    virtual midi_control_value_raw minRawValue() = 0;
+    virtual midi_control_value_raw maxRawValue() = 0;
 
     // MIDI control code index
-    virtual const midi_control_index controlIndex() = 0;
+    virtual midi_control_index controlIndex() = 0;
     
+    // public accessors
+    int handIndex() { return _handIndex; }
+    midi_control_value_raw rawValue() { return _rawValue; }
+
 protected:
-    midi_control_value_raw _rawValue, _handIndex, _fingerIndex;
+    int _handIndex;
+    midi_control_value_raw _rawValue;
 };
 
 } // namespace leapmidi

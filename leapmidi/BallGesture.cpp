@@ -9,6 +9,8 @@
 #include "BallGesture.h"
 #include "BallRadius.h"
 
+using namespace std;
+
 namespace leapmidi {
 
 void BallGesture::recognizedControls(const Leap::Controller &controller, std::vector<ControlPtr> &controls) {
@@ -28,7 +30,7 @@ void BallGesture::recognizedControls(const Leap::Controller &controller, std::ve
         if (! radius)
             continue;
                 
-        BallRadiusPtr bc = make_shared<BallRadius>(i, 0, radius);
+        BallRadiusPtr bc = make_shared<BallRadius>(radius, i);
         ControlPtr cptr = dynamic_pointer_cast<Control>(bc);
         
         controls.push_back(cptr);

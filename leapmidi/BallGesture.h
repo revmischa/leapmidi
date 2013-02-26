@@ -9,7 +9,6 @@
 #ifndef __leapmidi__MIDIGestureBall__
 #define __leapmidi__MIDIGestureBall__
 
-#include <iostream>
 #include <vector>
 #include <Leap.h>
 
@@ -23,7 +22,7 @@ public:
     void recognizedControls(const Leap::Controller &controller, std::vector<ControlPtr> &controls);
 };
 
-typedef shared_ptr<BallGesture> GestureBallPtr;
+typedef std::shared_ptr<BallGesture> BallGesturePtr;
 
 }
 

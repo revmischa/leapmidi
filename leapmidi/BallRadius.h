@@ -13,25 +13,23 @@
 #include "LeapMIDI.h"
 #include "MIDIControl.h"
 
-using namespace std;
-
 namespace leapmidi {
     
 class BallRadius : public Control {
 public:
-    BallRadius(midi_bodypart_index hi, midi_bodypart_index fi, double radius) : Control(hi, fi, radius) {}
+    BallRadius(midi_control_value_raw rawValue, int hand) : Control(rawValue, hand) {};
     
-    virtual const string &description() {
-        static const string desc = "Hand curvature";
+    virtual const std::string& description() {
+        static const std::string desc = "Hand curvature";
         return desc;
     }
     
-    virtual const midi_control_value_raw minRawValue() { return 48; }
-    virtual const midi_control_value_raw maxRawValue() { return 145; }
-    virtual const midi_control_index controlIndex();
+    virtual midi_control_value_raw minRawValue() { return 48; }
+    virtual midi_control_value_raw maxRawValue() { return 115; }
+    virtual midi_control_index controlIndex();
 };
 
-typedef shared_ptr<BallRadius> BallRadiusPtr;
+typedef std::shared_ptr<BallRadius> BallRadiusPtr;
     
 }
 

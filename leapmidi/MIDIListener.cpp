@@ -15,7 +15,8 @@ namespace leapmidi {
     
 Listener::Listener() {
     BallGesturePtr ballGesture = make_shared<BallGesture>();
-    _gestureRecognizers.push_back(dynamic_pointer_cast<Gesture>(ballGesture));
+    GesturePtr ballGestureBasePtr = dynamic_pointer_cast<Gesture>(ballGesture);
+    _gestureRecognizers.push_back(ballGestureBasePtr);
 }
 
 void Listener::onFrame(const Leap::Controller &controller) {    
@@ -23,19 +24,22 @@ void Listener::onFrame(const Leap::Controller &controller) {
     // and then trigger appropriate note/controls
     // feed frames to recognizers
     vector<GesturePtr> recognizers = gestureRecognizers();
-    for (vector<GesturePtr>::iterator gesture = recognizers.begin(); gesture != recognizers.end(); ++gesture) {
+    for (vector<GesturePtr>::iterator it = recognizers.begin(); it != recognizers.end(); ++it) {
         // get controls recognized from gestures
-        vector<ControlPtr> gestureControls; // controls from this gesture
-        (*gesture)->recognizedControls(controller, gestureControls);
+        GesturePtr gesture = *it;
+        std::vector<ControlPtr> gestureControls; // controls from this gesture
+        gesture->recognizedControls(controller, gestureControls);
         
         if (! gestureControls.size())
             continue;
         
         // call gesture recognized callback
-        onGestureRecognized(controller, *gesture);
+        onGestureRecognized(controller, gesture);
         
         for (vector<ControlPtr>::iterator ctl = gestureControls.begin(); ctl != gestureControls.end(); ++ctl) {
-            onControlUpdated(controller, *gesture, *ctl);
+            ControlPtr control = *ctl;
+            
+            onControlUpdated(controller, gesture, control);
         }
     }
 }

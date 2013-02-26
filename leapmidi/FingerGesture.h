@@ -28,7 +28,7 @@ class FingerGesture : public Gesture {
     void recognizedControls(const Leap::Controller &controller, std::vector<ControlPtr> &controls);
 };
 
-typedef shared_ptr<FingerGesture> FingerGesturePtr;
+typedef std::shared_ptr<FingerGesture> FingerGesturePtr;
 
 }
 

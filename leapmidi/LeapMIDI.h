@@ -8,16 +8,12 @@
 #ifndef leapmidi_leapmidi_h
 #define leapmidi_leapmidi_h
 
-#include <iostream>
-
-using namespace std;
+#include <memory>
 
 namespace leapmidi {    
     
 typedef double midi_control_value_raw;
 typedef unsigned short midi_control_value;
-
-typedef unsigned short midi_bodypart_index;
 
 // MIDI control number offsets
 enum midi_control_index {
@@ -41,9 +37,9 @@ enum midi_control_index {
 class Gesture;
 class Control;
 
-typedef shared_ptr<Control> ControlPtr;
-typedef shared_ptr<Gesture> GesturePtr;
+typedef std::shared_ptr<Control> ControlPtr;
+typedef std::shared_ptr<Gesture> GesturePtr;
     
-}
+} // namespace leapmidi
 
 #endif

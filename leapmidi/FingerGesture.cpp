@@ -9,6 +9,8 @@
 #include "LeapMIDI.h"
 #include "FingerGesture.h"
 
+using namespace std;
+
 namespace leapmidi {
 
 void FingerGesture::recognizedControls(const Leap::Controller &controller, std::vector<ControlPtr> &controls) {

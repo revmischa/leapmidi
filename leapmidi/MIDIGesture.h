@@ -14,14 +14,12 @@
 #include "MIDIControl.h"
 #include <Leap.h>
 
-using namespace std;
-
 namespace leapmidi {
 
 class Gesture {
 public:
     // given a controller, return MIDI controls recognized from gestures
-    virtual void recognizedControls(const Leap::Controller&, std::vector<ControlPtr>&) = 0;
+    virtual void recognizedControls(const Leap::Controller &controller, std::vector<ControlPtr> &gesturesOut) = 0;
 };
 
 } // namespace leapmidi

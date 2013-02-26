@@ -13,23 +13,26 @@
 #include "MIDIControl.h"
 #include "LeapMIDI.h"
 
-using namespace std;
-
 namespace leapmidi {
 
 class FingerPosition : public Control {
 public:
-    FingerPosition(midi_bodypart_index hi, midi_bodypart_index fi, double pos) : Control(hi, fi, pos) {}
-
-    virtual ~FingerPosition() {}
+    FingerPosition(int hi, int fi, double pos) : Control(pos, hi) {
+        _fingerIndex = fi;
+    }
     
     // override this in subclass to define the control index of hand 1/finger 1
-    virtual const midi_control_index controlIndexBase() = 0;
+    virtual midi_control_index controlIndexBase() = 0;
     
-    virtual const midi_control_index controlIndex();
+    virtual midi_control_index controlIndex();
+
+    int fingerIndex() { return _fingerIndex; }
+
+protected:
+    int _fingerIndex;
 };
     
-typedef shared_ptr<FingerPosition> FingerPositionPtr;
+typedef std::shared_ptr<FingerPosition> FingerPositionPtr;
 
 }
 

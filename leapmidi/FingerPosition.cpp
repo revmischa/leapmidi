@@ -10,7 +10,7 @@
 
 namespace leapmidi {
     
-const midi_control_index FingerPosition::controlIndex() {
+midi_control_index FingerPosition::controlIndex() {
     // how many controls do we have per hand?
     unsigned long handControlCount = FINGER_1_HAND_2_X - FINGER_1_HAND_1_X;
     unsigned long _controlIndex = controlIndexBase() + fingerIndex() * 3; // gives us finger control index

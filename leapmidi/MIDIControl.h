@@ -13,6 +13,8 @@
 #define __leapmidi__MIDIControl__
 
 #include <iostream>
+#include <sys/time.h>
+
 #include "LeapMIDI.h"
 
 namespace leapmidi {
@@ -21,7 +23,9 @@ class Control {
 public:
     // create a recognized control with raw input value from recognizer
     Control(midi_control_value_raw rawValue, int hand) :
-        _rawValue(rawValue), _handIndex(hand) {}
+        _rawValue(rawValue), _handIndex(hand) {
+        gettimeofday(&timestamp, NULL);
+    }
     
     // map a raw value from [minRawValue,maxRawValue] into the range [0,127]
     virtual midi_control_value mappedValue();
@@ -41,6 +45,7 @@ public:
     midi_control_value_raw rawValue() { return _rawValue; }
 
 protected:
+    struct timeval timestamp;
     int _handIndex;
     midi_control_value_raw _rawValue;
 };

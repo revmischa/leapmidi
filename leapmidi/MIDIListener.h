@@ -16,6 +16,7 @@
 #include <assert.h>
 
 #ifdef LeapMIDI_OSX
+    #include <mach/mach_time.h>
     #include <CoreMIDI/CoreMIDI.h>
     #include <CoreMIDI/MIDIServices.h>
 #endif

@@ -25,7 +25,7 @@ public:
     }
     
     virtual midi_control_value_raw minRawValue() { return 48; }
-    virtual midi_control_value_raw maxRawValue() { return 115; }
+    virtual midi_control_value_raw maxRawValue() { return 100; }
     virtual midi_control_index controlIndex();
 };
 

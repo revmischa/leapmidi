@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		6044028916D0A68500B5C7DF /* FingerPositionY.h in Headers */ = {isa = PBXBuildFile; fileRef = 6044028816D0A68500B5C7DF /* FingerPositionY.h */; };
+		C3027D2316DDB4810026718C /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3027D2216DDB4810026718C /* CoreMIDI.framework */; };
+		C3027D2416DDB48B0026718C /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3027D2216DDB4810026718C /* CoreMIDI.framework */; };
+		C3027D2616DDB4FA0026718C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3027D2516DDB4FA0026718C /* CoreFoundation.framework */; };
 		C313AAE91687B78400A0AD2A /* LeapMath.h in Headers */ = {isa = PBXBuildFile; fileRef = C313AAE81687B78400A0AD2A /* LeapMath.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C33EF31516673851001D3D0E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C33EF31416673851001D3D0E /* OpenGL.framework */; };
 		C33EF319166738D3001D3D0E /* Leap.h in Headers */ = {isa = PBXBuildFile; fileRef = C33EF317166738D3001D3D0E /* Leap.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -67,6 +70,8 @@
 
 /* Begin PBXFileReference section */
 		6044028816D0A68500B5C7DF /* FingerPositionY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FingerPositionY.h; sourceTree = "<group>"; };
+		C3027D2216DDB4810026718C /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
+		C3027D2516DDB4FA0026718C /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		C313AAE81687B78400A0AD2A /* LeapMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeapMath.h; sourceTree = "<group>"; };
 		C33EF2AF16672833001D3D0E /* leapmidi.a */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = leapmidi.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33EF2B416672833001D3D0E /* leapmidiProj.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = leapmidiProj.xcconfig; sourceTree = "<group>"; };
@@ -100,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3027D2316DDB4810026718C /* CoreMIDI.framework in Frameworks */,
 				C38824A1166B1BAA007FE3B3 /* libLeap.dylib in Frameworks */,
 				C33EF31516673851001D3D0E /* OpenGL.framework in Frameworks */,
 			);
@@ -109,6 +115,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3027D2616DDB4FA0026718C /* CoreFoundation.framework in Frameworks */,
+				C3027D2416DDB48B0026718C /* CoreMIDI.framework in Frameworks */,
 				C35F6D8916704EE5000CEF49 /* libLeap.dylib in Frameworks */,
 				C33EF32D16673D1D001D3D0E /* leapmidi.a in Frameworks */,
 			);
@@ -127,6 +135,8 @@
 		C33EF2A416672833001D3D0E = {
 			isa = PBXGroup;
 			children = (
+				C3027D2516DDB4FA0026718C /* CoreFoundation.framework */,
+				C3027D2216DDB4810026718C /* CoreMIDI.framework */,
 				C38824A0166B1BAA007FE3B3 /* libLeap.dylib */,
 				C33EF31416673851001D3D0E /* OpenGL.framework */,
 				C33EF2B116672833001D3D0E /* leapmidi */,
@@ -349,10 +359,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "LeapMIDI_OSX=1";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -377,6 +384,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "LeapMIDI_OSX=1";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;

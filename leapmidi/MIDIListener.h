@@ -13,6 +13,13 @@
 #include <Leap.h>
 #include <vector>
 #include <iostream>
+#include <assert.h>
+
+#ifdef LeapMIDI_OSX
+    #include <CoreMIDI/CoreMIDI.h>
+    #include <CoreMIDI/MIDIServices.h>
+#endif
+
 #include "MIDIGesture.h"
 #include "BallGesture.h"
 
@@ -37,6 +44,17 @@ public:
     
 protected:
     std::vector<GesturePtr> _gestureRecognizers;
+    
+    void fatal(const char *msg);
+    
+    void initPacketList();
+    void createDevice();
+    
+    MIDIClientRef deviceClient;
+    MIDIEndpointRef deviceEndpoint;
+    MIDIPacketList *midiPacketList;
+    unsigned int packetListSize;
+    MIDIPacket *curPacket;
 };
 
 } // namespace leapmidi

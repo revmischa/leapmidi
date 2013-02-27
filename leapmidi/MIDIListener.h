@@ -26,6 +26,8 @@
 
 namespace leapmidi {
     
+const unsigned int packetListSize = 200;
+    
 class Listener : public Leap::Listener {
 public:
     Listener();
@@ -57,7 +59,6 @@ protected:
     MIDIClientRef deviceClient;
     MIDIEndpointRef deviceEndpoint;
     MIDIPacketList *midiPacketList;
-    unsigned int packetListSize = 500;
     MIDIPacket *curPacket;
 };
 

@@ -122,11 +122,11 @@ void Listener::initPacketList() {
 void Listener::createDevice() {
     OSStatus result;
     
-    result = MIDIClientCreate(CFSTR("LeapMIDIX"), NULL, NULL, &deviceClient);
+    result = MIDIClientCreate(CFSTR("LeapMIDI"), NULL, NULL, &deviceClient);
     if (result)
         fatal("Failed to create MIDI client");
     
-    result = MIDISourceCreate(deviceClient, CFSTR("LeapMIDIX Control"), &deviceEndpoint);
+    result = MIDISourceCreate(deviceClient, CFSTR("LeapMIDI Control"), &deviceEndpoint);
     if (result)
         fatal("Failed to create MIDI source");
     

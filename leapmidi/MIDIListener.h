@@ -28,7 +28,8 @@ namespace leapmidi {
 class Listener : public Leap::Listener {
 public:
     Listener();
-
+    ~Listener();
+    
     // vector of Gesture instances to detect gesture input
     // and emit control messages
     std::vector<GesturePtr>& gestureRecognizers() { return _gestureRecognizers; }
@@ -43,6 +44,8 @@ public:
     virtual void onFrame(const Leap::Controller &controller);
     
 protected:
+    double minLatency = 0, maxLatency = 0, controlCount = 0, totalLatency = 0;
+    
     std::vector<GesturePtr> _gestureRecognizers;
     
     void fatal(const char *msg);
@@ -53,7 +56,7 @@ protected:
     MIDIClientRef deviceClient;
     MIDIEndpointRef deviceEndpoint;
     MIDIPacketList *midiPacketList;
-    unsigned int packetListSize;
+    unsigned int packetListSize = 500;
     MIDIPacket *curPacket;
 };
 

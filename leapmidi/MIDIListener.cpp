@@ -21,8 +21,14 @@ Listener::Listener() {
     midiPacketList = NULL;
     createDevice();
 }
-
-void Listener::onFrame(const Leap::Controller &controller) {    
+    
+Listener::~Listener() {
+    cout << "Total: " << controlCount << ", avg: " <<
+    (totalLatency / controlCount) << ", min: " <<
+    minLatency << ", max: " << maxLatency << endl;
+}
+    
+void Listener::onFrame(const Leap::Controller &controller) {
     // use current active gesture recognizers to locate gestures
     // and then trigger appropriate note/controls
     // feed frames to recognizers
@@ -53,10 +59,10 @@ void Listener::onControlUpdated(const Leap::Controller &controller, GesturePtr g
     midi_control_index ctrlIdx = control->controlIndex();
     midi_control_value ctrlVal = control->mappedValue();
     
-    cout << "Recognized control index " << ctrlIdx
-         << " (" << control->description() << ")"
-         << ", raw value: "
-         << control->rawValue() << " mapped value: " << ctrlVal << endl;
+//    cout << "Recognized control index " << ctrlIdx
+//         << " (" << control->description() << ")"
+//         << ", raw value: "
+//         << control->rawValue() << " mapped value: " << ctrlVal << endl;
     
     assert(ctrlIdx < 120);
     assert(ctrlVal <= 127);
@@ -68,13 +74,13 @@ void Listener::onControlUpdated(const Leap::Controller &controller, GesturePtr g
     packetOut[2] = ctrlVal;  // controller value
     
     int z;
-    printf("Sending MIDI packet: ");
+//    printf("Sending MIDI packet: ");
     for (z = 0; z < 3; z++)
     {
-        if (z > 0) printf(":");
-        printf("%02X", packetOut[z]);
+//        if (z > 0) printf(":");
+//        printf("%02X", packetOut[z]);
     }
-    printf("\n");
+//    printf("\n");
     
     
     // add packet to packet list
@@ -87,6 +93,21 @@ void Listener::onControlUpdated(const Leap::Controller &controller, GesturePtr g
     OSStatus res = MIDIReceived(deviceEndpoint, midiPacketList);
     if (res)
         fatal("MIDIReceived() failed");
+    
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    double elapsedTime = (tv.tv_sec - control->timestamp().tv_sec) * 1000.0;      // sec to ms
+    elapsedTime += (tv.tv_usec - control->timestamp().tv_usec) / 1000.0;   // us to ms
+    
+    if (minLatency == 0 || elapsedTime < minLatency)
+        minLatency = elapsedTime;
+    if (elapsedTime > maxLatency)
+        maxLatency = elapsedTime;
+    controlCount++;
+    totalLatency += elapsedTime;
+    
+    if (elapsedTime > 5)
+        cout << "control output latency: " << elapsedTime << endl;
 }
 
 void Listener::initPacketList() {
@@ -95,7 +116,7 @@ void Listener::initPacketList() {
         midiPacketList = NULL;
     }
     
-    midiPacketList = (MIDIPacketList *)malloc(packetListSize * sizeof(char));
+    midiPacketList = (MIDIPacketList *)malloc(packetListSize * sizeof(u_int8_t));
     curPacket = MIDIPacketListInit(midiPacketList);
 }
     

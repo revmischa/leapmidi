@@ -24,7 +24,7 @@ public:
     // create a recognized control with raw input value from recognizer
     Control(midi_control_value_raw rawValue, int hand) :
         _rawValue(rawValue), _handIndex(hand) {
-        gettimeofday(&timestamp, NULL);
+        gettimeofday(&_timestamp, NULL);
     }
     
     // map a raw value from [minRawValue,maxRawValue] into the range [0,127]
@@ -43,9 +43,10 @@ public:
     // public accessors
     int handIndex() { return _handIndex; }
     midi_control_value_raw rawValue() { return _rawValue; }
+    struct timeval& timestamp() { return _timestamp; }
 
 protected:
-    struct timeval timestamp;
+    struct timeval _timestamp;
     int _handIndex;
     midi_control_value_raw _rawValue;
 };

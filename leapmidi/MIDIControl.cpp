@@ -10,7 +10,7 @@
 
 namespace leapmidi {
 
-bool _controlRangeWarning = true;
+bool _controlRangeWarning = false;
 
 midi_control_value Control::mappedValue() {
     midi_control_value_raw min = minRawValue();

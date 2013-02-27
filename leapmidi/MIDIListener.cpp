@@ -59,12 +59,12 @@ void Listener::onControlUpdated(const Leap::Controller &controller, GesturePtr g
     midi_control_index ctrlIdx = control->controlIndex();
     midi_control_value ctrlVal = control->mappedValue();
     
-//    cout << "Recognized control index " << ctrlIdx
-//         << " (" << control->description() << ")"
-//         << ", raw value: "
-//         << control->rawValue() << " mapped value: " << ctrlVal << endl;
+    cout << "Recognized control index " << ctrlIdx
+         << " (" << control->description() << ")"
+         << ", raw value: "
+         << control->rawValue() << " mapped value: " << ctrlVal << endl;
     
-    assert(ctrlIdx < 120);
+    assert(ctrlIdx <= 119);
     assert(ctrlVal <= 127);
     
     // build midi packet
@@ -85,7 +85,8 @@ void Listener::onControlUpdated(const Leap::Controller &controller, GesturePtr g
     
     // add packet to packet list
     initPacketList();
-    curPacket = MIDIPacketListAdd(midiPacketList, packetListSize, curPacket, 0, 3, packetOut);
+    MIDITimeStamp timeStamp = mach_absolute_time();
+    curPacket = MIDIPacketListAdd(midiPacketList, packetListSize, curPacket, timeStamp, 3, packetOut);
     if (! curPacket) {
         std::cerr << "Buffer overrun on midi packet list\n";
         exit(1);
@@ -111,10 +112,8 @@ void Listener::onControlUpdated(const Leap::Controller &controller, GesturePtr g
 }
 
 void Listener::initPacketList() {
-    if (midiPacketList) {
+    if (midiPacketList)
         free(midiPacketList);
-        midiPacketList = NULL;
-    }
     
     midiPacketList = (MIDIPacketList *)malloc(packetListSize * sizeof(u_int8_t));
     curPacket = MIDIPacketListInit(midiPacketList);

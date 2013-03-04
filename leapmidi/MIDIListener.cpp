@@ -13,13 +13,26 @@ using namespace std;
 
 namespace leapmidi {
     
+static int64_t tv_to_msec(struct timeval &tv) {
+    int64_t msec = tv.tv_sec * 1000.0;      // sec to ms
+    msec += tv.tv_usec / 1000.0;   // us to ms
+    return msec;
+}
+
+static int64_t tv_to_usec(struct timeval &tv) {
+    int64_t usec = tv.tv_sec * 1000000.0;      // sec to us
+    usec += tv.tv_usec;   // us to ms
+    return usec;
+}
+
+    
 Listener::Listener() {
     BallGesturePtr ballGesture = make_shared<BallGesture>();
     GesturePtr ballGestureBasePtr = dynamic_pointer_cast<Gesture>(ballGesture);
     _gestureRecognizers.push_back(ballGestureBasePtr);
     
-    midiPacketList = NULL;
-    createDevice();
+    firstFrameAbs.tv_sec = 0;
+    firstFrameLeap = 0;
 }
     
 Listener::~Listener() {
@@ -28,7 +41,26 @@ Listener::~Listener() {
     minLatency << ", max: " << maxLatency << endl;
 }
     
+void Listener::init() {
+    device.init();
+}
+    
+void Listener::onConnect(const Leap::Controller &controller) {
+    // reset timers
+    cout << "connected\n";
+    firstFrameLeap = 0;
+    frameCount = 0;
+}
+
 void Listener::onFrame(const Leap::Controller &controller) {
+    Leap::Frame curFrame = controller.frame();
+    if (firstFrameLeap == 0 && ++frameCount > 10) {
+        gettimeofday(&firstFrameAbs, NULL);
+        firstFrameLeap = curFrame.timestamp();
+        cout << "First frame clock time: " << tv_to_usec(firstFrameAbs) << endl;
+        cout << "First frame leap time: " << firstFrameLeap << endl;
+    }
+    
     // use current active gesture recognizers to locate gestures
     // and then trigger appropriate note/controls
     // feed frames to recognizers
@@ -58,83 +90,44 @@ void Listener::onGestureRecognized(const Leap::Controller &controller, GesturePt
 void Listener::onControlUpdated(const Leap::Controller &controller, GesturePtr gesture, ControlPtr control) {
     midi_control_index ctrlIdx = control->controlIndex();
     midi_control_value ctrlVal = control->mappedValue();
+//    
+//    cout << "Recognized control index " << ctrlIdx
+//         << " (" << control->description() << ")"
+//         << ", raw value: "
+//         << control->rawValue() << " mapped value: " << ctrlVal << endl;
     
-    cout << "Recognized control index " << ctrlIdx
-         << " (" << control->description() << ")"
-         << ", raw value: "
-         << control->rawValue() << " mapped value: " << ctrlVal << endl;
+    bool multithreaded = false;
     
-    assert(ctrlIdx <= 119);
-    assert(ctrlVal <= 127);
+    if (multithreaded)
+        device.queueControlMessage(ctrlIdx, ctrlVal);
+    else
+        device.sendControlMessage(ctrlIdx, ctrlVal);
     
-    // build midi packet
-    u_int8_t packetOut[3];
-    packetOut[0] = 0xB0;     // channel
-    packetOut[1] = ctrlIdx;  // controller number
-    packetOut[2] = ctrlVal;  // controller value
+    if (frameCount <= 10) return;
     
-    int z;
-//    printf("Sending MIDI packet: ");
-    for (z = 0; z < 3; z++)
-    {
-//        if (z > 0) printf(":");
-//        printf("%02X", packetOut[z]);
-    }
-//    printf("\n");
-    
-    
-    // add packet to packet list
-    initPacketList();
-    MIDITimeStamp timeStamp = mach_absolute_time();
-    curPacket = MIDIPacketListAdd(midiPacketList, packetListSize, curPacket, timeStamp, 3, packetOut);
-    if (! curPacket) {
-        std::cerr << "Buffer overrun on midi packet list\n";
-        exit(1);
-    }
-    OSStatus res = MIDIReceived(deviceEndpoint, midiPacketList);
-    if (res)
-        fatal("MIDIReceived() failed");
-    
+    // control latency
     struct timeval tv;
     gettimeofday(&tv, NULL);
     double elapsedTime = (tv.tv_sec - control->timestamp().tv_sec) * 1000.0;      // sec to ms
     elapsedTime += (tv.tv_usec - control->timestamp().tv_usec) / 1000.0;   // us to ms
     
-    if (minLatency == 0 || elapsedTime < minLatency)
-        minLatency = elapsedTime;
-    if (elapsedTime > maxLatency)
-        maxLatency = elapsedTime;
+    // frame latency
+    double absoluteTimeOffset = tv_to_usec(tv) - tv_to_usec(firstFrameAbs);
+//    cout << "absolute time offset: " << absoluteTimeOffset << endl;
+    int64_t curFrameTime = controller.frame().timestamp();
+    int64_t frameOffset = curFrameTime - firstFrameLeap;
+    int64_t frameLatency = absoluteTimeOffset - frameOffset;
+    cout << "frame: " << curFrameTime << ", absolute offset: " << (absoluteTimeOffset / 1000) << ", frameOffset: " << (frameOffset / 1000) << ", diff: " << (frameLatency / 1000) << endl;
+        
+    if (minLatency == 0 || frameLatency < minLatency)
+        minLatency = frameLatency;
+    if (frameLatency > maxLatency)
+        maxLatency = frameLatency;
     controlCount++;
-    totalLatency += elapsedTime;
+    totalLatency += frameLatency;
     
-    if (elapsedTime > 5)
-        cout << "control output latency: " << elapsedTime << endl;
-}
-
-void Listener::initPacketList() {
-    if (midiPacketList)
-        free(midiPacketList);
-    
-    midiPacketList = (MIDIPacketList *)malloc(packetListSize * sizeof(u_int8_t));
-    curPacket = MIDIPacketListInit(midiPacketList);
-}
-    
-void Listener::createDevice() {
-    OSStatus result;
-    
-    result = MIDIClientCreate(CFSTR("LeapMIDI"), NULL, NULL, &deviceClient);
-    if (result)
-        fatal("Failed to create MIDI client");
-    
-    result = MIDISourceCreate(deviceClient, CFSTR("LeapMIDI Control"), &deviceEndpoint);
-    if (result)
-        fatal("Failed to create MIDI source");
-    
-}
-
-void Listener::fatal(const char *msg) {
-    cerr << "Fatal error: " << msg << endl;
-    exit(1);
+    if (elapsedTime > 3)
+        cout << "frame latency: " << frameLatency << ", control output latency: " << elapsedTime << endl;
 }
 
 }

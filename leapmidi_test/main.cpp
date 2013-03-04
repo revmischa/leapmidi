@@ -15,6 +15,8 @@ using namespace std;
 
 int main(int argc, const char * argv[]) {
     leapmidi::Listener listener;
+    listener.init();
+    
     Leap::Controller controller;
     controller.addListener(listener);
 

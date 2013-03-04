@@ -23,15 +23,18 @@
 
 #include "MIDIGesture.h"
 #include "BallGesture.h"
+#include "MIDIDevice.h"
 
 namespace leapmidi {
     
-const unsigned int packetListSize = 200;
+const unsigned int packetListSize = 512;
     
 class Listener : public Leap::Listener {
 public:
     Listener();
     ~Listener();
+    
+    void init();
     
     // vector of Gesture instances to detect gesture input
     // and emit control messages
@@ -45,9 +48,12 @@ public:
 
     // from Leap::Listener
     virtual void onFrame(const Leap::Controller &controller);
+    virtual void onConnect(const Leap::Controller &controller);
     
 protected:
     double minLatency = 0, maxLatency = 0, controlCount = 0, totalLatency = 0;
+    struct timeval firstFrameAbs;
+    int64_t firstFrameLeap, frameCount;
     
     std::vector<GesturePtr> _gestureRecognizers;
     
@@ -56,10 +62,7 @@ protected:
     void initPacketList();
     void createDevice();
     
-    MIDIClientRef deviceClient;
-    MIDIEndpointRef deviceEndpoint;
-    MIDIPacketList *midiPacketList;
-    MIDIPacket *curPacket;
+    Device device;
 };
 
 } // namespace leapmidi

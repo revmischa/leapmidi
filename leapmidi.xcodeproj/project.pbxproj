@@ -12,6 +12,9 @@
 		C3027D2416DDB48B0026718C /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3027D2216DDB4810026718C /* CoreMIDI.framework */; };
 		C3027D2616DDB4FA0026718C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3027D2516DDB4FA0026718C /* CoreFoundation.framework */; };
 		C313AAE91687B78400A0AD2A /* LeapMath.h in Headers */ = {isa = PBXBuildFile; fileRef = C313AAE81687B78400A0AD2A /* LeapMath.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C32D41C816E43173007C66BA /* MIDIDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C32D41C616E43173007C66BA /* MIDIDevice.cpp */; };
+		C32D41C916E43173007C66BA /* MIDIDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C32D41C616E43173007C66BA /* MIDIDevice.cpp */; };
+		C32D41CA16E43173007C66BA /* MIDIDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = C32D41C716E43173007C66BA /* MIDIDevice.h */; };
 		C33EF31516673851001D3D0E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C33EF31416673851001D3D0E /* OpenGL.framework */; };
 		C33EF319166738D3001D3D0E /* Leap.h in Headers */ = {isa = PBXBuildFile; fileRef = C33EF317166738D3001D3D0E /* Leap.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C33EF32616673D10001D3D0E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C33EF32516673D10001D3D0E /* main.cpp */; };
@@ -73,6 +76,8 @@
 		C3027D2216DDB4810026718C /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
 		C3027D2516DDB4FA0026718C /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		C313AAE81687B78400A0AD2A /* LeapMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeapMath.h; sourceTree = "<group>"; };
+		C32D41C616E43173007C66BA /* MIDIDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MIDIDevice.cpp; sourceTree = "<group>"; };
+		C32D41C716E43173007C66BA /* MIDIDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIDIDevice.h; sourceTree = "<group>"; };
 		C33EF2AF16672833001D3D0E /* leapmidi.a */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = leapmidi.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33EF2B416672833001D3D0E /* leapmidiProj.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = leapmidiProj.xcconfig; sourceTree = "<group>"; };
 		C33EF2B516672833001D3D0E /* leapmidiTarget.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = leapmidiTarget.xcconfig; sourceTree = "<group>"; };
@@ -166,6 +171,8 @@
 				C3BF4B7416D053C40091DE62 /* LeapMIDI.h */,
 				C35F6D8316704EAF000CEF49 /* MIDIListener.cpp */,
 				C35F6D8416704EAF000CEF49 /* MIDIListener.h */,
+				C32D41C616E43173007C66BA /* MIDIDevice.cpp */,
+				C32D41C716E43173007C66BA /* MIDIDevice.h */,
 			);
 			path = leapmidi;
 			sourceTree = "<group>";
@@ -236,6 +243,7 @@
 				C3C2E7BA167D496D0031B430 /* FingerPositionZ.h in Headers */,
 				C35F6DA21671B460000CEF49 /* BallRadius.h in Headers */,
 				6044028916D0A68500B5C7DF /* FingerPositionY.h in Headers */,
+				C32D41CA16E43173007C66BA /* MIDIDevice.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +324,7 @@
 				C35F6DA01671B460000CEF49 /* BallRadius.cpp in Sources */,
 				C3EAA989167AD5FE00497E33 /* FingerGesture.cpp in Sources */,
 				C3EAA98F167AD69300497E33 /* FingerPosition.cpp in Sources */,
+				C32D41C816E43173007C66BA /* MIDIDevice.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,6 +340,7 @@
 				C35F6DA11671B460000CEF49 /* BallRadius.cpp in Sources */,
 				C3EAA98A167AD5FE00497E33 /* FingerGesture.cpp in Sources */,
 				C3EAA990167AD69300497E33 /* FingerPosition.cpp in Sources */,
+				C32D41C916E43173007C66BA /* MIDIDevice.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

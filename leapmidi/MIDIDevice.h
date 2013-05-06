@@ -21,7 +21,6 @@ namespace leapmidi {
 typedef struct {
     midi_control_index control_index;
     midi_control_value control_value;
-    
     timeval timestamp;
 } midi_message;
     
@@ -41,8 +40,9 @@ protected:
     void initPacketList();
     void createDevice();
     
-    // thread-safe MIDI message queue
     void *messageSendingThreadEntry();
+
+    // thread-safe MIDI message queue
     std::queue<midi_message> midiMessageQueue;
     pthread_mutex_t messageQueueMutex;
     pthread_t messageQueueThread;
@@ -62,7 +62,9 @@ protected:
     MIDIPacket *curPacket;
     
 private:
-    static void *_messageSendingThreadEntry(void * This) {((Device *)This)->messageSendingThreadEntry(); return NULL;}
+    static void *_messageSendingThreadEntry(void * This) {
+        ((Device *)This)->messageSendingThreadEntry(); return NULL;
+    }
     
 };
     

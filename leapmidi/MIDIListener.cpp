@@ -96,7 +96,7 @@ void Listener::onControlUpdated(const Leap::Controller &controller, GesturePtr g
 //         << ", raw value: "
 //         << control->rawValue() << " mapped value: " << ctrlVal << endl;
     
-    bool multithreaded = false;
+    bool multithreaded = true;
     
     if (multithreaded)
         device.queueControlMessage(ctrlIdx, ctrlVal);
@@ -117,8 +117,8 @@ void Listener::onControlUpdated(const Leap::Controller &controller, GesturePtr g
     int64_t curFrameTime = controller.frame().timestamp();
     int64_t frameOffset = curFrameTime - firstFrameLeap;
     int64_t frameLatency = absoluteTimeOffset - frameOffset;
-    cout << "frame: " << curFrameTime << ", absolute offset: " << (absoluteTimeOffset / 1000) << ", frameOffset: " << (frameOffset / 1000) << ", diff: " << (frameLatency / 1000) << endl;
-        
+//    cout << "frame: " << curFrameTime << ", absolute offset: " << (absoluteTimeOffset / 1000) << ", frameOffset: " << (frameOffset / 1000) << ", diff: " << (frameLatency / 1000) << endl;
+    
     if (minLatency == 0 || frameLatency < minLatency)
         minLatency = frameLatency;
     if (frameLatency > maxLatency)
@@ -127,7 +127,7 @@ void Listener::onControlUpdated(const Leap::Controller &controller, GesturePtr g
     totalLatency += frameLatency;
     
     if (elapsedTime > 3)
-        cout << "frame latency: " << frameLatency << ", control output latency: " << elapsedTime << endl;
+        cout << "frame latency: " << (frameLatency / 1000) << ", control output latency: " << elapsedTime << endl;
 }
 
 }

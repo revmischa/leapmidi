@@ -25,13 +25,16 @@ void Device::init() {
 }
 
 void Device::queueControlMessage(midi_control_index controlIndex, midi_control_value controlValue) {
-    pthread_mutex_lock(&messageQueueMutex);
-    
     midi_message msg;
     msg.control_index = controlIndex;
     msg.control_value = controlValue;
     gettimeofday(&msg.timestamp, NULL);
+
+    pthread_mutex_lock(&messageQueueMutex);
+    
+    // critical section
     midiMessageQueue.push(msg);
+    
     pthread_mutex_unlock(&messageQueueMutex);
     pthread_cond_signal(&messageQueueCond);
 }
@@ -96,31 +99,20 @@ void Device::createDevice() {
     }
 }
 
-void *Device::messageSendingThreadEntry() {
-    struct timeval tv;
-    struct timespec ts;
-    
-    while (1) {        
+void *Device::messageSendingThreadEntry() {    
+    while (1) {
+        pthread_testcancel();
+        
         // wait for next item to go in the queue
         pthread_mutex_lock(&messageQueueMutex);
         
         // check if we have anything in the queue to send
-        if (midiMessageQueue.empty()) {
-            // wait on next item
-            gettimeofday(&tv, NULL);
-            ts.tv_sec = tv.tv_sec + 2; // timeout 2s
-            ts.tv_nsec = 0;
+        if (midiMessageQueue.empty()) {            
             // wait until other thread posts a notif
-            int res = pthread_cond_timedwait(&messageQueueCond, &messageQueueMutex, &ts);
-            if (res == ETIMEDOUT) {
-                // timeout, no message was waiting
-                pthread_mutex_unlock(&messageQueueMutex);
-                continue;
-            }
+            int res = pthread_cond_wait(&messageQueueCond, &messageQueueMutex);
             if (res != 0) {
-                std::cerr << "unexpected pthread_cond_timedwait retval=" << res << std::endl;
+                cerr << "unexpected pthread_cond_wait retval=" << res << endl;
                 exit(1);
-                continue;
             }
             
             if (midiMessageQueue.empty()) {
@@ -131,7 +123,7 @@ void *Device::messageSendingThreadEntry() {
         
         // copy messages from shared queue into thread-local copy
         // (is there a cleaner way to do this?)
-        std::queue<midi_message> queueCopy;
+        queue<midi_message> queueCopy;
         while (! midiMessageQueue.empty()) {
             midi_message msg = midiMessageQueue.front();
             queueCopy.push(msg);
@@ -139,7 +131,7 @@ void *Device::messageSendingThreadEntry() {
         }
         // unlock
         if (pthread_mutex_unlock(&messageQueueMutex) != 0) {
-            std::cerr << "message queue mutex unlock failure\n";
+            cerr << "message queue mutex unlock failure\n";
             exit(1);
         }
         
@@ -172,8 +164,6 @@ void Device::_addControlMessages(std::queue<midi_message> &messages) {
         
         _addControlPacket(msg.control_index, msg.control_value);
     }
-    
-    _flushMessages();
 }
     
 OSStatus Device::_flushMessages() {

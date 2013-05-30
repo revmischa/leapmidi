@@ -29,6 +29,8 @@ Listener::~Listener() {
 }
     
 void Listener::onFrame(const Leap::Controller &controller) {
+    
+    
     // use current active gesture recognizers to locate gestures
     // and then trigger appropriate note/controls
     // feed frames to recognizers
@@ -109,6 +111,14 @@ void Listener::onControlUpdated(const Leap::Controller &controller, GesturePtr g
     
     if (elapsedTime > 5)
         cout << "control output latency: " << elapsedTime << endl;
+}
+    
+double currentTimeMsec() {
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    double tms = tv.tv_sec * 1000.0; // sec to ms
+    tms += tv.tv_usec / 1000.0;      // us to ms
+    return tms;
 }
 
 void Listener::initPacketList() {

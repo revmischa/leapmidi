@@ -13,34 +13,42 @@
 #define __leapmidi__MIDINote__
 
 #include <iostream>
-#include "MIDITypes.h"
-#include "MIDIBase.h"
+#include "LeapMIDI.h"
+#include "MIDIMessage.h"
+
+using namespace std;
 
 namespace leapmidi {
+
+const static string *MIDIMessageTempDesc = new string("MIDINote");
+
+class Note : public MIDIMessage {
+public:
+    // create a recognized note with raw input value from recognizer
+    Note(midi_control_value_raw rawValue, int hand) : MIDIMessage(rawValue, hand) {
+        gettimeofday(&_timestamp, NULL);
+    }
+    virtual ~Note() {}
     
-    class Note : public virtual MIDIBase {
-    public:
-        // create a recognized note with raw input value from recognizer
-        Note(midi_bodypart_index handIndex, midi_bodypart_index fingerIndex, midi_note_value_raw rawValue);
-        virtual ~Note() {}
-        
-        virtual const midi_note_value_raw rawValue() { return _rawValue; }
-        
-        // map a raw value from [minRawValue,maxRawValue] into the range [0,127]
-        virtual const midi_note_value mappedValue();
-        
-        // min/max raw value, for mapping to MIDI value
-        virtual const midi_note_value_raw minRawValue() = 0;
-        virtual const midi_note_value_raw maxRawValue() = 0;
-        
-        // MIDI note code index
-        virtual const midi_note_index noteIndex() = 0;
-        
-    protected:
-        midi_note_value_raw _rawValue;
-    };
+    virtual const midi_note_value_raw rawValue() { return _rawValue; }
     
-    typedef std::shared_ptr<Note> NotePtr;
+    virtual const string &description() { return *MIDIMessageTempDesc; };
+    
+    // map a raw value from [minRawValue,maxRawValue] into the range [0,127]
+    virtual const midi_note_value mappedValue();
+    
+    // min/max raw value, for mapping to MIDI value
+    virtual const midi_note_value_raw minRawValue() = 0;
+    virtual const midi_note_value_raw maxRawValue() = 0;
+    
+    // MIDI note code index
+    virtual const midi_note_index noteIndex() = 0;
+    
+protected:
+    midi_note_value_raw _rawValue;
+};
+
+typedef std::shared_ptr<Note> NotePtr;
     
 } // namespace leapmidi
 

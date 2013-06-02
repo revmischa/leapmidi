@@ -129,5 +129,9 @@ void Listener::onControlUpdated(const Leap::Controller &controller, GesturePtr g
 //    if (elapsedTime > 3)
 //        cout << "frame latency: " << (frameLatency / 1000) << ", control output latency: " << elapsedTime << endl;
 }
+    
+void Listener::onNoteUpdated(const Leap::Controller &controller, GesturePtr gesture, NotePtr note) {
+    cout << "got note\n";
+}
 
 }

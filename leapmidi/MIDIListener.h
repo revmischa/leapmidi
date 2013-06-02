@@ -23,6 +23,7 @@
 
 #include "MIDIGesture.h"
 #include "BallGesture.h"
+#include "MIDINote.h"
 
 namespace leapmidi {
     
@@ -44,6 +45,8 @@ public:
     
     // called for each control message emitted by a gesture recognizer
     virtual void onControlUpdated(const Leap::Controller &controller, GesturePtr gesture, ControlPtr control);
+    
+    virtual void onNoteUpdated(const Leap::Controller &controller, GesturePtr gesture, NotePtr note);
 
     // from Leap::Listener
     virtual void onFrame(const Leap::Controller &controller);

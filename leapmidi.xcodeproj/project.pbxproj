@@ -36,6 +36,10 @@
 		C3BF4B7516D053C40091DE62 /* LeapMIDI.h in Headers */ = {isa = PBXBuildFile; fileRef = C3BF4B7416D053C40091DE62 /* LeapMIDI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C3C2E7B5167D45650031B430 /* FingerPositionX.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C2E7B2167D45650031B430 /* FingerPositionX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C3C2E7BA167D496D0031B430 /* FingerPositionZ.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C2E7B9167D496D0031B430 /* FingerPositionZ.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C3C6C1FE175BD1990018AABD /* MIDINote.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C6C1FD175BD1990018AABD /* MIDINote.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C3C6C20D175BD27E0018AABD /* MIDIMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3C6C20B175BD27E0018AABD /* MIDIMessage.cpp */; };
+		C3C6C20E175BD27E0018AABD /* MIDIMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3C6C20B175BD27E0018AABD /* MIDIMessage.cpp */; };
+		C3C6C20F175BD27E0018AABD /* MIDIMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C6C20C175BD27E0018AABD /* MIDIMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C3EAA989167AD5FE00497E33 /* FingerGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3EAA987167AD5FE00497E33 /* FingerGesture.cpp */; };
 		C3EAA98A167AD5FE00497E33 /* FingerGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3EAA987167AD5FE00497E33 /* FingerGesture.cpp */; };
 		C3EAA98B167AD5FE00497E33 /* FingerGesture.h in Headers */ = {isa = PBXBuildFile; fileRef = C3EAA988167AD5FE00497E33 /* FingerGesture.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -92,6 +96,9 @@
 		C3BF4B7416D053C40091DE62 /* LeapMIDI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeapMIDI.h; sourceTree = "<group>"; };
 		C3C2E7B2167D45650031B430 /* FingerPositionX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FingerPositionX.h; sourceTree = "<group>"; };
 		C3C2E7B9167D496D0031B430 /* FingerPositionZ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FingerPositionZ.h; sourceTree = "<group>"; };
+		C3C6C1FD175BD1990018AABD /* MIDINote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIDINote.h; sourceTree = "<group>"; };
+		C3C6C20B175BD27E0018AABD /* MIDIMessage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MIDIMessage.cpp; sourceTree = "<group>"; };
+		C3C6C20C175BD27E0018AABD /* MIDIMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIDIMessage.h; sourceTree = "<group>"; };
 		C3EAA987167AD5FE00497E33 /* FingerGesture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FingerGesture.cpp; sourceTree = "<group>"; };
 		C3EAA988167AD5FE00497E33 /* FingerGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FingerGesture.h; sourceTree = "<group>"; };
 		C3EAA98D167AD69300497E33 /* FingerPosition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FingerPosition.cpp; sourceTree = "<group>"; };
@@ -201,6 +208,9 @@
 		C35F6D9616705659000CEF49 /* controls */ = {
 			isa = PBXGroup;
 			children = (
+				C3C6C20B175BD27E0018AABD /* MIDIMessage.cpp */,
+				C3C6C20C175BD27E0018AABD /* MIDIMessage.h */,
+				C3C6C1FD175BD1990018AABD /* MIDINote.h */,
 				C35F6D90167052B3000CEF49 /* MIDIControl.cpp */,
 				C35F6D91167052B4000CEF49 /* MIDIControl.h */,
 				C35F6D9E1671B460000CEF49 /* BallRadius.cpp */,
@@ -234,6 +244,8 @@
 				C387D00C175BCD9D004FF256 /* Leap.h in Headers */,
 				C387D00D175BCD9D004FF256 /* LeapMath.h in Headers */,
 				C35F6DA21671B460000CEF49 /* BallRadius.h in Headers */,
+				C3C6C20F175BD27E0018AABD /* MIDIMessage.h in Headers */,
+				C3C6C1FE175BD1990018AABD /* MIDINote.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +326,7 @@
 				C35F6DA01671B460000CEF49 /* BallRadius.cpp in Sources */,
 				C3EAA989167AD5FE00497E33 /* FingerGesture.cpp in Sources */,
 				C3EAA98F167AD69300497E33 /* FingerPosition.cpp in Sources */,
+				C3C6C20D175BD27E0018AABD /* MIDIMessage.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +342,7 @@
 				C35F6DA11671B460000CEF49 /* BallRadius.cpp in Sources */,
 				C3EAA98A167AD5FE00497E33 /* FingerGesture.cpp in Sources */,
 				C3EAA990167AD69300497E33 /* FingerPosition.cpp in Sources */,
+				C3C6C20E175BD27E0018AABD /* MIDIMessage.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,6 +16,7 @@ typedef double midi_control_value_raw;
 typedef unsigned short midi_control_value;
 
 typedef unsigned short midi_note_index;
+typedef double midi_note_value_raw;
 typedef unsigned short midi_note_value;
 
 enum MIDI_SYS_MSG {

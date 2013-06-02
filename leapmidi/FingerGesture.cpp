@@ -54,7 +54,7 @@ void FingerGesture::recognizedControls(const Leap::Controller &controller, std::
         velZ /= pointableCount;
         
         // only register if velocity is greater than this threshold
-        double velocityThreshold = 13.0; // mm/s
+        double velocityThreshold = 19.0; // mm/s
 //                std::cout << "velX: " << velX << " velY: " << velY << " velZ: " << velZ << std::endl;
         
         // generate one pointable position control per hand coordinate, determined by number of pointables

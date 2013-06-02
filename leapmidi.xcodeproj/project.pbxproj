@@ -36,10 +36,10 @@
 		C35F6DA01671B460000CEF49 /* BallRadius.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35F6D9E1671B460000CEF49 /* BallRadius.cpp */; };
 		C35F6DA11671B460000CEF49 /* BallRadius.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35F6D9E1671B460000CEF49 /* BallRadius.cpp */; };
 		C35F6DA21671B460000CEF49 /* BallRadius.h in Headers */ = {isa = PBXBuildFile; fileRef = C35F6D9F1671B460000CEF49 /* BallRadius.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		C38824A1166B1BAA007FE3B3 /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C38824A0166B1BAA007FE3B3 /* libLeap.dylib */; };
 		C3BF4B7516D053C40091DE62 /* LeapMIDI.h in Headers */ = {isa = PBXBuildFile; fileRef = C3BF4B7416D053C40091DE62 /* LeapMIDI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C3C2E7B5167D45650031B430 /* FingerPositionX.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C2E7B2167D45650031B430 /* FingerPositionX.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C3C2E7BA167D496D0031B430 /* FingerPositionZ.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C2E7B9167D496D0031B430 /* FingerPositionZ.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3CBC7C2174DE12E00645662 /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C3CBC7C1174DE12E00645662 /* libLeap.dylib */; };
 		C3EAA989167AD5FE00497E33 /* FingerGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3EAA987167AD5FE00497E33 /* FingerGesture.cpp */; };
 		C3EAA98A167AD5FE00497E33 /* FingerGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3EAA987167AD5FE00497E33 /* FingerGesture.cpp */; };
 		C3EAA98B167AD5FE00497E33 /* FingerGesture.h in Headers */ = {isa = PBXBuildFile; fileRef = C3EAA988167AD5FE00497E33 /* FingerGesture.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -99,6 +99,7 @@
 		C3BF4B7416D053C40091DE62 /* LeapMIDI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeapMIDI.h; sourceTree = "<group>"; };
 		C3C2E7B2167D45650031B430 /* FingerPositionX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FingerPositionX.h; sourceTree = "<group>"; };
 		C3C2E7B9167D496D0031B430 /* FingerPositionZ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FingerPositionZ.h; sourceTree = "<group>"; };
+		C3CBC7C1174DE12E00645662 /* libLeap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libLeap.dylib; path = "../LeapSDK/lib/libc++/libLeap.dylib"; sourceTree = "<group>"; };
 		C3EAA987167AD5FE00497E33 /* FingerGesture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FingerGesture.cpp; sourceTree = "<group>"; };
 		C3EAA988167AD5FE00497E33 /* FingerGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FingerGesture.h; sourceTree = "<group>"; };
 		C3EAA98D167AD69300497E33 /* FingerPosition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FingerPosition.cpp; sourceTree = "<group>"; };
@@ -110,8 +111,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3CBC7C2174DE12E00645662 /* libLeap.dylib in Frameworks */,
 				C3027D2316DDB4810026718C /* CoreMIDI.framework in Frameworks */,
-				C38824A1166B1BAA007FE3B3 /* libLeap.dylib in Frameworks */,
 				C33EF31516673851001D3D0E /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -140,6 +141,7 @@
 		C33EF2A416672833001D3D0E = {
 			isa = PBXGroup;
 			children = (
+				C3CBC7C1174DE12E00645662 /* libLeap.dylib */,
 				C3027D2516DDB4FA0026718C /* CoreFoundation.framework */,
 				C3027D2216DDB4810026718C /* CoreMIDI.framework */,
 				C38824A0166B1BAA007FE3B3 /* libLeap.dylib */,
@@ -413,6 +415,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/contrib\"",
 					"\"$(SRCROOT)/../Leap_SDK/lib\"",
+					"\"$(SRCROOT)/../LeapSDK/lib/libc++\"",
 				);
 				MACH_O_TYPE = staticlib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -428,6 +431,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/contrib\"",
 					"\"$(SRCROOT)/../Leap_SDK/lib\"",
+					"\"$(SRCROOT)/../LeapSDK/lib/libc++\"",
 				);
 				MACH_O_TYPE = staticlib;
 				PRODUCT_NAME = "$(TARGET_NAME)";

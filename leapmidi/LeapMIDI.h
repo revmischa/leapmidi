@@ -15,6 +15,9 @@ namespace leapmidi {
 typedef double midi_control_value_raw;
 typedef unsigned short midi_control_value;
 
+typedef unsigned short midi_note_index;
+typedef unsigned short midi_note_value;
+
 // MIDI control number offsets
 enum midi_control_index {
     BALL_RADIUS_HAND_1 = 1,

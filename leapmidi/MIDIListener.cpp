@@ -26,11 +26,7 @@ static int64_t tv_to_usec(struct timeval &tv) {
 }
 
     
-Listener::Listener() {
-    BallGesturePtr ballGesture = make_shared<BallGesture>();
-    GesturePtr ballGestureBasePtr = dynamic_pointer_cast<Gesture>(ballGesture);
-    _gestureRecognizers.push_back(ballGestureBasePtr);
-    
+Listener::Listener() {    
     firstFrameAbs.tv_sec = 0;
     firstFrameLeap = 0;
 }

@@ -42,7 +42,7 @@ Listener::~Listener() {
 }
     
 void Listener::init() {
-    device.init();
+//    device.init();
 }
     
 void Listener::onConnect(const Leap::Controller &controller) {
@@ -96,38 +96,38 @@ void Listener::onControlUpdated(const Leap::Controller &controller, GesturePtr g
 //         << ", raw value: "
 //         << control->rawValue() << " mapped value: " << ctrlVal << endl;
     
-    bool multithreaded = true;
-    
-    if (multithreaded)
-        device.queueControlMessage(ctrlIdx, ctrlVal);
-    else
-        device.sendControlMessage(ctrlIdx, ctrlVal);
-    
-    if (frameCount <= 10) return;
-    
-    // control latency
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    double elapsedTime = (tv.tv_sec - control->timestamp().tv_sec) * 1000.0;      // sec to ms
-    elapsedTime += (tv.tv_usec - control->timestamp().tv_usec) / 1000.0;   // us to ms
-    
-    // frame latency
-    double absoluteTimeOffset = tv_to_usec(tv) - tv_to_usec(firstFrameAbs);
-//    cout << "absolute time offset: " << absoluteTimeOffset << endl;
-    int64_t curFrameTime = controller.frame().timestamp();
-    int64_t frameOffset = curFrameTime - firstFrameLeap;
-    int64_t frameLatency = absoluteTimeOffset - frameOffset;
-//    cout << "frame: " << curFrameTime << ", absolute offset: " << (absoluteTimeOffset / 1000) << ", frameOffset: " << (frameOffset / 1000) << ", diff: " << (frameLatency / 1000) << endl;
-    
-    if (minLatency == 0 || frameLatency < minLatency)
-        minLatency = frameLatency;
-    if (frameLatency > maxLatency)
-        maxLatency = frameLatency;
-    controlCount++;
-    totalLatency += frameLatency;
-    
-    if (elapsedTime > 3)
-        cout << "frame latency: " << (frameLatency / 1000) << ", control output latency: " << elapsedTime << endl;
+//    bool multithreaded = true;
+//    
+//    if (multithreaded)
+//        device.queueControlMessage(ctrlIdx, ctrlVal);
+//    else
+//        device.sendControlMessage(ctrlIdx, ctrlVal);
+//    
+//    if (frameCount <= 10) return;
+//    
+//    // control latency
+//    struct timeval tv;
+//    gettimeofday(&tv, NULL);
+//    double elapsedTime = (tv.tv_sec - control->timestamp().tv_sec) * 1000.0;      // sec to ms
+//    elapsedTime += (tv.tv_usec - control->timestamp().tv_usec) / 1000.0;   // us to ms
+//    
+//    // frame latency
+//    double absoluteTimeOffset = tv_to_usec(tv) - tv_to_usec(firstFrameAbs);
+////    cout << "absolute time offset: " << absoluteTimeOffset << endl;
+//    int64_t curFrameTime = controller.frame().timestamp();
+//    int64_t frameOffset = curFrameTime - firstFrameLeap;
+//    int64_t frameLatency = absoluteTimeOffset - frameOffset;
+////    cout << "frame: " << curFrameTime << ", absolute offset: " << (absoluteTimeOffset / 1000) << ", frameOffset: " << (frameOffset / 1000) << ", diff: " << (frameLatency / 1000) << endl;
+//    
+//    if (minLatency == 0 || frameLatency < minLatency)
+//        minLatency = frameLatency;
+//    if (frameLatency > maxLatency)
+//        maxLatency = frameLatency;
+//    controlCount++;
+//    totalLatency += frameLatency;
+//    
+//    if (elapsedTime > 3)
+//        cout << "frame latency: " << (frameLatency / 1000) << ", control output latency: " << elapsedTime << endl;
 }
 
 }

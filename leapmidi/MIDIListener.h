@@ -23,7 +23,6 @@
 
 #include "MIDIGesture.h"
 #include "BallGesture.h"
-#include "MIDIDevice.h"
 
 namespace leapmidi {
     
@@ -61,8 +60,6 @@ protected:
     
     void initPacketList();
     void createDevice();
-    
-    Device device;
 };
 
 } // namespace leapmidi

@@ -18,6 +18,11 @@ typedef unsigned short midi_control_value;
 typedef unsigned short midi_note_index;
 typedef unsigned short midi_note_value;
 
+enum MIDI_SYS_MSG {
+    MSG_NOTE = 0,
+    MSG_CONTROL
+};
+
 // MIDI control number offsets
 enum midi_control_index {
     BALL_RADIUS_HAND_1 = 1,

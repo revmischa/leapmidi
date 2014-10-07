@@ -17,7 +17,7 @@ void BallGesture::recognizedControls(const Leap::Controller &controller, std::ve
     Leap::Frame frame = controller.frame();
     
     // hands detected?
-    if (frame.hands().empty())
+    if (frame.hands().isEmpty())
         return;
                 
     for (int i = 0; i < frame.hands().count(); i++) {

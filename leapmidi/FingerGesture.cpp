@@ -17,7 +17,7 @@ void FingerGesture::recognizedControls(const Leap::Controller &controller, std::
     Leap::Frame frame = controller.frame();
     
     // hands detected?
-    if (frame.hands().empty())
+    if (frame.hands().isEmpty())
         return;
                 
     size_t handCount = frame.hands().count();
